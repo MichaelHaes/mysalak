@@ -7,9 +7,9 @@ export const useStore = create((set) => ({
   }));
 
 export const useNavbar = create((set) => ({
-    page: String,
+    page: "Home",
     home: () => set((state) => ({page: "Home"})),
     history: () => set((state) => ({page: "History"})),
-    peta: () => set((state) => ({page: "Peta"})),
+    article: () => set((state) => ({page: "Article"})),
     profil: () => set((state) => ({page: "Profile"})),
 }))
