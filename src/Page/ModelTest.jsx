@@ -1,19 +1,29 @@
-import * as tf from "@tensorflow/tfjs";
 import React, { useEffect, useState } from 'react';
-
-const min = 66
-const max = 98
+import * as tf from "@tensorflow/tfjs";
+import Form from "../Components/Form";
 
 const ModelTest = () => {
-    const [model, setModel] = useState(null);
-    const [input, setInput] = useState('');
-    const [prediction, setPrediction] = useState(null);
+    const [models, setModels] = useState({
+        temperatureModel: null,
+        humidityModel: null,
+        precipitationModel: null,
+        luminosityModel: null
+    });
 
     useEffect(() => {
         async function loadModel() {
             try {
-                const loadedModel = await tf.loadLayersModel("/model/converted_model/RH_avg_LSTM.json");
-                setModel(loadedModel);
+                const temperatureModel = await tf.loadLayersModel("/model/converted_model/Tavg_LSTM.json");
+                const humidityModel = await tf.loadLayersModel("/model/converted_model/RH_avg_LSTM.json");
+                // const precipitationModel = await tf.loadLayersModel("/model/converted_model/RR_LSTM.json");
+                // const luminosityModel = await tf.loadLayersModel("/model/converted_model/Lumen_LSTM.json");
+
+                setModels({
+                    temperatureModel,
+                    humidityModel,
+                    // precipitationModel,
+                    // luminosityModel
+                });
             } catch (error) {
                 console.error("Error loading model:", error);
             }
@@ -23,49 +33,21 @@ const ModelTest = () => {
     }, []);
 
     useEffect(() => {
-        if (model) {
-            console.log("Model loaded:", model);
+        if (models) {
+            console.log("Model loaded:", models);
         } else {
             console.log("Model is not loaded yet.");
         }
-    }, [model]);
-
-
-    // MinMaxNormalization
-    const normalize = (value, min, max) => (value - min) / (max - min);
-    const denormalize = (value, min, max) => value * (max - min) + min;
-
-    const handleInputChange = (event) => {
-        setInput(event.target.value);
-    };
-
-    const handlePredict = () => {
-        const inputValue = parseFloat(input);
-        const normalizedInput = normalize(inputValue, min, max)
-
-        const formattedInput = [[normalizedInput]];
-        const reshapedInput = tf.reshape(formattedInput, [1, 1, 1]);
-
-        const result = model.predict(reshapedInput);
-        console.log(normalizedInput)
-        console.log(denormalize(Array.from(result.dataSync()), min, max))
-        setPrediction(denormalize(Array.from(result.dataSync()), min, max));
-    };
+    }, [models]);
 
     return (
         <div>
-            <h2>ModelTest</h2>
-            <input
-                type="number"
-                value={input}
-                onChange={handleInputChange}
+            <Form 
+            humidityModel={models.humidityModel} 
+            temperatureModel={models.temperatureModel}
+            // precipitationModel={models.precipitationModel}
+            // luminosityModel={models.luminosityModel}
             />
-            <button onClick={handlePredict}>Predict</button>
-            {prediction !== null && (
-                <div>
-                    <h3>Prediction: {prediction}</h3>
-                </div>
-            )}
         </div>
     );
 };
