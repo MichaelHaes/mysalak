@@ -3,8 +3,7 @@ import React from "react";
 import { BsCloudRain } from "react-icons/bs";
 import { GoSun } from "react-icons/go";
 import { IoIosPartlySunny } from "react-icons/io";
-import { IoRainyOutline } from "react-icons/io5";
-import { WiDayCloudy, WiHumidity } from "react-icons/wi";
+import { WiHumidity } from "react-icons/wi";
 
 const Weather = () => {
   return (
