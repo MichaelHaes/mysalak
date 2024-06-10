@@ -15,14 +15,14 @@ const ModelTest = () => {
             try {
                 const temperatureModel = await tf.loadLayersModel("/model/converted_model/Tavg_LSTM.json");
                 const humidityModel = await tf.loadLayersModel("/model/converted_model/RH_avg_LSTM.json");
-                // const precipitationModel = await tf.loadLayersModel("/model/converted_model/RR_LSTM.json");
-                // const luminosityModel = await tf.loadLayersModel("/model/converted_model/Lumen_LSTM.json");
+                const precipitationModel = await tf.loadLayersModel("/model/converted_model/RR_LSTM.json");
+                const luminosityModel = await tf.loadLayersModel("/model/converted_model/Lumen_LSTM.json");
 
                 setModels({
                     temperatureModel,
                     humidityModel,
-                    // precipitationModel,
-                    // luminosityModel
+                    precipitationModel,
+                    luminosityModel
                 });
             } catch (error) {
                 console.error("Error loading model:", error);
@@ -45,8 +45,8 @@ const ModelTest = () => {
             <Form 
             humidityModel={models.humidityModel} 
             temperatureModel={models.temperatureModel}
-            // precipitationModel={models.precipitationModel}
-            // luminosityModel={models.luminosityModel}
+            precipitationModel={models.precipitationModel}
+            luminosityModel={models.luminosityModel}
             />
         </div>
     );
