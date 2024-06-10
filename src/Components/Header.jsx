@@ -77,7 +77,7 @@ const Header = () => {
         </Flex>
       </Box>
 
-      <Box
+      <Flex
         w={"85%"}
         mx={"auto"}
         h={"9vh"}
@@ -92,6 +92,7 @@ const Header = () => {
           w={"100%"}
           borderRadius={"20px"}
           bg={"rgba(237, 237, 237, 1)"}
+          zIndex={3}
         >
           <Image
             src="/assets/lalat buah.png"
@@ -110,18 +111,31 @@ const Header = () => {
               maskImage:
                 "linear-gradient(to right, rgba(237, 237, 237, 0), rgba(237, 237, 237, 1))",
             }}
-          ></Image>
-
-          <Box pos={"absolute"} zIndex={4} width={"55%"} py={2} ps={5}>
-            <Text fontWeight={"bold"} fontSize={"11pt"} mb={1}>
-              Waspada Lalat Buah!
-            </Text>
-            <Text fontSize={"8pt"}>
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-            </Text>
-          </Box>
+          />
+          <Text
+            pos={"absolute"}
+            width={"15px"}
+            height={"15px"}
+            fontSize={"11px"}
+            textAlign={"center"}
+            right={"12px"}
+            bottom={1}
+            zIndex={4}
+            bg={"white"}
+            borderRadius={"50%"}
+          >
+            i
+          </Text>
         </Box>
-      </Box>
+        <Box pos={"absolute"} zIndex={4} width={"50%"} py={2} ps={5}>
+          <Text fontWeight={"bold"} fontSize={"11pt"} mb={1}>
+            Waspada Lalat Buah!
+          </Text>
+          <Text fontSize={"8pt"}>
+            Lorem ipsum dolor sit amet consectetur adipisicing.
+          </Text>
+        </Box>
+      </Flex>
     </Box>
   );
 };
