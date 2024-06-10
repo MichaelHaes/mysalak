@@ -15,3 +15,7 @@
   height: 100vh;
   margin: auto;
 }
+
+.white-text {
+  color: var(--background);
+}

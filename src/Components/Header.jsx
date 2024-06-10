@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 
@@ -31,15 +31,14 @@ const Header = () => {
           ></Box>
         </Box>
 
-        <Box
+        <Flex
           zIndex={1}
           pos={"absolute"}
           top={0}
           left={0}
-          display={"flex"}
           height={"100%"}
           width={"100%"}
-          color={"white"}
+          className="white-text"
         >
           <Box
             display={"flex"}
@@ -52,15 +51,14 @@ const Header = () => {
             <Text mt={2} mb={3} fontSize={"18pt"} fontWeight={"bold"}>
               Sudah berkebun hari ini?
             </Text>
-            <Box display={"flex"} alignItems={"center"}>
+            <Flex alignItems={"center"}>
               <FaCalendarAlt fill="white" />
               <Text fontSize={"10pt"} ml={2}>
                 Senin, 1 Desember 2024
               </Text>
-            </Box>
+            </Flex>
           </Box>
-          <Box
-            display={"flex"}
+          <Flex
             flexDir={"column"}
             justifyContent={"center"}
             alignItems={"end"}
@@ -75,8 +73,8 @@ const Header = () => {
               border={"2px solid #a6c4a6"}
               objectFit={"cover"}
             />
-          </Box>
-        </Box>
+          </Flex>
+        </Flex>
       </Box>
 
       <Box
@@ -86,7 +84,6 @@ const Header = () => {
         border={"1px solid #CFCFCF"}
         boxShadow={"0 2px 5px 1px #e5e9e6"}
         mt={"-8%"}
-        bg={"rgba(237, 237, 237, 1)"}
         borderRadius={"20px"}
       >
         <Box
