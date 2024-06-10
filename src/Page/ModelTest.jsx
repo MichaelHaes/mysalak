@@ -49,7 +49,7 @@ const ModelTest = () => {
         const result = model.predict(reshapedInput);
         console.log(normalizedInput)
         console.log(denormalize(Array.from(result.dataSync()), min, max))
-        // setPrediction(result);
+        setPrediction(denormalize(Array.from(result.dataSync()), min, max));
     };
 
     return (
