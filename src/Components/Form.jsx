@@ -38,9 +38,14 @@ const Form = (props) => {
             ...prevInputs,
             [inputName]: value
         }));
-        console.log(inputs.Kelembapan)
-        console.log(inputs.Temperatur)
     };
+
+    function addNoiseOrZero(value, zeroProbability) {
+        if (Math.random() < zeroProbability) {
+            return 0;
+        }
+        return value;
+    }
 
     const handlePredict = () => {
         // Kelembapan
@@ -53,28 +58,41 @@ const Form = (props) => {
         const reshapedTemperatur = tf.reshape([[inputTemperatur]], [1, 1, 1]);
         const resultTemperatur = props.temperatureModel.predict(reshapedTemperatur);
 
-        // Curah Hujan
+        // Curah Hujan masih kacau ini ga tau gimana
         const inputRR = normalize(parseFloat(inputs['Curah Hujan']), minRR, maxRR)
-        const reshapedRR = tf.reshape([[inputRR]], [1, 1, 1]);
-        const resultRR = props.temperatureModel.predict(reshapedRR);
+        const finalRR = [
+            addNoiseOrZero(inputRR, 0.1),
+            addNoiseOrZero(inputRR, 0.1),
+            addNoiseOrZero(inputRR, 0.1),
+            addNoiseOrZero(inputRR, 0.1),
+            addNoiseOrZero(inputRR, 0.1)
+        ];
+        const reshapedRR = tf.reshape([[finalRR]], [1, 5, 1]);
+        const resultRR = props.precipitationModel.predict(reshapedRR);
 
         // Intensitas Cahaya
         const inputLumen = normalize(parseFloat(inputs['Intensitas Cahaya']), minLumen, maxLumen)
         const reshapedLumen = tf.reshape([[inputLumen]], [1, 1, 1]);
-        const resultLumen = props.temperatureModel.predict(reshapedLumen);
+        const resultLumen = props.luminosityModel.predict(reshapedLumen);
 
         setPredictions({
             "Temperatur": denormalize(Array.from(resultTemperatur.dataSync()), minTavg, maxTavg),
             "Kelembapan": denormalize(Array.from(resultKelembapan.dataSync()), minRH_avg, maxRH_avg),
-            // "Curah Hujan": denormalize(Array.from(resultRR.dataSync()), minRR, maxRR),
-            // "Intensitas Cahaya": denormalize(Array.from(resultLumen.dataSync()), minLumen, maxLumen)
+            "Curah Hujan": denormalize(Array.from(resultRR.dataSync()), minRR, maxRR),
+            "Intensitas Cahaya": denormalize(Array.from(resultLumen.dataSync()), minLumen, maxLumen)
         });
     };
 
     return (
         <div>
             <h2>Prediksi</h2>
-
+            <div>
+                <p>Min-Max</p>
+                Temperatur : {minTavg} - {maxTavg} <br />
+                Kelembapan : {minRH_avg} - {maxRH_avg} <br />
+                Curah Hujan : {minRR} - {maxRR} <br />
+                Intensitas Cahaya : {minLumen} - {maxLumen} <br />
+            </div>
             {Object.entries(inputs).map(([inputName, value], index) => (
                 <Input
                     key={index}
@@ -89,8 +107,8 @@ const Form = (props) => {
             <div>
                 <h3>Temperatur: {predictions.Temperatur}</h3>
                 <h3>Kelembapan: {predictions.Kelembapan}</h3>
-                <h3>Temperatur: {predictions['Curah Hujan']}</h3>
-                <h3>Kelembapan: {predictions['Intensitas Cahaya']}</h3>
+                <h3>Curah Hujan: {predictions['Curah Hujan']}</h3>
+                <h3>Intensitas Cahaya: {predictions['Intensitas Cahaya']}</h3>
             </div>
         </div>
     )
