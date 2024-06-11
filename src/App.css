@@ -20,7 +20,3 @@
 .white-text {
   color: var(--background);
 }
-
-.swiper-slide:last-child {
-  margin-right: 10rem !important;
-}
