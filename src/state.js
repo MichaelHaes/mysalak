@@ -6,10 +6,11 @@ export const useStore = create((set) => ({
     increase: () => set((state) => ({ count: state.count + 1 })),
   }));
 
-export const useNavbar = create((set) => ({
+export const usePage = create((set) => ({
     page: "Home",
     home: () => set((state) => ({page: "Home"})),
-    history: () => set((state) => ({page: "History"})),
-    article: () => set((state) => ({page: "Article"})),
-    profil: () => set((state) => ({page: "Profile"})),
+    cuaca: () => set((state) => ({page: "Prediksi Cuaca"})),
+    hama: () => set((state) => ({page: "Prediksi Hama"})),
+    informasi: () => set((state) => ({page: "Informasi Hama"})),
+    setPage: (val) => set(({page: val})),
 }))

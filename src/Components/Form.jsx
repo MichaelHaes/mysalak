@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import * as tf from "@tensorflow/tfjs";
-import { Input, Button } from "@chakra-ui/react";
+import { Input, Button, Box, Heading, Text } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+} from "@chakra-ui/react";
+import { Flex, Spacer } from "@chakra-ui/react";
+import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 
 const minRH_avg = 66;
 const maxRH_avg = 98;
@@ -87,31 +95,56 @@ const Form = (props) => {
     const reshapedLumen = tf.reshape([[inputLumen]], [1, 1, 1]);
     const resultLumen = props.luminosityModel.predict(reshapedLumen);
 
-    setPredictions({
-      Temperatur: denormalize(
-        Array.from(resultTemperatur.dataSync()),
-        minTavg,
-        maxTavg
-      ),
-      Kelembapan: denormalize(
-        Array.from(resultKelembapan.dataSync()),
-        minRH_avg,
-        maxRH_avg
-      ),
-      "Curah Hujan": denormalize(Array.from(resultRR.dataSync()), minRR, maxRR),
-      "Intensitas Cahaya": denormalize(
-        Array.from(resultLumen.dataSync()),
-        minLumen,
-        maxLumen
-      ),
-    });
-
-    props.predictPest(inputTemperatur, inputKelembapan, inputRR, inputLumen);
+    if (!isNaN(Array.from(resultTemperatur.dataSync()))) {
+      setPredictions({
+        Temperatur: denormalize(
+          Array.from(resultTemperatur.dataSync()),
+          minTavg,
+          maxTavg
+        ),
+        Kelembapan: null,
+        "Curah Hujan": null,
+        "Intensitas Cahaya": null,
+      });
+    } else if (!isNaN(Array.from(resultKelembapan.dataSync()))) {
+      setPredictions({
+        Temperatur: null,
+        Kelembapan: denormalize(
+          Array.from(resultKelembapan.dataSync()),
+          minRH_avg,
+          maxRH_avg
+        ),
+        "Curah Hujan": null,
+        "Intensitas Cahaya": null,
+      });
+    } else if (!isNaN(Array.from(resultRR.dataSync()))) {
+      setPredictions({
+        Temperatur: null,
+        Kelembapan: null,
+        "Curah Hujan": denormalize(
+          Array.from(resultRR.dataSync()),
+          minRR,
+          maxRR
+        ),
+        "Intensitas Cahaya": null,
+      });
+    } else if (!isNaN(Array.from(resultLumen.dataSync()))) {
+      setPredictions({
+        Temperatur: null,
+        Kelembapan: null,
+        "Curah Hujan": null,
+        "Intensitas Cahaya": denormalize(
+          Array.from(resultLumen.dataSync()),
+          minLumen,
+          maxLumen
+        ),
+      });
+    }
   };
 
   return (
-    <div>
-      <h2>Prediksi</h2>
+    <Box marginX={"10px"} padding={"10px"}>
+      <Heading size="md">Prediksi Cuaca</Heading>
       <div>
         <p>Min-Max</p>
         Temperatur : {minTavg} - {maxTavg} <br />
@@ -119,25 +152,67 @@ const Form = (props) => {
         Curah Hujan : {minRR} - {maxRR} <br />
         Intensitas Cahaya : {minLumen} - {maxLumen} <br />
       </div>
-      {Object.entries(inputs).map(([inputName, value], index) => (
-        <Input
-          key={index}
-          value={value}
-          variant="flushed"
-          placeholder={inputName}
-          onChange={(event) => handleInputChange(event, inputName)}
-        />
-      ))}
-      <Button onClick={handlePredict}>Predict</Button>
-      <div>
-        {Object.entries(predictions).map(([key, value], index) => (
-          <div key={index}>
-            <h3>{key}</h3>
-            <p>{value}</p>
-          </div>
+      <FormControl>
+        {Object.entries(inputs).map(([inputName, value], index) => (
+          <Flex>
+            <FormLabel w="15vw" margin={"auto"}>
+              {inputName}
+            </FormLabel>
+            <Spacer />
+            <Input
+              key={index}
+              value={value}
+              variant="flushed"
+              placeholder={inputName}
+              onChange={(event) => handleInputChange(event, inputName)}
+            />
+          </Flex>
         ))}
-      </div>
-    </div>
+        <Button margin={"auto"} onClick={handlePredict}>
+          Prediksi
+        </Button>
+      </FormControl>
+
+      <Card align="center" w={"75%"} margin={"auto"}>
+        <CardHeader>
+          <Heading size="sm">Hasil Prediksi</Heading>
+        </CardHeader>
+        <CardBody>
+          <Flex>
+            <Text w="15vw">Temperatur</Text>
+            <Text>
+              {predictions.Temperatur !== null
+                ? `: ${parseFloat(predictions.Temperatur).toFixed(2)}`
+                : ":"}
+            </Text>
+          </Flex>
+          <Flex>
+            <Text w="15vw">Kelembapan</Text>
+            <Text>
+              {predictions.Kelembapan !== null
+                ? `: ${parseFloat(predictions.Kelembapan).toFixed(2)}`
+                : ":"}
+            </Text>
+          </Flex>
+          <Flex>
+            <Text w="15vw">Curah Hujan</Text>
+            <Text>
+              {predictions["Curah Hujan"] !== null
+                ? `: ${parseFloat(predictions["Curah Hujan"]).toFixed(2)}`
+                : ":"}
+            </Text>
+          </Flex>
+          <Flex>
+            <Text w="15vw">Intensitas Cahaya</Text>
+            <Text>
+              {predictions["Intensitas Cahaya"] !== null
+                ? `: ${parseFloat(predictions["Intensitas Cahaya"]).toFixed(2)}`
+                : ":"}
+            </Text>
+          </Flex>
+        </CardBody>
+      </Card>
+    </Box>
   );
 };
 

@@ -47,13 +47,20 @@ const Header = () => {
             ps={5}
             w={"50%"}
           >
-            <Text fontSize={"10pt"}>Selamat pagi, Bu Endang!</Text>
-            <Text mt={2} mb={3} fontSize={"18pt"} fontWeight={"bold"}>
-              Sudah berkebun hari ini?
+            <Text fontSize={"1.4vh"}>Selamat pagi, Bu Endang!</Text>
+            <Text
+              mt={{ base: 1, md: 2 }}
+              mb={{ base: 2, md: 3 }}
+              fontSize={"2.5vh"}
+              fontWeight={"bold"}
+            >
+              Sudah berkebun
+              <br />
+              hari ini?
             </Text>
             <Flex alignItems={"center"}>
-              <FaCalendarAlt fill="white" />
-              <Text fontSize={"10pt"} ml={2}>
+              <FaCalendarAlt size={"1.5vh"} fill="white" />
+              <Text fontSize={"1.4vh"} ml={2}>
                 Senin, 1 Desember 2024
               </Text>
             </Flex>
@@ -77,7 +84,7 @@ const Header = () => {
         </Flex>
       </Box>
 
-      <Box
+      <Flex
         w={"85%"}
         mx={"auto"}
         h={"9vh"}
@@ -92,6 +99,7 @@ const Header = () => {
           w={"100%"}
           borderRadius={"20px"}
           bg={"rgba(237, 237, 237, 1)"}
+          zIndex={3}
         >
           <Image
             src="/assets/lalat buah.png"
@@ -110,18 +118,42 @@ const Header = () => {
               maskImage:
                 "linear-gradient(to right, rgba(237, 237, 237, 0), rgba(237, 237, 237, 1))",
             }}
-          ></Image>
-
-          <Box pos={"absolute"} zIndex={4} width={"55%"} py={2} ps={5}>
-            <Text fontWeight={"bold"} fontSize={"11pt"} mb={1}>
-              Waspada Lalat Buah!
-            </Text>
-            <Text fontSize={"8pt"}>
-              Lorem ipsum dolor sit amet consectetur adipisicing.
-            </Text>
-          </Box>
+          />
+          <Text
+            pos={"absolute"}
+            width={"15px"}
+            height={"15px"}
+            fontSize={"11px"}
+            textAlign={"center"}
+            right={"12px"}
+            bottom={1}
+            zIndex={4}
+            bg={"white"}
+            borderRadius={"50%"}
+          >
+            i
+          </Text>
         </Box>
-      </Box>
+        <Box pos={"absolute"} zIndex={4} width={"41%"} py={"1.3vh"} ps={5}>
+          <Text fontWeight={"bold"} fontSize={"1.55vh"} mb={1}>
+            Waspada Lalat Buah!
+          </Text>
+          <Text
+            fontSize={"1.1vh"}
+            lineHeight={1}
+            maxH={"3.3vh"}
+            overflowY={"auto"}
+            wordBreak={"break-word"}
+            style={{
+              scrollbarWidth: "none"
+            }}
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+            voluptates distinctio quaerat neque officia fugit explicabo totam!
+            Hic, nobis asperiores.
+          </Text>
+        </Box>
+      </Flex>
     </Box>
   );
 };

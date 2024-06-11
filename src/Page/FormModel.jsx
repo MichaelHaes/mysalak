@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
 import Form from "../Components/Form";
 
+<<<<<<< HEAD:src/Page/ModelTest.jsx
 const ModelTest = () => {
   const [models, setModels] = useState({
     temperatureModel: null,
@@ -9,6 +10,15 @@ const ModelTest = () => {
     precipitationModel: null,
     luminosityModel: null,
   });
+=======
+const FormModel = () => {
+    const [models, setModels] = useState({
+        temperatureModel: null,
+        humidityModel: null,
+        precipitationModel: null,
+        luminosityModel: null
+    });
+>>>>>>> a1809eacfda4e400751124536d7983e010b73588:src/Page/FormModel.jsx
 
   const [pestPrediction, setPestPrediction] = useState("");
 
@@ -207,4 +217,4 @@ const ModelTest = () => {
   );
 };
 
-export default ModelTest;
+export default FormModel;
