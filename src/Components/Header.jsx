@@ -144,6 +144,9 @@ const Header = () => {
             maxH={"3.3vh"}
             overflowY={"auto"}
             wordBreak={"break-word"}
+            style={{
+              scrollbarWidth: "none"
+            }}
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
             voluptates distinctio quaerat neque officia fugit explicabo totam!
