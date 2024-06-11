@@ -20,16 +20,29 @@ const ManajemenHama = () => {
   return (
     <Box w={"85%"} mx={"auto"} pos={"relative"}>
       <Flex align={"center"} justify={"space-between"} mb={3}>
-        <Text fontWeight={"bold"} fontSize={"14pt"}>Manajemen Hama</Text>
-        <Button bg={"white"} fontWeight={"normal"} fontSize={"8pt"} h={"fit-content"} py={1} px={2} borderRadius={"30px"}>Lihat Semua</Button>
+        <Text fontWeight={"bold"} fontSize={"14pt"}>
+          Manajemen Hama
+        </Text>
+        <Button
+          bg={"white"}
+          fontWeight={"normal"}
+          fontSize={"8pt"}
+          h={"fit-content"}
+          py={1}
+          px={2}
+          borderRadius={"30px"}
+        >
+          Lihat Semua
+        </Button>
       </Flex>
 
       <Flex h={"fit-content"} pos={"relative"} gap={3}>
         {hama.map((item) => (
-          <Box
+          <Button
+            variant={"unstyled"}
             pos={"relative"}
-            h={"16vh"}
-            w={"16vh"}
+            h={"15vh"}
+            w={"18vh"}
             border={"1px solid #CFCFCF"}
             borderRadius={"20px"}
             bg={"white"}
@@ -37,12 +50,10 @@ const ManajemenHama = () => {
             <Image
               src="/assets/lalat buah.png"
               pos={"absolute"}
-              top={0}
               right={0}
               h={"60%"}
               w={"100%"}
               objectFit={"cover"}
-              objectPosition={"right"}
               zIndex={0}
               borderRadius={"20px 20px 0 0"}
               style={{
@@ -58,12 +69,17 @@ const ManajemenHama = () => {
               align={"end"}
               h={"100%"}
               px={2}
-              pb={3}
+              pb={"0.8vh"}
               zIndex={1}
               gap={2}
             >
               <Flex alignItems={"center"} justify={"space-between"} w={"100%"}>
-                <Text fontSize={"7pt"} lineHeight={1}>
+                <Text
+                  fontSize={"7pt"}
+                  lineHeight={1}
+                  fontWeight={"normal"}
+                  textAlign={"start"}
+                >
                   Jumlah <br />
                   Hama
                 </Text>
@@ -73,7 +89,12 @@ const ManajemenHama = () => {
               </Flex>
 
               <Flex direction={"column"} w={"30%"} align={"end"}>
-                <Text fontWeight={"bold"} textAlign={"end"} fontSize={"8pt"} lineHeight={1}>
+                <Text
+                  fontWeight={"bold"}
+                  textAlign={"end"}
+                  fontSize={"8pt"}
+                  lineHeight={1}
+                >
                   {item.nama}
                 </Text>
                 <Text fontSize={"6pt"} color={"#d4d4d4"}>
@@ -81,7 +102,7 @@ const ManajemenHama = () => {
                 </Text>
               </Flex>
             </Flex>
-          </Box>
+          </Button>
         ))}
       </Flex>
     </Box>
