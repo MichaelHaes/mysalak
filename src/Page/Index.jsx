@@ -34,7 +34,7 @@ const Index = () => {
   return (
     <Box>
       <Component />
-      <Navbar />
+      {page !== "Camera" && <Navbar />}
     </Box>
   );
 };
