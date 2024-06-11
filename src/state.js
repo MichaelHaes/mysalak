@@ -8,5 +8,9 @@ export const useStore = create((set) => ({
 
 export const usePage = create((set) => ({
     page: "Home",
+    home: () => set((state) => ({page: "Home"})),
+    cuaca: () => set((state) => ({page: "Prediksi Cuaca"})),
+    hama: () => set((state) => ({page: "Prediksi Hama"})),
+    informasi: () => set((state) => ({page: "Informasi Hama"})),
     setPage: (val) => set(({page: val})),
 }))

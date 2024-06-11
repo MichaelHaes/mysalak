@@ -3,6 +3,7 @@ import { usePage } from "../state";
 import Dashboard from "./Dashboard";
 import { Box } from "@chakra-ui/react";
 import Navbar from "../Components/Navbar";
+import FormModel from "./FormModel";
 import Indikator from "./Indikator";
 import ModelTest from "./ModelTest";
 import Camera from "./Camera";
@@ -33,6 +34,8 @@ const Index = () => {
 
   return (
     <Box>
+      {page === "Home" && <Dashboard />}
+      {page === "Prediksi Cuaca" && <FormModel />}
       <Component />
       <Navbar />
     </Box>

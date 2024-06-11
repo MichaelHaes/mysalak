@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as tf from "@tensorflow/tfjs";
 import Form from "../Components/Form";
 
-const ModelTest = () => {
+const FormModel = () => {
     const [models, setModels] = useState({
         temperatureModel: null,
         humidityModel: null,
@@ -52,4 +52,4 @@ const ModelTest = () => {
     );
 };
 
-export default ModelTest;
+export default FormModel;
