@@ -6,10 +6,7 @@ export const useStore = create((set) => ({
     increase: () => set((state) => ({ count: state.count + 1 })),
   }));
 
-export const useNavbar = create((set) => ({
+export const usePage = create((set) => ({
     page: "Home",
-    home: () => set((state) => ({page: "Home"})),
-    history: () => set((state) => ({page: "History"})),
-    article: () => set((state) => ({page: "Article"})),
-    profil: () => set((state) => ({page: "Profile"})),
+    setPage: (val) => set(({page: val})),
 }))
