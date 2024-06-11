@@ -1,14 +1,21 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { BsCloudRain } from "react-icons/bs";
 import { GoSun } from "react-icons/go";
 import { IoIosPartlySunny } from "react-icons/io";
 import { WiHumidity } from "react-icons/wi";
+import { usePage } from "../state";
 
 const Weather = () => {
+  const { cuaca } = usePage();
+
   return (
-    <Box pos={"relative"} my={9}>
-      <Box
+    <Flex justifyContent={"center"} pos={"relative"} my={9}>
+      <Button
+        variant={"unstyled"}
+        onClick={() => {
+          cuaca();
+        }}
         w={"85%"}
         mx={"auto"}
         h={"19vh"}
@@ -84,21 +91,15 @@ const Weather = () => {
             <Flex gap={4} textAlign={"center"} fontSize={"1.4vh"}>
               <Flex direction={"column"}>
                 <IoIosPartlySunny size={"4vh"} />
-                <Text mt={"-10%"}>
-                  12.00
-                </Text>
+                <Text mt={"-10%"}>12.00</Text>
               </Flex>
               <Flex direction={"column"}>
                 <IoIosPartlySunny size={"4vh"} />
-                <Text mt={"-10%"}>
-                  16.00
-                </Text>
+                <Text mt={"-10%"}>16.00</Text>
               </Flex>
               <Flex direction={"column"}>
                 <IoIosPartlySunny size={"4vh"} />
-                <Text mt={"-10%"}>
-                  20.00
-                </Text>
+                <Text mt={"-10%"}>20.00</Text>
               </Flex>
             </Flex>
           </Flex>
@@ -178,8 +179,8 @@ const Weather = () => {
             </Flex>
           </Flex>
         </Flex>
-      </Box>
-    </Box>
+      </Button>
+    </Flex>
   );
 };
 

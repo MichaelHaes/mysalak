@@ -30,7 +30,7 @@ const componentMap = {
 
 const Index = () => {
   const { page } = usePage();
-  const Component = componentMap[page] || Dashboard;
+//   const Component = componentMap[page] || Dashboard;
 
   return (
     <Box>
