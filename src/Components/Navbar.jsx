@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs, TabList, Tab, Box } from "@chakra-ui/react";
 import { GoHome, GoHomeFill } from "react-icons/go";
-import { useNavbar, usePage } from "../state";
+import { usePage } from "../state";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { RiAccountCircleFill } from "react-icons/ri";
 import { IoScanCircleSharp } from "react-icons/io5";

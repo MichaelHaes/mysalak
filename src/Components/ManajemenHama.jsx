@@ -51,12 +51,9 @@ const ManajemenHama = () => {
       </Flex>
 
       <Box h={"fit-content"} pos={"relative"} gap={3}>
-        <Swiper
-          spaceBetween={65}
-          slidesPerView={3}
-        >
-          {hama.map((item) => (
-            <SwiperSlide>
+        <Swiper slidesPerView={2.5}>
+          {hama.map((item, index) => (
+            <SwiperSlide key={index}>
               <Button
                 variant={"unstyled"}
                 pos={"relative"}
@@ -65,6 +62,12 @@ const ManajemenHama = () => {
                 // border={"1px solid #CFCFCF"}
                 borderRadius={"20px"}
                 bg={"white"}
+                // me={index === hama.length - 1 ? "100px" : 0}
+                // onClick={() => {
+                //   index === hama.length - 1
+                //     ? console.log("true")
+                //     : console.log("false");
+                // }}
               >
                 <Image
                   src="/assets/lalat buah.png"
@@ -128,6 +131,7 @@ const ManajemenHama = () => {
               </Button>
             </SwiperSlide>
           ))}
+          {/* <SwiperSlide></SwiperSlide> */}
         </Swiper>
       </Box>
     </Box>
