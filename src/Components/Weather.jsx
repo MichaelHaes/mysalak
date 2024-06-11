@@ -11,7 +11,7 @@ const Weather = () => {
       <Box
         w={"85%"}
         mx={"auto"}
-        h={"20vh"}
+        h={"19vh"}
         boxShadow={"0 2px 5px 1px #e5e9e6"}
         borderRadius={"20px"}
         pos={"relative"}
@@ -60,44 +60,43 @@ const Weather = () => {
           left={0}
           zIndex={1}
           className="white-text"
-          py={2}
           px={5}
         >
           <Flex flexDir={"column"} width={"50%"}>
             <Flex align={"center"} mt={1}>
-              <Box w={"65px"} h={"65px"}>
+              <Box w={"8vh"} h={"8vh"}>
                 <IoIosPartlySunny size="auto" fill="white" />
               </Box>
 
               <Flex ms={1} direction={"column"} justify={"center"} mb={-4}>
-                <Text fontSize={"8pt"} mb={-3}>
+                <Text fontSize={"1.1vh"} mb={"-1vh"}>
                   Saat ini
                 </Text>
-                <Text fontSize={"28pt"} fontWeight={"bold"}>
+                <Text fontSize={"4vh"} fontWeight={"bold"}>
                   30°C
                 </Text>
               </Flex>
             </Flex>
-            <Text fontSize={"10pt"} mt={-1} mb={2}>
+            <Text fontSize={"1.5vh"} mt={"-0.5vh"} mb={2}>
               Cerah Berawan
             </Text>
 
-            <Flex gap={4}>
+            <Flex gap={4} textAlign={"center"} fontSize={"1.4vh"}>
               <Flex direction={"column"}>
-                <IoIosPartlySunny size={"35px"} />
-                <Text fontSize={"10pt"} mt={"-10%"}>
+                <IoIosPartlySunny size={"4vh"} />
+                <Text mt={"-10%"}>
                   12.00
                 </Text>
               </Flex>
               <Flex direction={"column"}>
-                <IoIosPartlySunny size={"35px"} />
-                <Text fontSize={"10pt"} mt={"-10%"}>
+                <IoIosPartlySunny size={"4vh"} />
+                <Text mt={"-10%"}>
                   16.00
                 </Text>
               </Flex>
               <Flex direction={"column"}>
-                <IoIosPartlySunny size={"35px"} />
-                <Text fontSize={"10pt"} mt={"-10%"}>
+                <IoIosPartlySunny size={"4vh"} />
+                <Text mt={"-10%"}>
                   20.00
                 </Text>
               </Flex>
@@ -113,7 +112,7 @@ const Weather = () => {
               borderRadius={"20px"}
               gap={2}
               justify={"center"}
-              px={4}
+              ps={3}
             >
               <Flex align={"center"}>
                 <Box
@@ -127,10 +126,10 @@ const Weather = () => {
                   <BsCloudRain fill="#416d51" size={"auto"} />
                 </Box>
                 <Flex direction={"column"}>
-                  <Text fontSize={"6pt"} mb={-1}>
+                  <Text fontSize={"0.8vh"} mb={-1}>
                     Curah Hujan
                   </Text>
-                  <Text fontSize={"12pt"} fontWeight={"bold"}>
+                  <Text fontSize={"2vh"} fontWeight={"bold"}>
                     100%
                   </Text>
                 </Flex>
@@ -148,10 +147,10 @@ const Weather = () => {
                   <GoSun fill="#416d51" size={"auto"} />
                 </Box>
                 <Flex direction={"column"}>
-                  <Text fontSize={"6pt"} mb={-1}>
+                  <Text fontSize={"0.8vh"} mb={-1}>
                     Intensitas Cahaya
                   </Text>
-                  <Text fontSize={"12pt"} fontWeight={"bold"}>
+                  <Text fontSize={"2vh"} fontWeight={"bold"}>
                     30cd
                   </Text>
                 </Flex>
@@ -168,10 +167,10 @@ const Weather = () => {
                   <WiHumidity fill="#416d51" size={"auto"} />
                 </Box>
                 <Flex direction={"column"}>
-                  <Text fontSize={"6pt"} mb={-1}>
+                  <Text fontSize={"0.8vh"} mb={-1}>
                     Kelembaban
                   </Text>
-                  <Text fontSize={"12pt"} fontWeight={"bold"}>
+                  <Text fontSize={"2vh"} fontWeight={"bold"}>
                     30%
                   </Text>
                 </Flex>
