@@ -5,6 +5,7 @@ import { GoSun } from "react-icons/go";
 import { IoIosPartlySunny } from "react-icons/io";
 import { WiHumidity } from "react-icons/wi";
 import { usePage } from "../state";
+import "./Styles/Weather.css";
 
 const Weather = () => {
   const { setPage } = usePage();
@@ -67,11 +68,13 @@ const Weather = () => {
           left={0}
           zIndex={1}
           className="white-text"
-          px={5}
+          px={3}
+          align={"center"}
         >
-          <Flex flexDir={"column"} width={"50%"} align={"start"}>
-            <Flex align={"center"} mt={1}>
-              <Box w={"8vh"} h={"8vh"}>
+          {/* Kiri */}
+          <Flex flexDir={"column"} width={"50%"} align={"start"} pb={2} ps={1}>
+            <Flex align={"center"}>
+              <Box w={"7vh"} h={"7vh"}>
                 <IoIosPartlySunny size="auto" fill="white" />
               </Box>
 
@@ -84,7 +87,7 @@ const Weather = () => {
                 </Text>
               </Flex>
             </Flex>
-            <Text fontSize={"1.5vh"} mt={"-0.5vh"} mb={2}>
+            <Text fontSize={"1.5vh"} mt={0} fontWeight={500} mb={3}>
               Cerah Berawan
             </Text>
 
@@ -104,7 +107,8 @@ const Weather = () => {
             </Flex>
           </Flex>
 
-          <Flex w={"50%"} align={"center"} justify={"end"}>
+          {/* Kanan */}
+          <Flex w={"50%"} h={"95%"} align={"center"} justify={"end"}>
             <Flex
               direction={"column"}
               bg={"#416d51"}
@@ -115,65 +119,33 @@ const Weather = () => {
               justify={"center"}
               ps={3}
             >
-              <Flex align={"center"}>
-                <Box
-                  borderRadius={"50%"}
-                  bg={"white"}
-                  w={"25px"}
-                  h={"25px"}
-                  p={1}
-                  me={2}
-                >
+              <Flex className="indikator-list">
+                <Box className="icon-wrapper">
                   <BsCloudRain fill="#416d51" size={"auto"} />
                 </Box>
-                <Flex direction={"column"}>
-                  <Text fontSize={"0.8vh"} mb={-1}>
-                    Curah Hujan
-                  </Text>
-                  <Text fontSize={"2vh"} fontWeight={"bold"}>
-                    100%
-                  </Text>
+                <Flex className="text-wrapper">
+                  <Text>Curah Hujan</Text>
+                  <Text>100%</Text>
                 </Flex>
               </Flex>
 
-              <Flex align={"center"}>
-                <Box
-                  borderRadius={"50%"}
-                  bg={"white"}
-                  w={"25px"}
-                  h={"25px"}
-                  p={1}
-                  me={2}
-                >
+              <Flex className="indikator-list">
+                <Box className="icon-wrapper">
                   <GoSun fill="#416d51" size={"auto"} />
                 </Box>
-                <Flex direction={"column"}>
-                  <Text fontSize={"0.8vh"} mb={-1}>
-                    Intensitas Cahaya
-                  </Text>
-                  <Text fontSize={"2vh"} fontWeight={"bold"}>
-                    30cd
-                  </Text>
+                <Flex className="text-wrapper">
+                  <Text>Intensitas Cahaya</Text>
+                  <Text>4000cd</Text>
                 </Flex>
               </Flex>
 
-              <Flex align={"center"}>
-                <Box
-                  borderRadius={"50%"}
-                  bg={"white"}
-                  w={"25px"}
-                  h={"25px"}
-                  me={2}
-                >
+              <Flex className="indikator-list">
+                <Box className="icon-wrapper">
                   <WiHumidity fill="#416d51" size={"auto"} />
                 </Box>
-                <Flex direction={"column"}>
-                  <Text fontSize={"0.8vh"} mb={-1}>
-                    Kelembaban
-                  </Text>
-                  <Text fontSize={"2vh"} fontWeight={"bold"}>
-                    30%
-                  </Text>
+                <Flex className="text-wrapper">
+                  <Text>Kelembaban</Text>
+                  <Text>30%</Text>
                 </Flex>
               </Flex>
             </Flex>
