@@ -8,12 +8,12 @@
 }
 
 #app {
-  font-family: 'DM Sans', sans-serif;
+  font-family: "DM Sans", sans-serif;
   color: var(--text);
   background: var(--background);
   width: 100vw;
   max-width: 480px;
-  height: 100vh;
+  min-height: 100vh;
   margin: auto;
 }
 

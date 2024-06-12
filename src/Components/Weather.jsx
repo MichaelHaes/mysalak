@@ -1,14 +1,22 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { BsCloudRain } from "react-icons/bs";
 import { GoSun } from "react-icons/go";
 import { IoIosPartlySunny } from "react-icons/io";
 import { WiHumidity } from "react-icons/wi";
+import { usePage } from "../state";
+import "./Styles/Weather.css";
 
 const Weather = () => {
+  const { setPage } = usePage();
+
   return (
-    <Box pos={"relative"} my={9}>
-      <Box
+    <Flex justifyContent={"center"} pos={"relative"} my={9}>
+      <Button
+        variant={"unstyled"}
+        onClick={() => {
+          setPage("Ramalan Cuaca");
+        }}
         w={"85%"}
         mx={"auto"}
         h={"19vh"}
@@ -60,15 +68,17 @@ const Weather = () => {
           left={0}
           zIndex={1}
           className="white-text"
-          px={5}
+          px={3}
+          align={"center"}
         >
-          <Flex flexDir={"column"} width={"50%"}>
-            <Flex align={"center"} mt={1}>
-              <Box w={"8vh"} h={"8vh"}>
+          {/* Kiri */}
+          <Flex flexDir={"column"} width={"50%"} align={"start"} pb={2} ps={1}>
+            <Flex align={"center"}>
+              <Box w={"7vh"} h={"7vh"}>
                 <IoIosPartlySunny size="auto" fill="white" />
               </Box>
 
-              <Flex ms={1} direction={"column"} justify={"center"} mb={-4}>
+              <Flex ms={1} direction={"column"} align={"start"} mb={-4}>
                 <Text fontSize={"1.1vh"} mb={"-1vh"}>
                   Saat ini
                 </Text>
@@ -77,33 +87,28 @@ const Weather = () => {
                 </Text>
               </Flex>
             </Flex>
-            <Text fontSize={"1.5vh"} mt={"-0.5vh"} mb={2}>
+            <Text fontSize={"1.5vh"} mt={0} fontWeight={500} mb={3}>
               Cerah Berawan
             </Text>
 
             <Flex gap={4} textAlign={"center"} fontSize={"1.4vh"}>
               <Flex direction={"column"}>
                 <IoIosPartlySunny size={"4vh"} />
-                <Text mt={"-10%"}>
-                  12.00
-                </Text>
+                <Text mt={"-10%"}>12.00</Text>
               </Flex>
               <Flex direction={"column"}>
                 <IoIosPartlySunny size={"4vh"} />
-                <Text mt={"-10%"}>
-                  16.00
-                </Text>
+                <Text mt={"-10%"}>16.00</Text>
               </Flex>
               <Flex direction={"column"}>
                 <IoIosPartlySunny size={"4vh"} />
-                <Text mt={"-10%"}>
-                  20.00
-                </Text>
+                <Text mt={"-10%"}>20.00</Text>
               </Flex>
             </Flex>
           </Flex>
 
-          <Flex w={"50%"} align={"center"} justify={"end"}>
+          {/* Kanan */}
+          <Flex w={"50%"} h={"95%"} align={"center"} justify={"end"}>
             <Flex
               direction={"column"}
               bg={"#416d51"}
@@ -114,72 +119,40 @@ const Weather = () => {
               justify={"center"}
               ps={3}
             >
-              <Flex align={"center"}>
-                <Box
-                  borderRadius={"50%"}
-                  bg={"white"}
-                  w={"25px"}
-                  h={"25px"}
-                  p={1}
-                  me={2}
-                >
+              <Flex className="indikator-list">
+                <Box className="icon-wrapper">
                   <BsCloudRain fill="#416d51" size={"auto"} />
                 </Box>
-                <Flex direction={"column"}>
-                  <Text fontSize={"0.8vh"} mb={-1}>
-                    Curah Hujan
-                  </Text>
-                  <Text fontSize={"2vh"} fontWeight={"bold"}>
-                    100%
-                  </Text>
+                <Flex className="text-wrapper">
+                  <Text>Curah Hujan</Text>
+                  <Text>100%</Text>
                 </Flex>
               </Flex>
 
-              <Flex align={"center"}>
-                <Box
-                  borderRadius={"50%"}
-                  bg={"white"}
-                  w={"25px"}
-                  h={"25px"}
-                  p={1}
-                  me={2}
-                >
+              <Flex className="indikator-list">
+                <Box className="icon-wrapper">
                   <GoSun fill="#416d51" size={"auto"} />
                 </Box>
-                <Flex direction={"column"}>
-                  <Text fontSize={"0.8vh"} mb={-1}>
-                    Intensitas Cahaya
-                  </Text>
-                  <Text fontSize={"2vh"} fontWeight={"bold"}>
-                    30cd
-                  </Text>
+                <Flex className="text-wrapper">
+                  <Text>Intensitas Cahaya</Text>
+                  <Text>4000cd</Text>
                 </Flex>
               </Flex>
 
-              <Flex align={"center"}>
-                <Box
-                  borderRadius={"50%"}
-                  bg={"white"}
-                  w={"25px"}
-                  h={"25px"}
-                  me={2}
-                >
+              <Flex className="indikator-list">
+                <Box className="icon-wrapper">
                   <WiHumidity fill="#416d51" size={"auto"} />
                 </Box>
-                <Flex direction={"column"}>
-                  <Text fontSize={"0.8vh"} mb={-1}>
-                    Kelembaban
-                  </Text>
-                  <Text fontSize={"2vh"} fontWeight={"bold"}>
-                    30%
-                  </Text>
+                <Flex className="text-wrapper">
+                  <Text>Kelembaban</Text>
+                  <Text>30%</Text>
                 </Flex>
               </Flex>
             </Flex>
           </Flex>
         </Flex>
-      </Box>
-    </Box>
+      </Button>
+    </Flex>
   );
 };
 

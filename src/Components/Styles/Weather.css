@@ -1,0 +1,30 @@
+.indikator-list {
+  align-items: center;
+}
+
+.indikator-list .icon-wrapper {
+  border-radius: 50%;
+  background: white;
+  width: 25px;
+  height: 25px;
+  padding: 5%;
+  margin-right: 7%;
+}
+
+.indikator-list .icon-wrapper:last-of-type {
+  padding: 0 !important;
+}
+
+.indikator-list .text-wrapper {
+  flex-direction: column;
+  text-align: start;
+  font-size: 1.8vh;
+  font-weight: bold;
+  line-height: normal;
+}
+
+.indikator-list .text-wrapper p:first-child {
+  font-size: 0.82vh;
+  font-weight: normal;
+  margin-bottom: -5%;
+}
