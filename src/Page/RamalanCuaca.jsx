@@ -57,10 +57,10 @@ const RamalanCuaca = () => {
   }
 
   useEffect(() => {
-    setAll(true);
+    setAll(false);
   }, [])
 
-  return all ? (
+  return !all ? (
     <Box>
       <IndikatorHeader />
       <IndikatorCard />
