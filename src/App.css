@@ -13,7 +13,7 @@
   background: var(--background);
   width: 100vw;
   max-width: 480px;
-  height: 100vh;
+  min-height: 100vh;
   margin: auto;
 }
 

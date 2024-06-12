@@ -35,7 +35,7 @@ const IndikatorCard = () => {
       </Text>
 
       <Box h={"fit-content"} pos={"relative"}>
-        <Swiper slidesPerView={3.5} slidesOffsetAfter={30}>
+        <Swiper spaceBetween={30} slidesPerView={3.5} slidesOffsetAfter={30}>
           {cardDetails.map((item) => (
             <SwiperSlide>
               <Box className="ramalan-card">

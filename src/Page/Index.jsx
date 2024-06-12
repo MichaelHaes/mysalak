@@ -4,7 +4,6 @@ import Dashboard from "./Dashboard";
 import { Box } from "@chakra-ui/react";
 import Navbar from "../Components/Navbar";
 import FormModel from "./FormModel";
-import Indikator from "./Indikator";
 // import ModelTest from "./ModelTest";
 import Camera from "./Camera";
 import HitungHama from "./HitungHama";
@@ -14,11 +13,12 @@ import PersebaranHama from "./PersebaranHama";
 import Profil from "./Profil";
 import Artikel from "./Artikel";
 import History from "./History";
+import RamalanCuaca from "./RamalanCuaca";
 
 const componentMap = {
   Home: Dashboard,
   // History: History,
-  Indikator: Indikator,
+  'Ramalan Cuaca': RamalanCuaca,
   // Artikel: Artikel,
   // Camera: Camera,
   // HitungHama: HitungHama,
@@ -38,6 +38,9 @@ const Index = () => {
       {/* {page === "Home" && <Dashboard />}
       {page === "Prediksi Cuaca" && <FormModel />} */}
       <Component />
+
+      <Box h={"7vh"}></Box>
+
       <Navbar />
     </Box>
   );

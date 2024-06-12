@@ -14,7 +14,7 @@ const Weather = () => {
       <Button
         variant={"unstyled"}
         onClick={() => {
-          setPage("Indikator");
+          setPage("Ramalan Cuaca");
         }}
         w={"85%"}
         mx={"auto"}
