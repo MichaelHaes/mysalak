@@ -1,8 +1,10 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { FaCalendarAlt } from "react-icons/fa";
+import { usePage } from "../state";
 
 const DashboardHeader = () => {
+  const {setPage} = usePage();
   return (
     <Box>
       <Box pos={"relative"} height={"28vh"}>
@@ -71,6 +73,7 @@ const DashboardHeader = () => {
             alignItems={"end"}
             pe={10}
             w={"50%"}
+            onClick={() => {setPage("Profil")}}
           >
             <Image
               src="/assets/lalat buah.png"
