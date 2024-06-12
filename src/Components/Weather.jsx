@@ -60,7 +60,6 @@ const Weather = () => {
           ></Box>
         </Box>
 
-
         <Flex
           pos={"absolute"}
           w={"100%"}
@@ -73,8 +72,8 @@ const Weather = () => {
           align={"center"}
         >
           {/* Kiri */}
-          <Flex flexDir={"column"} width={"50%"} align={"start"} py={2} ps={1}>
-            <Flex align={"center"} mt={1}>
+          <Flex flexDir={"column"} width={"50%"} align={"start"} pb={2} ps={1}>
+            <Flex align={"center"}>
               <Box w={"7vh"} h={"7vh"}>
                 <IoIosPartlySunny size="auto" fill="white" />
               </Box>
@@ -88,7 +87,7 @@ const Weather = () => {
                 </Text>
               </Flex>
             </Flex>
-            <Text fontSize={"1.5vh"} mt={"-0.5vh"} mb={2}>
+            <Text fontSize={"1.5vh"} mt={0} fontWeight={500} mb={3}>
               Cerah Berawan
             </Text>
 
