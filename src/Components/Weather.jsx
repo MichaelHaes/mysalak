@@ -7,7 +7,7 @@ import { WiHumidity } from "react-icons/wi";
 import { usePage } from "../state";
 
 const Weather = () => {
-  const { cuaca, setPage } = usePage();
+  const { setPage } = usePage();
 
   return (
     <Flex justifyContent={"center"} pos={"relative"} my={9}>

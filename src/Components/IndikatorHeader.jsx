@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text, Button } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { IoIosArrowBack, IoIosPartlySunny } from "react-icons/io";
 import { usePage } from "../state";
