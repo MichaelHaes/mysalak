@@ -30,7 +30,6 @@ const DashboardHeader = () => {
             borderRadius={"0 0 65px 65px"}
           ></Box>
         </Box>
-
         <Flex
           zIndex={1}
           pos={"absolute"}
@@ -46,6 +45,7 @@ const DashboardHeader = () => {
             justifyContent={"center"}
             ps={5}
             w={"50%"}
+            
           >
             <Text fontSize={"1.4vh"}>Selamat pagi, Bu Endang!</Text>
             <Text

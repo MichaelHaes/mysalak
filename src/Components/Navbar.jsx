@@ -25,11 +25,12 @@ const Navbar = () => {
   };
 
   return (
-    <Tabs position={"fixed"} bottom={0} width={"100%"} variant={"unstyled"}>
+    <Tabs position={"fixed"} bottom={0} width={"480px"} variant={"unstyled"} display={"flex"} justifyContent={"center"}>
       <TabList
         display={"flex"}
-        justifyContent={"space-between"}
         paddingX={"5%"}
+        justifyContent={"space-between"}
+        width={"408px"}
       >
         <Tab onClick={Page.home}>
           {Page.page === "Home" ? (
