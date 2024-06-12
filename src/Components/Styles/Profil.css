@@ -1,0 +1,43 @@
+.subheading {
+  font-size: 2vh;
+  font-weight: bold;
+  margin-bottom: 1%;
+}
+
+.menu-item {
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 2% 0;
+}
+
+.menu-icon {
+  height: 5vh;
+  width: 5vh;
+  border-radius: 50%;
+  background: white;
+  align-items: center;
+  padding: 1.5%;
+}
+
+.menu-text-wrapper {
+  margin-left: 3%;
+  justify-content: start;
+  flex-direction: column;
+}
+
+.menu-title {
+  font-weight: bold;
+  font-size: 1.5vh;
+}
+.menu-desc {
+  font-size: 1vh;
+}
+
+.menu-goto {
+  width: 3vh;
+  height: 3vh;
+  border: 2px solid black;
+  padding: 1%;
+  border-radius: 50%;
+}
