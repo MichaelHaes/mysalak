@@ -8,10 +8,10 @@ import ManajemenHamaDetail from "./ManajemenHamaDetail";
 import ManajemenHamaPage from "./ManajemenHamaPage";
 import RamalanCuaca from "./RamalanCuaca";
 // import ModelTest from "./ModelTest";
-// import Camera from "./Camera";
+import Camera from "./Camera";
 // import HitungHama from "./HitungHama";
 // import PersebaranHama from "./PersebaranHama";
-// import Profil from "./Profil";
+import Profil from "./Profil";
 // import Artikel from "./Artikel";
 // import History from "./History";
 
@@ -20,12 +20,14 @@ const componentMap = {
   // History: History,
   "Ramalan Cuaca": RamalanCuaca,
   // Artikel: Artikel,
-  // Camera: Camera,
+  Camera: Camera,
   // HitungHama: HitungHama,
   ManajemenHamaDetail: ManajemenHamaDetail,
-  ManajemenHamaPage: ManajemenHamaPage,
+  // ManajemenHamaPage: ManajemenHamaPage,
+  // "Manajemen Hama": ManajemenHamaPage,
+  "Prediksi Hama": ManajemenHamaPage,
   // PersebaranHama: PersebaranHama,
-  // Profil: Profil,
+  Profil: Profil,
   "Prediksi Cuaca": FormModel,
 };
 

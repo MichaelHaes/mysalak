@@ -60,7 +60,7 @@ const Navbar = () => {
             <RiHistoryLine fill="grey" />
           )}
         </Tab>
-        <Tab>
+        <Tab onClick={() => Page.setPage("Camera")}>
           <IoScanCircleSharp size={"40px"} />
         </Tab>
         <Tab onClick={Page.hama}>
@@ -77,8 +77,8 @@ const Navbar = () => {
             <MdOutlineArticle fill="grey" />
           )}
         </Tab>
-        <Tab onClick={Page.informasi}>
-          {Page.page === "Informasi Hama" ? (
+        <Tab onClick={() => {Page.setPage("Profil")}}>
+          {Page.page === "Profil" ? (
             <Box
               display={"flex"}
               flexDirection={"column"}

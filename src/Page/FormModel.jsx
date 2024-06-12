@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
 import Form from "../Components/Form";
+import { useWeatherPred } from "../state";
 
 const FormModel = () => {
-    const [models, setModels] = useState({
-        temperatureModel: null,
-        humidityModel: null,
-        precipitationModel: null,
-        luminosityModel: null
-    });
+  const [models, setModels] = useState({
+    temperatureModel: null,
+    humidityModel: null,
+    precipitationModel: null,
+    luminosityModel: null,
+  });
 
   const [pestPrediction, setPestPrediction] = useState("");
+
+  const temp = useWeatherPred((state) => state.temp);
+  const humidity = useWeatherPred((state) => state.humidity);
+  const precipitation = useWeatherPred((state) => state.precipitation);
+  const luminosity = useWeatherPred((state) => state.luminosity);
 
   useEffect(() => {
     async function loadModel() {
@@ -111,78 +117,17 @@ const FormModel = () => {
     );
   };
 
-  const predictPest = async (
-    temperature,
-    humidity,
-    precipitation,
-    luminosity
-  ) => {
-    const tempPrediction = (
-      await models.temperatureModel
-        .predict(tf.tensor2d([temperature], [1, 1]))
-        .array()
-    )[0][0];
-    const humidityPrediction = (
-      await models.humidityModel
-        .predict(tf.tensor2d([humidity], [1, 1]))
-        .array()
-    )[0][0];
-    const precipitationPrediction = (
-      await models.precipitationModel
-        .predict(tf.tensor2d([precipitation], [1, 1]))
-        .array()
-    )[0][0];
-    const luminosityPrediction = (
-      await models.luminosityModel
-        .predict(tf.tensor2d([luminosity], [1, 1]))
-        .array()
-    )[0][0];
-
+  const predictPest = () => {
     let pest = "";
-    if (
-      isLalatBuah(
-        tempPrediction,
-        humidityPrediction,
-        luminosityPrediction,
-        precipitationPrediction
-      )
-    ) {
+    if (isLalatBuah(temp, humidity, luminosity, precipitation)) {
       pest = "Lalat Buah";
-    } else if (
-      isKutuPutih(
-        tempPrediction,
-        humidityPrediction,
-        luminosityPrediction,
-        precipitationPrediction
-      )
-    ) {
+    } else if (isKutuPutih(temp, humidity, luminosity, precipitation)) {
       pest = "Kutu Putih";
-    } else if (
-      isKumbangGirang(
-        tempPrediction,
-        humidityPrediction,
-        luminosityPrediction,
-        precipitationPrediction
-      )
-    ) {
+    } else if (isKumbangGirang(temp, humidity, luminosity, precipitation)) {
       pest = "Kumbang Girang";
-    } else if (
-      isTikus(
-        tempPrediction,
-        humidityPrediction,
-        luminosityPrediction,
-        precipitationPrediction
-      )
-    ) {
+    } else if (isTikus(temp, humidity, luminosity, precipitation)) {
       pest = "Tikus";
-    } else if (
-      isBajing(
-        tempPrediction,
-        humidityPrediction,
-        luminosityPrediction,
-        precipitationPrediction
-      )
-    ) {
+    } else if (isBajing(temp, humidity, luminosity, precipitation)) {
       pest = "Bajing";
     } else {
       pest = "No significant pest predicted";

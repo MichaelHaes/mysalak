@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
+import { useWeatherPred } from "../state";
 import { Input, Button, Box, Heading, Text } from "@chakra-ui/react";
 import {
   FormControl,
@@ -23,6 +24,16 @@ const minLumen = 2.7;
 const maxLumen = 231468.2;
 
 const Form = (props) => {
+  const setTemp = useWeatherPred((state) => state.setTemp);
+  const setHumid = useWeatherPred((state) => state.setHumid);
+  const setPrecipitation = useWeatherPred((state) => state.setPrecipitation);
+  const setLuminosity = useWeatherPred((state) => state.setLuminosity);
+
+  // const temp = useWeatherPred((state) => state.temp)
+  // const humidity = useWeatherPred((state) => state.humidity)
+  // const precipitation = useWeatherPred((state) => state.precipitation)
+  // const luminosity = useWeatherPred((state) => state.luminosity)
+
   const [inputs, setInputs] = useState({
     Temperatur: "",
     Kelembapan: "",
@@ -31,10 +42,10 @@ const Form = (props) => {
   });
 
   const [predictions, setPredictions] = useState({
-    Temperatur: null,
-    Kelembapan: null,
-    "Curah Hujan": null,
-    "Intensitas Cahaya": null,
+    Temperatur: 0,
+    Kelembapan: 0,
+    "Curah Hujan": 0,
+    "Intensitas Cahaya": 0,
   });
 
   const normalize = (value, min, max) => (value - min) / (max - min);
@@ -44,7 +55,7 @@ const Form = (props) => {
     const { value } = event.target;
     setInputs((prevInputs) => ({
       ...prevInputs,
-      [inputName]: value,
+      [inputName]: isNaN(value) ? 0 : value,
     }));
   };
 
@@ -95,117 +106,106 @@ const Form = (props) => {
     const reshapedLumen = tf.reshape([[inputLumen]], [1, 1, 1]);
     const resultLumen = props.luminosityModel.predict(reshapedLumen);
 
-    if (!isNaN(Array.from(resultTemperatur.dataSync()))) {
-      setPredictions({
-        Temperatur: denormalize(
-          Array.from(resultTemperatur.dataSync()),
-          minTavg,
-          maxTavg
-        ),
-        Kelembapan: null,
-        "Curah Hujan": null,
-        "Intensitas Cahaya": null,
-      });
-    } else if (!isNaN(Array.from(resultKelembapan.dataSync()))) {
-      setPredictions({
-        Temperatur: null,
-        Kelembapan: denormalize(
-          Array.from(resultKelembapan.dataSync()),
-          minRH_avg,
-          maxRH_avg
-        ),
-        "Curah Hujan": null,
-        "Intensitas Cahaya": null,
-      });
-    } else if (!isNaN(Array.from(resultRR.dataSync()))) {
-      setPredictions({
-        Temperatur: null,
-        Kelembapan: null,
-        "Curah Hujan": denormalize(
-          Array.from(resultRR.dataSync()),
-          minRR,
-          maxRR
-        ),
-        "Intensitas Cahaya": null,
-      });
-    } else if (!isNaN(Array.from(resultLumen.dataSync()))) {
-      setPredictions({
-        Temperatur: null,
-        Kelembapan: null,
-        "Curah Hujan": null,
-        "Intensitas Cahaya": denormalize(
-          Array.from(resultLumen.dataSync()),
-          minLumen,
-          maxLumen
-        ),
-      });
-    }
+    setPredictions({
+      Temperatur: denormalize(
+        Array.from(resultTemperatur.dataSync()),
+        minTavg,
+        maxTavg
+      ),
+      Kelembapan: denormalize(
+        Array.from(resultKelembapan.dataSync()),
+        minRH_avg,
+        maxRH_avg
+      ),
+      "Curah Hujan": denormalize(Array.from(resultRR.dataSync()), minRR, maxRR),
+      "Intensitas Cahaya": denormalize(
+        Array.from(resultLumen.dataSync()),
+        minLumen,
+        maxLumen
+      ),
+    });
   };
+
+  useEffect(() => {
+    if (predictions) {
+      setTemp(predictions.Temperatur);
+      setHumid(predictions.Kelembapan);
+      setPrecipitation(predictions["Curah Hujan"]);
+      setLuminosity(predictions["Intensitas Cahaya"]);
+    }
+  }, [predictions, setTemp, setHumid, setPrecipitation, setLuminosity]);
 
   return (
     <Box marginX={"10px"} padding={"10px"}>
       <Heading size="md">Prediksi Cuaca</Heading>
-      <div>
+      {/* <div>
         <p>Min-Max</p>
         Temperatur : {minTavg} - {maxTavg} <br />
         Kelembapan : {minRH_avg} - {maxRH_avg} <br />
         Curah Hujan : {minRR} - {maxRR} <br />
         Intensitas Cahaya : {minLumen} - {maxLumen} <br />
-      </div>
-      <FormControl>
-        {Object.entries(inputs).map(([inputName, value], index) => (
-          <Flex>
-            <FormLabel w="15vw" margin={"auto"}>
-              {inputName}
-            </FormLabel>
-            <Spacer />
-            <Input
-              key={index}
-              value={value}
-              variant="flushed"
-              placeholder={inputName}
-              onChange={(event) => handleInputChange(event, inputName)}
-            />
-          </Flex>
-        ))}
-        <Button margin={"auto"} onClick={handlePredict}>
-          Prediksi
-        </Button>
+      </div> */}
+      <FormControl isRequired>
+        <Flex flexDirection={"column"}>
+          {Object.entries(inputs).map(([inputName, value], index) => (
+            <Flex key={index}>
+              <FormLabel w="100vw" margin={"auto"}>
+                {inputName}
+              </FormLabel>
+              <Spacer />
+              <Input
+                value={value}
+                variant="flushed"
+                placeholder={inputName}
+                onChange={(event) => handleInputChange(event, inputName)}
+                isRequired
+              />
+            </Flex>
+          ))}
+          <Button
+            marginX={"auto"}
+            width={"50%"}
+            marginY={"10px"}
+            onClick={handlePredict}
+          >
+            Prediksi
+          </Button>
+        </Flex>
       </FormControl>
 
-      <Card align="center" w={"75%"} margin={"auto"}>
+      <Card align="center" w={"90vw"} margin={"auto"}>
         <CardHeader>
           <Heading size="sm">Hasil Prediksi</Heading>
         </CardHeader>
         <CardBody>
           <Flex>
-            <Text w="15vw">Temperatur</Text>
+            <Text w="40vw">Temperatur</Text>
             <Text>
-              {predictions.Temperatur !== null
+              {predictions.Temperatur !== 0
                 ? `: ${parseFloat(predictions.Temperatur).toFixed(2)}`
                 : ":"}
             </Text>
           </Flex>
           <Flex>
-            <Text w="15vw">Kelembapan</Text>
+            <Text w="40vw">Kelembapan</Text>
             <Text>
-              {predictions.Kelembapan !== null
+              {predictions.Kelembapan !== 0
                 ? `: ${parseFloat(predictions.Kelembapan).toFixed(2)}`
                 : ":"}
             </Text>
           </Flex>
           <Flex>
-            <Text w="15vw">Curah Hujan</Text>
+            <Text w="40vw">Curah Hujan</Text>
             <Text>
-              {predictions["Curah Hujan"] !== null
+              {predictions["Curah Hujan"] !== 0
                 ? `: ${parseFloat(predictions["Curah Hujan"]).toFixed(2)}`
                 : ":"}
             </Text>
           </Flex>
           <Flex>
-            <Text w="15vw">Intensitas Cahaya</Text>
+            <Text w="40vw">Intensitas Cahaya</Text>
             <Text>
-              {predictions["Intensitas Cahaya"] !== null
+              {predictions["Intensitas Cahaya"] !== 0
                 ? `: ${parseFloat(predictions["Intensitas Cahaya"]).toFixed(2)}`
                 : ":"}
             </Text>
