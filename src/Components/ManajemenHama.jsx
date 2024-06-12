@@ -2,8 +2,11 @@ import { Box, Button, Flex, Text, Image } from "@chakra-ui/react";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { usePage } from "../state";
 
 const ManajemenHama = () => {
+  const {setPage} = usePage();
+
   const hama = [
     {
       nama: "Lalat Buah",
@@ -45,6 +48,7 @@ const ManajemenHama = () => {
           py={1}
           px={2}
           borderRadius={"30px"}
+          onClick={() => {setPage("Prediksi Hama")}}
         >
           Lihat Semua
         </Button>
