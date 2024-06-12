@@ -1,15 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import IndikatorHeader from "../Components/IndikatorHeader";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import IndikatorCard from "../Components/IndikatorCard";
 import RamalanMingguan from "../Components/RamalanMingguan";
+import RamalanMingguanFull from "../Components/RamalanMingguanFull";
 
 const RamalanCuaca = () => {
-  return (
+  const [all, setAll] = useState(false);
+
+  const ramalanDetails = [
+    {
+      date: "2024-5-10",
+      cuaca: "Cerah Berawan",
+      suhu: "20",
+    },
+    {
+      date: "2024-5-11",
+      cuaca: "Hujan Lebat",
+      suhu: "20",
+    },
+    {
+      date: "2024-5-12",
+      cuaca: "Hujan Lebat",
+      suhu: "20",
+    },
+    {
+      date: "2024-5-13",
+      cuaca: "Cerah Berawan",
+      suhu: "20",
+    },
+    {
+      date: "2024-5-14",
+      cuaca: "Hujan Lebat",
+      suhu: "20",
+    },
+    {
+      date: "2024-5-15",
+      cuaca: "Hujan Lebat",
+      suhu: "20",
+    },
+    {
+      date: "2024-5-16",
+      cuaca: "Hujan Lebat",
+      suhu: "20",
+    },
+    {
+      date: "2024-5-17",
+      cuaca: "Hujan Lebat",
+      suhu: "20",
+    },
+  ];
+
+  function toggleAll() {
+    setAll(!all);
+    console.log("toggled");
+  }
+
+  return all ? (
     <Box>
       <IndikatorHeader />
       <IndikatorCard />
-      <RamalanMingguan />
+      <RamalanMingguan
+        item={ramalanDetails.slice(0, 3)}
+        toggleAll={toggleAll}
+      />
 
       <Flex
         pos={"relative"}
@@ -59,6 +113,11 @@ const RamalanCuaca = () => {
         </Text>
       </Flex>
     </Box>
+  ) : (
+    <RamalanMingguanFull
+      item={ramalanDetails}
+      toggleAll={toggleAll}
+    />
   );
 };
 
