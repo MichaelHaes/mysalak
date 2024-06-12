@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useWeatherPred } from "../state";
 import * as tf from "@tensorflow/tfjs";
 import Form from "../Components/Form";
 
 const FormModel = () => {
-    const [models, setModels] = useState({
-        temperatureModel: null,
-        humidityModel: null,
-        precipitationModel: null,
-        luminosityModel: null
-    });
+  const temp = useWeatherPred((state) => state.temp)
+  const humidity = useWeatherPred((state) => state.humidity)
+  const precipitation = useWeatherPred((state) => state.precipitation)
+  const luminosity = useWeatherPred((state) => state.luminosity)
+
+  useEffect(() => {
+    console.log('Temp:', temp);
+    console.log('Humidity:', humidity);
+    console.log('Precipitation:', precipitation);
+    console.log('Luminosity:', luminosity);
+  }, [temp, humidity, precipitation, luminosity]);
+
+  const [models, setModels] = useState({
+    temperatureModel: null,
+    humidityModel: null,
+    precipitationModel: null,
+    luminosityModel: null
+  });
 
   const [pestPrediction, setPestPrediction] = useState("");
 
@@ -42,13 +55,13 @@ const FormModel = () => {
     loadModel();
   }, []);
 
-  useEffect(() => {
-    if (models) {
-      console.log("Model loaded:", models);
-    } else {
-      console.log("Model is not loaded yet.");
-    }
-  }, [models]);
+  // useEffect(() => {
+  //   if (models) {
+  //     console.log("Model loaded:", models);
+  //   } else {
+  //     console.log("Model is not loaded yet.");
+  //   }
+  // }, [models]);
 
   const isLalatBuah = (temp, humidity, light, rain) => {
     return (
