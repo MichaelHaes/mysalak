@@ -50,7 +50,7 @@ const ManajemenHama = () => {
         </Button>
       </Flex>
 
-      <Box h={"fit-content"} pos={"relative"} gap={3}>
+      <Box h={"fit-content"} pos={"relative"}>
         <Swiper spaceBetween={20} slidesPerView={2.5} slidesOffsetAfter={30}>
           {hama.map((item) => (
             <SwiperSlide>

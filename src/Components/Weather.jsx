@@ -7,14 +7,14 @@ import { WiHumidity } from "react-icons/wi";
 import { usePage } from "../state";
 
 const Weather = () => {
-  const { cuaca } = usePage();
+  const { cuaca, setPage } = usePage();
 
   return (
     <Flex justifyContent={"center"} pos={"relative"} my={9}>
       <Button
         variant={"unstyled"}
         onClick={() => {
-          cuaca();
+          setPage("Indikator");
         }}
         w={"85%"}
         mx={"auto"}

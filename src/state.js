@@ -9,7 +9,7 @@ export const useStore = create((set) => ({
 export const usePage = create((set) => ({
   page: "Home",
   // prevPage: "",
-  // setPage: (val) => set({ page: val }),
+  setPage: (val) => set({ page: val }),
 
   home: () => set((state) => ({ page: "Home" })),
   cuaca: () => set((state) => ({ page: "Prediksi Cuaca" })),
