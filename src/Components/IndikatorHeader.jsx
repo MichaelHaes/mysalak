@@ -66,22 +66,22 @@ const IndikatorHeader = () => {
           align={"center"}
         >
           <Flex pos={"relative"} mt={"7vh"} w={"100%"} textAlign={"center"}>
-            <Button
-              pos={"absolute"}
-              w={"1vh"}
-              top={0}
-              left={5}
-              variant={"unstyled"}
+            <Flex
+              justify={"center"}
+              align={"center"}
+              w={"30px"}
+              h={"30px"}
               bg={"white"}
               borderRadius={"50%"}
               p={2}
-              ms={5}
+              pos={"absolute"}
+              left={7}
               onClick={() => {
                 home();
               }}
             >
               <IoIosArrowBack size={"auto"} fill="black" />
-            </Button>
+            </Flex>
             <Text
               fontWeight={"bold"}
               w={"100%"}
