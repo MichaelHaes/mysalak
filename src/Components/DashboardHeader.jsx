@@ -2,7 +2,7 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 
-const Header = () => {
+const DashboardHeader = () => {
   return (
     <Box>
       <Box pos={"relative"} height={"28vh"}>
@@ -158,4 +158,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default DashboardHeader;
