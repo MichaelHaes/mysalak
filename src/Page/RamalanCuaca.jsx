@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import IndikatorHeader from "../Components/IndikatorHeader";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import IndikatorCard from "../Components/IndikatorCard";
@@ -55,6 +55,10 @@ const RamalanCuaca = () => {
     setAll(!all);
     console.log("toggled");
   }
+
+  useEffect(() => {
+    setAll(true);
+  }, [])
 
   return all ? (
     <Box>
