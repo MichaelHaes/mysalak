@@ -69,13 +69,13 @@ const Weather = () => {
           className="white-text"
           px={5}
         >
-          <Flex flexDir={"column"} width={"50%"}>
+          <Flex flexDir={"column"} width={"50%"} align={"start"}>
             <Flex align={"center"} mt={1}>
               <Box w={"8vh"} h={"8vh"}>
                 <IoIosPartlySunny size="auto" fill="white" />
               </Box>
 
-              <Flex ms={1} direction={"column"} justify={"center"} mb={-4}>
+              <Flex ms={1} direction={"column"} align={"start"} mb={-4}>
                 <Text fontSize={"1.1vh"} mb={"-1vh"}>
                   Saat ini
                 </Text>
