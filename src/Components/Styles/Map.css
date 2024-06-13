@@ -1,0 +1,44 @@
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+}
+
+.custom-marker {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 105, 0, 0.8);
+  border-radius: 50%;
+  filter: blur(.5px);
+
+  box-shadow: rgba(255, 105, 0);
+  transform: scale(1);
+  animation: pulse 2s infinite;
+}
+
+.leaflet-div-icon {
+  background: none;
+  border: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 105, 0, 0.7);
+  }
+
+  40% {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 30px rgba(255, 105, 0, 0);
+  }
+
+  60% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(255, 105, 0, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 105, 0, 0);
+  }
+}

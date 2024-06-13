@@ -10,7 +10,7 @@ import RamalanCuaca from "./RamalanCuaca";
 // import ModelTest from "./ModelTest";
 import Camera from "./Camera";
 // import HitungHama from "./HitungHama";
-// import PersebaranHama from "./PersebaranHama";
+import PersebaranHama from "./PersebaranHama";
 import Profil from "./Profil";
 // import Artikel from "./Artikel";
 // import History from "./History";
@@ -26,7 +26,7 @@ const componentMap = {
   // ManajemenHamaPage: ManajemenHamaPage,
   // "Manajemen Hama": ManajemenHamaPage,
   "Prediksi Hama": ManajemenHamaPage,
-  // PersebaranHama: PersebaranHama,
+  "Sebaran Hama": PersebaranHama,
   Profil: Profil,
   "Prediksi Cuaca": FormModel,
 };
@@ -41,7 +41,11 @@ const Index = () => {
       {page === "Prediksi Cuaca" && <FormModel />} */}
       <Component />
 
-      <Box h={"7vh"}></Box>
+      {page !== "Sebaran Hama" || page !== "Camera" ? (
+        <Box h={"7vh"}></Box>
+      ) : (
+        <></>
+      )}
 
       <Navbar />
     </Box>

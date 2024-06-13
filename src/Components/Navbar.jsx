@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <Tabs position={"fixed"} bottom={0} width={"100%"} variant={"unstyled"}>
+    <Tabs position={"fixed"} zIndex={10} bg={"white"} bottom={0} width={"100%"} variant={"unstyled"}>
       <TabList
         display={"flex"}
         justifyContent={"space-between"}
@@ -45,8 +45,11 @@ const Navbar = () => {
             <GoHome fill="grey" />
           )}
         </Tab>
-        <Tab onClick={Page.cuaca}>
-          {Page.page === "Prediksi Cuaca" ? (
+        <Tab 
+        // onClick={Page.cuaca}
+        onClick={() => {Page.setPage("Sebaran Hama")}}
+        >
+          {Page.page === "Sebaran Hama" ? (
             <Box
               display={"flex"}
               flexDirection={"column"}
