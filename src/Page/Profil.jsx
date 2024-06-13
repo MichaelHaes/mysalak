@@ -83,7 +83,6 @@ const Profil = () => {
           mt={1}
           py={"3%"}
           borderRadius={"full"}
-          py={1}
         >
           <FaRegEdit fill="white" size={"10px"} />
           <Text color={"white"} fontSize={"1vh"} ms={1}>
