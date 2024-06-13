@@ -1,15 +1,21 @@
 import { Flex, Box, Text, Image } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import Moment from "react-moment";
 
 const ManajemenHamaCard = (props) => {
   const data = props.item;
+
   return (
     <Box
+      key={props.index}
       pos={"relative"}
       h={"11.5vh"}
       boxShadow={"0 2px 5px 1px #e5e9e6"}
       borderRadius={"20px"}
+      onClick={() => {
+        props.handleDetail();
+        props.handleIndex(props.index);
+      }}
     >
       <Box
         pos={"absolute"}
