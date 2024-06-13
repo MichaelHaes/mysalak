@@ -24,8 +24,8 @@ const maxTavg = 33;
 const minRR = 0;
 const maxRR = 92;
 
-const minLumen = 2.7;
-const maxLumen = 231468.2;
+const minLumen = 0;
+const maxLumen = 2000;
 
 const Form = (props) => {
   const setTemp = useWeatherPred((state) => state.setTemp);
@@ -207,6 +207,12 @@ const Form = (props) => {
               {predictions["Intensitas Cahaya"] !== 0
                 ? `: ${parseFloat(predictions["Intensitas Cahaya"]).toFixed(2)}`
                 : ":"}
+            </Text>
+          </Flex>
+          <Flex>
+            <Text w="40vw">Hama</Text>
+            <Text>
+              : {props.pest}
             </Text>
           </Flex>
         </CardBody>

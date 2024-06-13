@@ -62,8 +62,8 @@ const FormModel = () => {
       temp <= 32 &&
       humidity >= 60 &&
       humidity <= 75 &&
-      // light >= 500 &&
-      // light <= 2000 &&
+      light >= 500 &&
+      light <= 2000 &&
       rain >= 50 &&
       rain <= 250
     );
@@ -75,8 +75,8 @@ const FormModel = () => {
       temp <= 37 &&
       humidity >= 50 &&
       humidity <= 60 &&
-      // light >= 600 &&
-      // light <= 1000 &&
+      light >= 600 &&
+      light <= 1000 &&
       rain >= 0 &&
       rain <= 225
     );
@@ -88,8 +88,8 @@ const FormModel = () => {
       temp <= 33 &&
       humidity >= 75 &&
       humidity <= 85 &&
-      // light >= 900 &&
-      // light <= 1700 &&
+      light >= 900 &&
+      light <= 1700 &&
       rain >= 0 &&
       rain <= 225
     );
@@ -132,7 +132,7 @@ const FormModel = () => {
     //   pest = "Bajing";
     // } 
     else {
-      pest = "No significant pest predicted";
+      pest = "Tidak ada";
     }
 
     setPestPrediction(pest);
@@ -164,11 +164,14 @@ const FormModel = () => {
         temperatureModel={models.temperatureModel}
         precipitationModel={models.precipitationModel}
         luminosityModel={models.luminosityModel}
+        pest={pestPrediction}
         // onPredict={predictPest}
       />
-      <div>
-        <h3>Predicted Pest: {pestPrediction}</h3>
-      </div>
+      Bantuan Input <br />
+      27 - 80 - 50 - 2000 = Lalat Buah <br />
+      33 - 55 - 50 - 1000 = Kutu Putih <br />
+      33 - 100 - 50 - 1000 = Kumbang Girang <br />
+      19 - 50 - 50 - 1000 = Tikus dan Bajing <br />
     </div>
   );
 };
