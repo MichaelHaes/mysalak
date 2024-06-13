@@ -11,11 +11,15 @@ import {
 import { Flex, Spacer } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 
-const minRH_avg = 66;
-const maxRH_avg = 98;
+// const minRH_avg = 66;
+// const maxRH_avg = 98;
+const minRH_avg = 0;
+const maxRH_avg = 100;
 
-const minTavg = 22.9;
-const maxTavg = 31.5;
+// const minTavg = 22.9;
+// const maxTavg = 31.5;
+const minTavg = 20;
+const maxTavg = 33;
 
 const minRR = 0;
 const maxRR = 92;
@@ -28,11 +32,6 @@ const Form = (props) => {
   const setHumid = useWeatherPred((state) => state.setHumid);
   const setPrecipitation = useWeatherPred((state) => state.setPrecipitation);
   const setLuminosity = useWeatherPred((state) => state.setLuminosity);
-
-  // const temp = useWeatherPred((state) => state.temp)
-  // const humidity = useWeatherPred((state) => state.humidity)
-  // const precipitation = useWeatherPred((state) => state.precipitation)
-  // const luminosity = useWeatherPred((state) => state.luminosity)
 
   const [inputs, setInputs] = useState({
     Temperatur: "",
@@ -88,11 +87,11 @@ const Form = (props) => {
     // Curah Hujan masih kacau ini ga tau gimana
     const inputRR = normalize(parseFloat(inputs["Curah Hujan"]), minRR, maxRR);
     const finalRR = [
-      addNoiseOrZero(inputRR, 0.1),
-      addNoiseOrZero(inputRR, 0.1),
-      addNoiseOrZero(inputRR, 0.1),
-      addNoiseOrZero(inputRR, 0.1),
-      addNoiseOrZero(inputRR, 0.1),
+      addNoiseOrZero(inputRR, 0),
+      addNoiseOrZero(inputRR, 0),
+      addNoiseOrZero(inputRR, 0),
+      addNoiseOrZero(inputRR, 0),
+      addNoiseOrZero(inputRR, 0),
     ];
     const reshapedRR = tf.reshape([[finalRR]], [1, 5, 1]);
     const resultRR = props.precipitationModel.predict(reshapedRR);

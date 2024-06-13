@@ -62,8 +62,8 @@ const FormModel = () => {
       temp <= 32 &&
       humidity >= 60 &&
       humidity <= 75 &&
-      light >= 500 &&
-      light <= 2000 &&
+      // light >= 500 &&
+      // light <= 2000 &&
       rain >= 50 &&
       rain <= 250
     );
@@ -75,8 +75,8 @@ const FormModel = () => {
       temp <= 37 &&
       humidity >= 50 &&
       humidity <= 60 &&
-      light >= 600 &&
-      light <= 1000 &&
+      // light >= 600 &&
+      // light <= 1000 &&
       rain >= 0 &&
       rain <= 225
     );
@@ -88,14 +88,14 @@ const FormModel = () => {
       temp <= 33 &&
       humidity >= 75 &&
       humidity <= 85 &&
-      light >= 900 &&
-      light <= 1700 &&
+      // light >= 900 &&
+      // light <= 1700 &&
       rain >= 0 &&
       rain <= 225
     );
   };
 
-  const isTikus = (temp, humidity, light, rain) => {
+  const isTikusBajing = (temp, humidity, light, rain) => {
     return (
       temp >= 19 &&
       temp <= 23 &&
@@ -106,18 +106,18 @@ const FormModel = () => {
     );
   };
 
-  const isBajing = (temp, humidity, light, rain) => {
-    return (
-      temp >= 19 &&
-      temp <= 23 &&
-      humidity >= 40 &&
-      humidity <= 70 &&
-      rain >= 25 &&
-      rain <= 200
-    );
-  };
+  // const isBajing = (temp, humidity, light, rain) => {
+  //   return (
+  //     temp >= 19 &&
+  //     temp <= 23 &&
+  //     humidity >= 40 &&
+  //     humidity <= 70 &&
+  //     rain >= 25 &&
+  //     rain <= 200
+  //   );
+  // };
 
-  const predictPest = () => {
+  useEffect(() => {
     let pest = "";
     if (isLalatBuah(temp, humidity, luminosity, precipitation)) {
       pest = "Lalat Buah";
@@ -125,16 +125,37 @@ const FormModel = () => {
       pest = "Kutu Putih";
     } else if (isKumbangGirang(temp, humidity, luminosity, precipitation)) {
       pest = "Kumbang Girang";
-    } else if (isTikus(temp, humidity, luminosity, precipitation)) {
-      pest = "Tikus";
-    } else if (isBajing(temp, humidity, luminosity, precipitation)) {
-      pest = "Bajing";
-    } else {
+    } else if (isTikusBajing(temp, humidity, luminosity, precipitation)) {
+      pest = "Tikus dan Bajing";
+    } 
+    // else if (isBajing(temp, humidity, luminosity, precipitation)) {
+    //   pest = "Bajing";
+    // } 
+    else {
       pest = "No significant pest predicted";
     }
 
     setPestPrediction(pest);
-  };
+  }, [temp, humidity, luminosity, precipitation]);
+
+  // const predictPest = () => {
+  //   let pest = "";
+  //   if (isLalatBuah(temp, humidity, luminosity, precipitation)) {
+  //     pest = "Lalat Buah";
+  //   } else if (isKutuPutih(temp, humidity, luminosity, precipitation)) {
+  //     pest = "Kutu Putih";
+  //   } else if (isKumbangGirang(temp, humidity, luminosity, precipitation)) {
+  //     pest = "Kumbang Girang";
+  //   } else if (isTikus(temp, humidity, luminosity, precipitation)) {
+  //     pest = "Tikus";
+  //   } else if (isBajing(temp, humidity, luminosity, precipitation)) {
+  //     pest = "Bajing";
+  //   } else {
+  //     pest = "No significant pest predicted";
+  //   }
+
+  //   setPestPrediction(pest);
+  // };
 
   return (
     <div>
@@ -143,7 +164,7 @@ const FormModel = () => {
         temperatureModel={models.temperatureModel}
         precipitationModel={models.precipitationModel}
         luminosityModel={models.luminosityModel}
-        onPredict={predictPest}
+        // onPredict={predictPest}
       />
       <div>
         <h3>Predicted Pest: {pestPrediction}</h3>
