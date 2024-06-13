@@ -95,7 +95,7 @@ const FormModel = () => {
     );
   };
 
-  const isTikus = (temp, humidity, light, rain) => {
+  const isTikusBajing = (temp, humidity, light, rain) => {
     return (
       temp >= 19 &&
       temp <= 23 &&
@@ -106,18 +106,18 @@ const FormModel = () => {
     );
   };
 
-  const isBajing = (temp, humidity, light, rain) => {
-    return (
-      temp >= 19 &&
-      temp <= 23 &&
-      humidity >= 40 &&
-      humidity <= 70 &&
-      rain >= 25 &&
-      rain <= 200
-    );
-  };
+  // const isBajing = (temp, humidity, light, rain) => {
+  //   return (
+  //     temp >= 19 &&
+  //     temp <= 23 &&
+  //     humidity >= 40 &&
+  //     humidity <= 70 &&
+  //     rain >= 25 &&
+  //     rain <= 200
+  //   );
+  // };
 
-  const predictPest = () => {
+  useEffect(() => {
     let pest = "";
     if (isLalatBuah(temp, humidity, luminosity, precipitation)) {
       pest = "Lalat Buah";
@@ -125,16 +125,37 @@ const FormModel = () => {
       pest = "Kutu Putih";
     } else if (isKumbangGirang(temp, humidity, luminosity, precipitation)) {
       pest = "Kumbang Girang";
-    } else if (isTikus(temp, humidity, luminosity, precipitation)) {
-      pest = "Tikus";
-    } else if (isBajing(temp, humidity, luminosity, precipitation)) {
-      pest = "Bajing";
-    } else {
-      pest = "No significant pest predicted";
+    } else if (isTikusBajing(temp, humidity, luminosity, precipitation)) {
+      pest = "Tikus dan Bajing";
+    } 
+    // else if (isBajing(temp, humidity, luminosity, precipitation)) {
+    //   pest = "Bajing";
+    // } 
+    else {
+      pest = "Tidak ada";
     }
 
     setPestPrediction(pest);
-  };
+  }, [temp, humidity, luminosity, precipitation]);
+
+  // const predictPest = () => {
+  //   let pest = "";
+  //   if (isLalatBuah(temp, humidity, luminosity, precipitation)) {
+  //     pest = "Lalat Buah";
+  //   } else if (isKutuPutih(temp, humidity, luminosity, precipitation)) {
+  //     pest = "Kutu Putih";
+  //   } else if (isKumbangGirang(temp, humidity, luminosity, precipitation)) {
+  //     pest = "Kumbang Girang";
+  //   } else if (isTikus(temp, humidity, luminosity, precipitation)) {
+  //     pest = "Tikus";
+  //   } else if (isBajing(temp, humidity, luminosity, precipitation)) {
+  //     pest = "Bajing";
+  //   } else {
+  //     pest = "No significant pest predicted";
+  //   }
+
+  //   setPestPrediction(pest);
+  // };
 
   return (
     <div>
@@ -143,11 +164,14 @@ const FormModel = () => {
         temperatureModel={models.temperatureModel}
         precipitationModel={models.precipitationModel}
         luminosityModel={models.luminosityModel}
-        onPredict={predictPest}
+        pest={pestPrediction}
+        // onPredict={predictPest}
       />
-      <div>
-        <h3>Predicted Pest: {pestPrediction}</h3>
-      </div>
+      Bantuan Input <br />
+      27 - 80 - 50 - 2000 = Lalat Buah <br />
+      33 - 55 - 50 - 1000 = Kutu Putih <br />
+      33 - 100 - 50 - 1000 = Kumbang Girang <br />
+      19 - 50 - 50 - 1000 = Tikus dan Bajing <br />
     </div>
   );
 };
