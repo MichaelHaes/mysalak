@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 import { useWeatherPred } from "../state";
-import { Input, Button, Box, Heading, Text } from "@chakra-ui/react";
+import { Input, Button, Box, Heading, Text, Grid } from "@chakra-ui/react";
 import {
   FormControl,
   FormLabel,
@@ -9,7 +9,6 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { Flex, Spacer } from "@chakra-ui/react";
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 
 // const minRH_avg = 66;
 // const maxRH_avg = 98;
@@ -54,7 +53,7 @@ const Form = (props) => {
     const { value } = event.target;
     setInputs((prevInputs) => ({
       ...prevInputs,
-      [inputName]: isNaN(value) ? 0 : value,
+      [inputName]: value,
     }));
   };
 
@@ -135,88 +134,59 @@ const Form = (props) => {
   }, [predictions, setTemp, setHumid, setPrecipitation, setLuminosity]);
 
   return (
-    <Box marginX={"10px"} padding={"10px"}>
-      <Heading size="md">Prediksi Cuaca</Heading>
-      {/* <div>
-        <p>Min-Max</p>
-        Temperatur : {minTavg} - {maxTavg} <br />
-        Kelembapan : {minRH_avg} - {maxRH_avg} <br />
-        Curah Hujan : {minRR} - {maxRR} <br />
-        Intensitas Cahaya : {minLumen} - {maxLumen} <br />
-      </div> */}
-      <FormControl isRequired>
-        <Flex flexDirection={"column"}>
-          {Object.entries(inputs).map(([inputName, value], index) => (
-            <Flex key={index}>
-              <FormLabel w="100vw" margin={"auto"}>
-                {inputName}
-              </FormLabel>
-              <Spacer />
-              <Input
-                value={value}
-                variant="flushed"
-                placeholder={inputName}
-                onChange={(event) => handleInputChange(event, inputName)}
-                isRequired
-              />
-            </Flex>
-          ))}
-          <Button
-            marginX={"auto"}
-            width={"50%"}
-            marginY={"10px"}
-            onClick={handlePredict}
-          >
-            Prediksi
-          </Button>
-        </Flex>
-      </FormControl>
+    <Box>
+      <Grid
+        width={'85%'}
+        margin={"auto"}
+        templateColumns='repeat(2, 1fr)'
+        gap={5}
+      >
 
-      <Card align="center" w={"90vw"} margin={"auto"}>
-        <CardHeader>
-          <Heading size="sm">Hasil Prediksi</Heading>
-        </CardHeader>
-        <CardBody>
-          <Flex>
-            <Text w="40vw">Temperatur</Text>
-            <Text>
-              {predictions.Temperatur !== 0
-                ? `: ${parseFloat(predictions.Temperatur).toFixed(2)}`
-                : ":"}
-            </Text>
-          </Flex>
-          <Flex>
-            <Text w="40vw">Kelembapan</Text>
-            <Text>
-              {predictions.Kelembapan !== 0
-                ? `: ${parseFloat(predictions.Kelembapan).toFixed(2)}`
-                : ":"}
-            </Text>
-          </Flex>
-          <Flex>
-            <Text w="40vw">Curah Hujan</Text>
-            <Text>
-              {predictions["Curah Hujan"] !== 0
-                ? `: ${parseFloat(predictions["Curah Hujan"]).toFixed(2)}`
-                : ":"}
-            </Text>
-          </Flex>
-          <Flex>
-            <Text w="40vw">Intensitas Cahaya</Text>
-            <Text>
-              {predictions["Intensitas Cahaya"] !== 0
-                ? `: ${parseFloat(predictions["Intensitas Cahaya"]).toFixed(2)}`
-                : ":"}
-            </Text>
-          </Flex>
-          <Flex>
-            <Text w="40vw">Hama</Text>
-            <Text>
-              : {props.pest}
-            </Text>
-          </Flex>
-        </CardBody>
-      </Card>
+        {Object.entries(inputs).map(([inputName, value], index) => (
+          <FormControl key={index}>
+            <FormLabel w={'100%'} marginBottom={'5px'} fontSize={'13px'}>
+              {
+                inputName === "Temperatur" ? "Suhu (°C)" :
+                  inputName === "Kelembapan" ? "Kelembapan (%)" :
+                    inputName === "Curah Hujan" ? "Curah Hujan (mm)" :
+                      "Intensitas Cahaya (cd)"
+              }
+            </FormLabel>
+            <Spacer />
+            <Input
+            type="number"
+              value={value}
+              variant="filled"
+              placeholder={
+                inputName === "Temperatur" ? "°C" :
+                  inputName === "Kelembapan" ? "%" :
+                    inputName === "Curah Hujan" ? "mm" :
+                      "cd"
+              }
+              bg={"white"}
+              textAlign={'right'}
+              onChange={(event) => handleInputChange(event, inputName)}
+              isRequired
+            />
+          </FormControl>
+        ))}
+      </Grid>
+      <Flex>
+        <Button
+          marginX={"auto"}
+          width={"85%"}
+          borderRadius={'100px'}
+          _hover={{
+            bg: 'black'
+          }}
+          marginY={'20px'}
+          bg={"#2C3631"}
+          color={"white"}
+          onClick={handlePredict}
+        >
+          Prediksi
+        </Button>
+      </Flex>
     </Box>
   );
 };
