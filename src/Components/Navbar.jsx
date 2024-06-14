@@ -1,98 +1,113 @@
 import React from "react";
-import { Tabs, TabList, Tab, Box } from "@chakra-ui/react";
-import { GoHome, GoHomeFill } from "react-icons/go";
+import { Tabs, TabList, Tab, Box, Flex } from "@chakra-ui/react";
+import { GoHomeFill } from "react-icons/go";
 import { usePage } from "../state";
-import { RiAccountCircleLine } from "react-icons/ri";
-import { RiAccountCircleFill } from "react-icons/ri";
-import { IoScanCircleSharp } from "react-icons/io5";
-import { RiHistoryLine, RiHistoryFill } from "react-icons/ri";
-import { MdArticle, MdOutlineArticle } from "react-icons/md";
+import { IoBug, IoScan } from "react-icons/io5";
+import { MdArticle } from "react-icons/md";
+import { FaMapMarkedAlt } from "react-icons/fa";
 
 const Navbar = () => {
   const Page = usePage();
 
+  const navItems = [
+    {
+      name: "Home",
+      a_logo: <GoHomeFill size={"auto"} />,
+    },
+    {
+      name: "Sebaran Hama",
+      a_logo: <FaMapMarkedAlt size={"auto"} />,
+    },
+    {
+      name: "Camera",
+      a_logo: <IoScan size={"auto"} />,
+      custom: true,
+    },
+    {
+      name: "Prediksi Hama",
+      a_logo: <IoBug size={"auto"} />,
+    },
+    {
+      name: "Prediksi Cuaca",
+      a_logo: <MdArticle size={"auto"} />,
+    },
+  ];
+
   const IconActive = () => {
     return (
       <Box
-        height={"3.5px"}
+        height={".4vh"}
         bgColor={"black"}
-        width={"8px"}
+        width={"45%"}
         borderRadius={"2px"}
-        position={"absolute"}
-        bottom={3}
+        mt={1}
       ></Box>
     );
   };
 
   return (
-    <Tabs position={"fixed"} zIndex={10} bg={"white"} bottom={0} width={"100%"} variant={"unstyled"}>
+    <Tabs
+      position={"fixed"}
+      zIndex={10}
+      bg={"white"}
+      bottom={0}
+      width={"inherit"}
+      variant={"unstyled"}
+      h={"6.5vh"}
+      w={"inherit"}
+    >
       <TabList
         display={"flex"}
         justifyContent={"space-between"}
+        alignItems={"start"}
         paddingX={"5%"}
+        w={"100%"}
       >
-        <Tab onClick={Page.home}>
-          {Page.page === "Home" ? (
-            <Box
-              display={"flex"}
+        {navItems.map((item) => (
+          <Tab
+            onClick={() => {
+              Page.setPage(item.name);
+            }}
+            w={
+              item.custom
+                ? { base: "25%", md: "22%" }
+                : { base: "15.5%", md: "14%" }
+            }
+          >
+            <Flex
               flexDirection={"column"}
               alignItems={"center"}
+              justify={"center"}
+              borderRadius={"full"}
+              h={"100%"}
+              w={"100%"}
+              bg={
+                item.custom
+                  ? "linear-gradient(to top, #6BBA5E, #2C3631)"
+                  : "transparent"
+              }
+              p={item.custom ? 2 : 0}
+              border={item.custom ? "5px solid rgba(231,231,231,1)" : "0px"}
+              color={
+                item.custom
+                  ? "white"
+                  : Page.page === item.name
+                  ? "black"
+                  : "gray"
+              }
+              mt={item.custom ? -7 : 1}
             >
-              <GoHomeFill />
-              <IconActive />
-            </Box>
-          ) : (
-            <GoHome fill="grey" />
-          )}
-        </Tab>
-        <Tab 
-        // onClick={Page.cuaca}
-        onClick={() => {Page.setPage("Sebaran Hama")}}
-        >
-          {Page.page === "Sebaran Hama" ? (
-            <Box
-              display={"flex"}
-              flexDirection={"column"}
-              alignItems={"center"}
-            >
-              <RiHistoryFill />
-              <IconActive />
-            </Box>
-          ) : (
-            <RiHistoryLine fill="grey" />
-          )}
-        </Tab>
-        <Tab onClick={() => Page.setPage("Camera")}>
-          <IoScanCircleSharp size={"40px"} />
-        </Tab>
-        <Tab onClick={Page.hama}>
-          {Page.page === "Prediksi Hama" ? (
-            <Box
-              display={"flex"}
-              flexDirection={"column"}
-              alignItems={"center"}
-            >
-              <MdArticle />
-              <IconActive />
-            </Box>
-          ) : (
-            <MdOutlineArticle fill="grey" />
-          )}
-        </Tab>
-        <Tab onClick={() => {Page.setPage("Profil")}}>
-          {Page.page === "Profil" ? (
-            <Box
-              display={"flex"}
-              flexDirection={"column"}
-              alignItems={"center"}
-            >
-              <RiAccountCircleFill />
-              <IconActive />
-            </Box>
-          ) : (
-            <RiAccountCircleLine fill="grey" />
-          )}
-        </Tab>
+              {Page.page === item.name ? (
+                <>
+                  {item.a_logo}
+                  {!item.custom && <IconActive />}
+                </>
+              ) : (
+                <>{item.a_logo}</>
+              )}
+            </Flex>
+          </Tab>
+        ))}
       </TabList>
     </Tabs>
   );
