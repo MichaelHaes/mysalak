@@ -14,8 +14,11 @@ import "./Styles/InformasiHama.css";
 import { IoIosArrowBack, IoIosArrowDropdownCircle } from "react-icons/io";
 import Chart from "react-apexcharts";
 import { FaChartLine } from "react-icons/fa6";
+import { usePage, useHama } from "../state";
 
 const InformasiHama = (props) => {
+  const { from, setFrom, resetDetail } = useHama();
+  const { setPage } = usePage();
   const data = props.item;
 
   const chartOptions = {
@@ -72,7 +75,11 @@ const InformasiHama = (props) => {
         p={2}
         pos={"absolute"}
         onClick={() => {
-          props.handleDetail();
+          if (from === "Home") {
+            setPage("Home");
+            setFrom("");
+          }
+          resetDetail();
         }}
         zIndex={3}
         top={20}
@@ -215,7 +222,14 @@ const InformasiHama = (props) => {
               Histori
             </Text>
           </Flex>
-          <Select fontWeight={"bold"} size={"xs"} w={"fit-content"} bg={"#F9F9F9"} borderRadius={"25px"} icon={<IoIosArrowDropdownCircle />}>
+          <Select
+            fontWeight={"bold"}
+            size={"xs"}
+            w={"fit-content"}
+            bg={"#F9F9F9"}
+            borderRadius={"25px"}
+            icon={<IoIosArrowDropdownCircle />}
+          >
             <option value="Mei">Mei</option>
             <option value="Mei">Desember</option>
           </Select>

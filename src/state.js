@@ -16,3 +16,13 @@ export const usePage = create((set) => ({
   hama: () => set((state) => ({ page: "Prediksi Hama" })),
   informasi: () => set((state) => ({ page: "Informasi Hama" })),
 }));
+
+export const useHama = create((set) => ({
+  from: "",
+  index: null,
+  detail: false,
+  setFrom: (val) => set({from: val}),
+  setIndex: (val) => set({ index: val }),
+  resetDetail: () => set({ detail: false }),
+  toggleDetail: () => set((state) => ({ detail: !state.detail })),
+}));

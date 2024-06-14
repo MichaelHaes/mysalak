@@ -1,13 +1,14 @@
 import React from "react";
 import { Tabs, TabList, Tab, Box, Flex } from "@chakra-ui/react";
 import { GoHomeFill } from "react-icons/go";
-import { usePage } from "../state";
+import { usePage, useHama } from "../state";
 import { IoBug, IoScan } from "react-icons/io5";
 import { MdArticle } from "react-icons/md";
 import { FaMapMarkedAlt } from "react-icons/fa";
 
 const Navbar = () => {
   const Page = usePage();
+  const {resetDetail} = useHama();
 
   const navItems = [
     {
@@ -67,6 +68,7 @@ const Navbar = () => {
           <Tab
             onClick={() => {
               Page.setPage(item.name);
+              resetDetail();
             }}
             w={
               item.custom
