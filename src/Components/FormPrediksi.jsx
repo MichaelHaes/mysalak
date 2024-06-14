@@ -33,6 +33,10 @@ const FormPrediksi = () => {
           bgRepeat={"no-repeat"}
           bgPos={"bottom right"}
           borderRadius={'15px'}
+          style={{
+            transition: 'height 0.3s ease',
+            height: temp !== 0 ? '74px' : '50px'
+          }}
         >
           <Box padding={'10px'}>
             <Flex alignItems="center" marginBottom={'5px'}>
@@ -47,7 +51,13 @@ const FormPrediksi = () => {
               </Flex>
               <Text paddingLeft={'5px'} fontSize={'15px'}>Suhu</Text>
             </Flex>
-            <Text as={'b'}>
+            <Text
+            as={'b'}
+            style={{
+              transition: 'opacity 0.5s ease',
+              opacity: temp !== 0 ? 1 : 0
+            }}
+            >
               {temp !== 0
                 ? `${temp.toFixed(2)}°C`
                 : ""}
@@ -61,6 +71,10 @@ const FormPrediksi = () => {
           bgRepeat={"no-repeat"}
           bgPos={"bottom right"}
           borderRadius={'15px'}
+          style={{
+            transition: 'height 0.3s ease',
+            height: humidity !== 0 ? '74px' : '50px'
+          }}
         >
           <Box padding={'10px'}>
             <Flex alignItems="center" marginBottom={'5px'}>
@@ -75,7 +89,13 @@ const FormPrediksi = () => {
               </Flex>
               <Text paddingLeft={'5px'} fontSize={'15px'}>Kelembapan</Text>
             </Flex>
-            <Text as={'b'}>
+            <Text
+            as={'b'}
+            style={{
+              transition: 'opacity 0.5s ease',
+              opacity: humidity !== 0 ? 1 : 0
+            }}
+            >
               {humidity !== 0
                 ? `${humidity.toFixed(2)}%`
                 : ""}
@@ -89,6 +109,10 @@ const FormPrediksi = () => {
           bgRepeat={"no-repeat"}
           bgPos={"bottom right"}
           borderRadius={'15px'}
+          style={{
+            transition: 'height 0.3s ease',
+            height: precipitation !== 0 ? '74px' : '50px'
+          }}
         >
           <Box padding={'10px'}>
             <Flex alignItems="center" marginBottom={'5px'}>
@@ -103,7 +127,13 @@ const FormPrediksi = () => {
               </Flex>
               <Text paddingLeft={'5px'} fontSize={'15px'}>Curah Hujan</Text>
             </Flex>
-            <Text as={'b'}>
+            <Text
+            as={'b'}
+            style={{
+              transition: 'opacity 0.5s ease',
+              opacity: precipitation !== 0 ? 1 : 0
+            }}
+            >
               {precipitation !== 0
                 ? `${precipitation.toFixed(2)} mm`
                 : ""}
@@ -117,6 +147,10 @@ const FormPrediksi = () => {
           bgRepeat={"no-repeat"}
           bgPos={"bottom right"}
           borderRadius={'15px'}
+          style={{
+            transition: 'height 0.3s ease',
+            height: luminosity !== 0 ? '74px' : '50px'
+          }}
         >
           <Box padding={'10px'}>
             <Flex alignItems="center" marginBottom={'5px'}>
@@ -131,7 +165,13 @@ const FormPrediksi = () => {
               </Flex>
               <Text paddingLeft={'5px'} fontSize={'15px'}>Intensitas C.</Text>
             </Flex>
-            <Text as={'b'}>
+            <Text
+            as={'b'}
+            style={{
+              transition: 'opacity 0.5s ease',
+              opacity: luminosity !== 0 ? 1 : 0
+            }}
+            >
               {luminosity !== 0
                 ? `${luminosity.toFixed(2)} cd`
                 : ""}

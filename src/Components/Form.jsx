@@ -33,10 +33,10 @@ const Form = (props) => {
   const setLuminosity = useWeatherPred((state) => state.setLuminosity);
 
   const [inputs, setInputs] = useState({
-    Temperatur: "",
-    Kelembapan: "",
-    "Curah Hujan": "",
-    "Intensitas Cahaya": "",
+    Temperatur: null,
+    Kelembapan: null,
+    "Curah Hujan": null,
+    "Intensitas Cahaya": null,
   });
 
   const [predictions, setPredictions] = useState({
@@ -65,6 +65,15 @@ const Form = (props) => {
   }
 
   const handlePredict = () => {
+    if (null === inputs.Kelembapan ||
+      null === inputs.Temperatur ||
+      null === inputs["Curah Hujan"] ||
+      null === inputs["Intensitas Cahaya"]
+    ) {
+      console.log('null')
+      return;
+    }
+
     // Kelembapan
     const inputKelembapan = normalize(
       parseFloat(inputs.Kelembapan),
@@ -154,7 +163,7 @@ const Form = (props) => {
             </FormLabel>
             <Spacer />
             <Input
-            type="number"
+              type="number"
               value={value}
               variant="filled"
               placeholder={
