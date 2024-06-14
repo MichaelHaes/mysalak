@@ -2,10 +2,11 @@ import { Box, Button, Flex, Text, Image } from "@chakra-ui/react";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { usePage } from "../state";
+import { usePage, useHama } from "../state";
 
 const ManajemenHama = () => {
   const {setPage} = usePage();
+  const {setIndex, toggleDetail, setFrom} = useHama();
 
   const hama = [
     {
@@ -56,8 +57,9 @@ const ManajemenHama = () => {
 
       <Box h={"fit-content"} pos={"relative"}>
         <Swiper spaceBetween={20} slidesPerView={2.5} slidesOffsetAfter={30}>
-          {hama.map((item) => (
-            <SwiperSlide>
+          {hama.map((item, index) => (
+            <SwiperSlide
+            key={index}>
               <Button
                 variant={"unstyled"}
                 pos={"relative"}
@@ -65,6 +67,12 @@ const ManajemenHama = () => {
                 w={"130px"}
                 borderRadius={"20px"}
                 bg={"white"}
+                onClick={() => {
+                  setIndex(index);
+                  setFrom("Home");
+                  toggleDetail();
+                  setPage('Prediksi Hama');
+                }}
               >
                 <Image
                   src="/assets/lalat buah.png"

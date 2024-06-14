@@ -28,3 +28,13 @@ export const useWeatherPred = create((set) => ({
   setPrecipitation: (precipitation) => set({ precipitation }),
   setLuminosity: (luminosity) => set({ luminosity }),
 }));
+
+export const useHama = create((set) => ({
+  from: "",
+  index: null,
+  detail: false,
+  setFrom: (val) => set({from: val}),
+  setIndex: (val) => set({ index: val }),
+  resetDetail: () => set({ detail: false }),
+  toggleDetail: () => set((state) => ({ detail: !state.detail })),
+}));

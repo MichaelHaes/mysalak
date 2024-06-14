@@ -10,8 +10,9 @@
 #app {
   font-family: "DM Sans", sans-serif;
   color: var(--text);
-  background: var(--background);
-  width: 100vw;
+  /* background: var(--background); */
+  background: black;
+  min-width: 100vw;
   max-width: 480px;
   min-height: 100vh;
   margin: auto;
