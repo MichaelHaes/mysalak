@@ -61,7 +61,7 @@ const RamalanCuaca = () => {
   }, [])
 
   return !all ? (
-    <Box>
+    <Box pb={"10vh"}>
       <IndikatorHeader />
       <IndikatorCard />
       <RamalanMingguan
