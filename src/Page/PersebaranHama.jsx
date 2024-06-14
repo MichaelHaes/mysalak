@@ -51,7 +51,7 @@ const PersebaranHama = () => {
   }
 
   return (
-    <Flex direction={"column"} pos={"relative"} w={"100%"} h={"90vh"}>
+    <Flex direction={"column"} pos={"relative"} w={"100%"} h={"100vh"}>
       <Box
         pos={"absolute"}
         zIndex={10}

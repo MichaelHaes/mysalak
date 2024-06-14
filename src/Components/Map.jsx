@@ -28,8 +28,8 @@ const MapComponent = (props) => {
       ref={mapRef}
       zoomControl={false}
       style={{
-        height: "100vh",
-        width: "100vw",
+        height: "96vh",
+        width: "inherit",
         zIndex: 1,
         position: "absolute",
         top: 0,
