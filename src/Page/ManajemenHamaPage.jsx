@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ManajemenHamaCard from "../Components/ManajemenHamaCard";
 import { Flex, Text } from "@chakra-ui/react";
 import InformasiHama from "../Components/InformasiHama";
+import { useHama } from "../state";
 
 const ManajemenHamaPage = () => {
-  const [detail, setDetail] = useState(false);
-  const [index, setIndex] = useState(0);
+  const { from, index, detail, resetDetail } = useHama();
 
   const hamaDetails = [
     {
@@ -25,17 +25,9 @@ const ManajemenHamaPage = () => {
     },
   ];
 
-  function handleDetail() {
-    setDetail(!detail);
-  }
-
-  function handleIndex(val) {
-    setIndex(val);
-  }
-
   useEffect(() => {
-    setDetail(false);
-  }, [])
+    if (from !== "Home") resetDetail();
+  }, []);
 
   return !detail ? (
     <Flex direction={"column"} w={"85%"} mx={"auto"} pos={"relative"}>
@@ -63,12 +55,12 @@ const ManajemenHamaPage = () => {
 
       <Flex direction={"column"} gap={5}>
         {hamaDetails.map((item, index) => (
-          <ManajemenHamaCard item={item} index={index} handleDetail={handleDetail} handleIndex={handleIndex}/>
+          <ManajemenHamaCard item={item} index={index}/>
         ))}
       </Flex>
     </Flex>
   ) : (
-    <InformasiHama item={hamaDetails[index]} handleDetail={handleDetail}/>
+    <InformasiHama item={hamaDetails[index]} />
   );
 };
 

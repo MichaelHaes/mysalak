@@ -1,9 +1,15 @@
 import { Flex, Box, Text, Image } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import Moment from "react-moment";
+import { useHama } from "../state";
 
 const ManajemenHamaCard = (props) => {
+  const { setIndex, toggleDetail } = useHama();
   const data = props.item;
+
+  useEffect(() => {
+    console.log(data);
+  }, [])
 
   return (
     <Box
@@ -13,8 +19,8 @@ const ManajemenHamaCard = (props) => {
       boxShadow={"0 2px 5px 1px #e5e9e6"}
       borderRadius={"20px"}
       onClick={() => {
-        props.handleDetail();
-        props.handleIndex(props.index);
+        setIndex(props.index);
+        toggleDetail();
       }}
     >
       <Box
