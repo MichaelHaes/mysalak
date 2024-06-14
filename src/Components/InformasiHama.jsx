@@ -60,7 +60,7 @@ const InformasiHama = (props) => {
   ];
 
   return (
-    <Flex direction={"column"}>
+    <Flex direction={"column"} height={"fit-content"} pb={"15vh"}>
       <Flex
         justify={"center"}
         align={"center"}
