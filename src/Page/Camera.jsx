@@ -24,7 +24,7 @@ const Camera = () => {
 
   return (
     <Box w={"inherit"} h={"100vh"} position="relative">
-      <Box
+      {/* <Box
         id="masked"
         w={"inherit"}
         h={"100vh"}
@@ -39,7 +39,7 @@ const Camera = () => {
         //   maskRepeat: "no-repeat",
         //   maskPosition: "center",
         // }}
-      ></Box>
+      ></Box> */}
       <Flex
         pos={"absolute"}
         top={"8%"}
@@ -47,6 +47,7 @@ const Camera = () => {
         align={"center"}
         justifyContent={"center"}
         textAlign={"center"}
+        zIndex={10}
       >
         <Button
           variant={"unstyled"}
