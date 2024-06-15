@@ -36,7 +36,13 @@ const Index = () => {
   const Component = componentMap[page] || <Dashboard />;
 
   return (
-    <Box w={{base: "100%", md: "480px"}} minH={"100vh"} mx={"auto"} bg={"#f5f5f5"} pos={"relative"}>
+    <Box
+      w={{ base: "100%", md: "480px" }}
+      minH={"100vh"}
+      mx={"auto"}
+      bg={"#f5f5f5"}
+      pos={"relative"}
+    >
       {/* {page === "Home" && <Dashboard />}
       {page === "Prediksi Cuaca" && <FormModel />} */}
       <Component />
@@ -47,7 +53,7 @@ const Index = () => {
         <></>
       )} */}
 
-      <Navbar />
+      {page !== "Camera" ? <Navbar /> : <></>}
     </Box>
   );
 };
