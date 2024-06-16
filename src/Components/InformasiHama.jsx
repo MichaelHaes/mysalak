@@ -200,7 +200,7 @@ const InformasiHama = (props) => {
       <Flex
         direction={"column"}
         w={"85%"}
-        h={"30vh"}
+        h={"fit-content"}
         mx={"auto"}
         mt={20}
         bg={"#FFFFFF"}
@@ -234,7 +234,7 @@ const InformasiHama = (props) => {
             <option value="Mei">Desember</option>
           </Select>
         </Flex>
-        <Box width="95%" height="85%" m={"auto"}>
+        <Box width="90%" height="80%" m={"auto"}>
           <Chart options={chartOptions} series={chartSeries} type="line" />
         </Box>
       </Flex>
