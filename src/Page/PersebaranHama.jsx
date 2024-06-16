@@ -104,7 +104,7 @@ const PersebaranHama = () => {
           position={"absolute"}
           w={"100%"}
           h={"fit-content"}
-          bottom={0}
+          bottom={"10%"}
           zIndex={10}
         >
           <Flex
