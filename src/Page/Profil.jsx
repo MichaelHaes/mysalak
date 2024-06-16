@@ -19,6 +19,7 @@ const Profil = () => {
       align={"center"}
       pos={"relative"}
       pt={"15%"}
+      pb={10}
     >
       {/* Back & Title */}
       <Flex w={"100%"} pos={"relative"} justify={"center"} align={"center"}>
