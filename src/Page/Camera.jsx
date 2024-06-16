@@ -1,6 +1,6 @@
 import { Box, Image, Button, Text, Flex } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { MdFlipCameraAndroid, MdOutlineCamera } from "react-icons/md";
+import { MdFlipCameraAndroid } from "react-icons/md";
 import Webcam from "react-webcam";
 import { usePage } from "../state";
 import { IoIosArrowBack } from "react-icons/io";
@@ -23,7 +23,7 @@ const Camera = () => {
   }
 
   return (
-    <Box w={"inherit"} h={"100vh"} position="relative" zIndex={2}>
+    <Box w={"inherit"} h={"100vh"} overflowY={"hidden"} position="relative" zIndex={2}>
       <Box
         id="masked"
         w={"inherit"}
