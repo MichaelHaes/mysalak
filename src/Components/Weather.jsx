@@ -140,7 +140,7 @@ const Weather = () => {
               </Flex>
 
               <Flex className="indikator-list">
-                <Box className="icon-wrapper">
+                <Box className="icon-wrapper no-padding">
                   <WiHumidity fill="#416d51" size={"auto"} />
                 </Box>
                 <Flex className="text-wrapper">
