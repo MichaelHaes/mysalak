@@ -1,5 +1,5 @@
 import { Box, Flex, ListItem, Text, UnorderedList } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MapComponent from "../Components/Map";
 import { IoIosArrowBack } from "react-icons/io";
 import { usePage } from "../state";
@@ -49,6 +49,13 @@ const PersebaranHama = () => {
     console.log(val);
     setDetail(val);
   }
+
+  useEffect(() => {
+    if (detail.hama && detail.hama.length > 0) {
+      const totalHama = detail.hama.reduce((acc, item) => acc + item.jumlah, 0);
+      setTotal(totalHama);
+    }
+  }, [detail.hama]);
 
   return (
     <Flex direction={"column"} pos={"relative"} w={"100%"} h={"100vh"}>
@@ -178,7 +185,7 @@ const PersebaranHama = () => {
               fontWeight={"bold"}
             >
               <Text>Total Jumlah Hama</Text>
-              <Text>220</Text>
+              <Text>{total}</Text>
             </Flex>
           </Flex>
         </Box>
