@@ -23,15 +23,15 @@ const Camera = () => {
   }
 
   return (
-    <Box w={"inherit"} h={"100vh"} position="relative">
-      {/* <Box
+    <Box w={"inherit"} h={"100vh"} position="relative" zIndex={2}>
+      <Box
         id="masked"
         w={"inherit"}
         h={"100vh"}
         position={"absolute"}
         top={0}
         left={0}
-        zIndex={5}
+        zIndex={1}
         bgGradient="linear(to-b, #202020, rgba(72, 72, 72, 0.5))"
         // style={{
         //   WebkitMaskImage: "-moz-element(#mask)",
@@ -39,15 +39,21 @@ const Camera = () => {
         //   maskRepeat: "no-repeat",
         //   maskPosition: "center",
         // }}
-      ></Box> */}
+      ></Box>
       <Flex
         pos={"absolute"}
-        top={"8%"}
+        top={0}
         w={"100%"}
+        h={"17vh"}
         align={"center"}
         justifyContent={"center"}
         textAlign={"center"}
-        zIndex={10}
+        zIndex={11}
+        // bgGradient="linear(to top,
+        // rgba(72, 72, 72, 0),
+        // rgba(72, 72, 72, 0.5) 10%,
+        // rgba(72, 72, 72, 0.8) 50%,
+        // rgba(72, 72, 72, 1))"
       >
         <Button
           variant={"unstyled"}
@@ -67,10 +73,21 @@ const Camera = () => {
           Hitung Hama
         </Text>
       </Flex>
+
       <Webcam
         audio={false}
         screenshotFormat="image/jpeg"
-        style={{ width: "100%", height: "100%", objectFit: "cover", zIndex: 0 }}
+        style={{
+          width: "98%",
+          height: "72%",
+          borderRadius: "20px",
+          objectFit: "cover",
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 9,
+        }}
         videoConstraints={videoConstraints}
         disablePictureInPicture={true}
         screenshotQuality={1}
@@ -78,13 +95,19 @@ const Camera = () => {
       >
         {({ getScreenshot }) => (
           <Flex
+            w={"100%"}
+            height={"25vh"}
+            // bgGradient="linear(to-b,
+            // rgba(72, 72, 72, 0),
+            // rgba(72, 72, 72, 0.5) 20%,
+            // rgba(72, 72, 72, 0.8) 50%,
+            // rgba(72, 72, 72, 1))"
             position="absolute"
-            bottom={"15%"}
-            left="50%"
-            transform="translateX(-50%)"
-            justify={"space-around"}
+            bottom={0}
+            pt={20}
+            justify={"center"}
             align={"center"}
-            gap={10}
+            zIndex={10}
           >
             <Box w="60px" h="60px">
               {captured && (
@@ -99,14 +122,17 @@ const Camera = () => {
               )}{" "}
             </Box>
             <Button
-              h={"fit-content"}
               variant={"unstyled"}
+              w={"70px"}
+              h={"70px"}
+              bg={"white"}
+              borderRadius={"full"}
+              border={"4px solid lightgrey"}
+              mx={10}
               onClick={() => {
                 setCaptured(getScreenshot());
               }}
-            >
-              <MdOutlineCamera fill="white" size={"80px"} />
-            </Button>
+            ></Button>
             <Button
               h={"fit-content"}
               variant={"unstyled"}
