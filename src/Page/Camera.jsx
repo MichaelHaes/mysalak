@@ -11,8 +11,8 @@ const Camera = () => {
   const { setPage } = usePage();
 
   const videoConstraints = {
-    width: "100%",
-    height: "100%",
+    width: 1280,
+    height: 720,
     facingMode: facing,
   };
 
@@ -74,6 +74,7 @@ const Camera = () => {
         videoConstraints={videoConstraints}
         disablePictureInPicture={true}
         screenshotQuality={1}
+        mirrored={facing === "user" ? true : false}
       >
         {({ getScreenshot }) => (
           <Flex
@@ -85,14 +86,7 @@ const Camera = () => {
             align={"center"}
             gap={10}
           >
-            <Button
-              variant={"unstyled"}
-              onClick={() => {
-                setCaptured(getScreenshot());
-              }}
-              width="60px"
-              height="60px"
-            >
+            <Box w="60px" h="60px">
               {captured && (
                 <Image
                   src={captured}
@@ -103,7 +97,7 @@ const Camera = () => {
                   border={"1px solid white"}
                 />
               )}{" "}
-            </Button>
+            </Box>
             <Button
               h={"fit-content"}
               variant={"unstyled"}
@@ -116,7 +110,9 @@ const Camera = () => {
             <Button
               h={"fit-content"}
               variant={"unstyled"}
-              onClick={handleFacing}
+              onClick={() => {
+                handleFacing();
+              }}
             >
               <MdFlipCameraAndroid fill="white" size={"60px"} />
             </Button>
