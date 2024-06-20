@@ -61,7 +61,7 @@ const RamalanCuaca = () => {
   }, [])
 
   return !all ? (
-    <Box pb={"10vh"}>
+    <Box pb={"10vh"} w={"inherit"} h={"100%"}>
       <IndikatorHeader />
       <IndikatorCard />
       <RamalanMingguan
