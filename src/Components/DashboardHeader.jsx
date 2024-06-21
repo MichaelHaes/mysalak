@@ -2,9 +2,12 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 import { usePage } from "../state";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const DashboardHeader = () => {
-  const {setPage} = usePage();
+  const navigate = useNavigate();
+
   return (
     <Box>
       <Box pos={"relative"} height={"28vh"}>
@@ -73,16 +76,20 @@ const DashboardHeader = () => {
             alignItems={"end"}
             pe={10}
             w={"50%"}
-            onClick={() => {setPage("Profil")}}
+            onClick={() => {
+              navigate("/profil")
+            }}
           >
-            <Image
-              src="/assets/lalat buah.png"
-              borderRadius={"50%"}
-              w={"80px"}
-              h={"80px"}
-              border={"2px solid #a6c4a6"}
-              objectFit={"cover"}
-            />
+            <Link to={"/profil"}>
+              <Image
+                src="/assets/lalat buah.png"
+                borderRadius={"50%"}
+                w={"80px"}
+                h={"80px"}
+                border={"2px solid #a6c4a6"}
+                objectFit={"cover"}
+              />
+            </Link>
           </Flex>
         </Flex>
       </Box>
@@ -148,7 +155,7 @@ const DashboardHeader = () => {
             overflowY={"auto"}
             wordBreak={"break-word"}
             style={{
-              scrollbarWidth: "none"
+              scrollbarWidth: "none",
             }}
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum

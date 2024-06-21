@@ -1,22 +1,51 @@
 import React from "react";
-// import logo from './logo.svg';
-import { ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Box, ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
-import Index from "./Page/Index";
+import Dashboard from "./Page/Dashboard";
+import PersebaranHama from "./Page/PersebaranHama";
+import Camera from "./Page/Camera";
+import ManajemenHamaPage from "./Page/ManajemenHamaPage";
+import Profil from "./Page/Profil";
+import RamalanCuaca from "./Page/RamalanCuaca";
+import FormModel from "./Page/FormModel";
+import Navbar from "./Components/Navbar";
 
 function App() {
+  const location = useLocation();
+
   return (
     <ChakraProvider>
-      <BrowserRouter>
-        <div id="app">
+      <div id="app">
+        <Box
+          w={{ base: "100%", md: "420px" }}
+          minH={"100vh"}
+          mx={"auto"}
+          bg={"#f5f5f5"}
+          pos={"relative"}
+        >
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/persebaran-hama" element={<PersebaranHama />} />
+            <Route path="/kamera" element={<Camera />} />
+            <Route path="/manajemen-hama" element={<ManajemenHamaPage />} />
+            <Route path="/profil" element={<Profil />} />
+            <Route path="/ramalan-cuaca" element={<RamalanCuaca />} />
+            <Route path="/prediksi" element={<FormModel />} />
           </Routes>
-        </div>
-      </BrowserRouter>
+          {location.pathname !== "/kamera" && <Navbar />}
+        </Box>
+      </div>
     </ChakraProvider>
   );
 }
 
-export default App;
+function AppWrapper() {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+}
+
+export default AppWrapper;

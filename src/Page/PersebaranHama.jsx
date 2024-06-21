@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import MapComponent from "../Components/Map";
 import { IoIosArrowBack } from "react-icons/io";
 import { usePage } from "../state";
+import { useNavigate } from "react-router-dom";
 
 const PersebaranHama = () => {
-  const { home } = usePage();
+  const navigate = useNavigate();
   const [detail, setDetail] = useState({});
   const [total, setTotal] = useState(0);
 
@@ -87,7 +88,7 @@ const PersebaranHama = () => {
         pos={"absolute"}
         zIndex={11}
         onClick={() => {
-          home();
+          navigate("/");
         }}
       >
         <IoIosArrowBack size={"auto"} fill="white" />

@@ -14,11 +14,12 @@ import "./Styles/InformasiHama.css";
 import { IoIosArrowBack, IoIosArrowDropdownCircle } from "react-icons/io";
 import Chart from "react-apexcharts";
 import { FaChartLine } from "react-icons/fa6";
-import { usePage, useHama } from "../state";
+import { useHama } from "../state";
+import { useNavigate } from "react-router-dom";
 
 const InformasiHama = (props) => {
   const { from, setFrom, resetDetail } = useHama();
-  const { setPage } = usePage();
+  const navigate = useNavigate();
   const data = props.item;
 
   const chartOptions = {
@@ -76,7 +77,7 @@ const InformasiHama = (props) => {
         pos={"absolute"}
         onClick={() => {
           if (from === "Home") {
-            setPage("Home");
+            navigate("/");
             setFrom("");
           }
           resetDetail();

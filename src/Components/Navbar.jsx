@@ -1,35 +1,37 @@
 import React from "react";
 import { Tabs, TabList, Tab, Box, Flex } from "@chakra-ui/react";
 import { GoHomeFill } from "react-icons/go";
-import { usePage, useHama } from "../state";
+import { useHama } from "../state";
 import { IoBug, IoScan } from "react-icons/io5";
 import { MdArticle } from "react-icons/md";
 import { FaMapMarkedAlt } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const Page = usePage();
-  const {resetDetail} = useHama();
+  const { resetDetail } = useHama();
+  const navigate = useNavigate();
+  const url = useLocation().pathname;
 
   const navItems = [
     {
-      name: "Home",
+      route: "/",
       a_logo: <GoHomeFill size={"auto"} />,
     },
     {
-      name: "Sebaran Hama",
+      route: "/persebaran-hama",
       a_logo: <FaMapMarkedAlt size={"auto"} />,
     },
     {
-      name: "Camera",
+      route: "/kamera",
       a_logo: <IoScan size={"auto"} />,
       custom: true,
     },
     {
-      name: "Prediksi Hama",
+      route: "/manajemen-hama",
       a_logo: <IoBug size={"auto"} />,
     },
     {
-      name: "Prediksi Cuaca",
+      route: "/prediksi",
       a_logo: <MdArticle size={"auto"} />,
     },
   ];
@@ -67,14 +69,11 @@ const Navbar = () => {
         {navItems.map((item) => (
           <Tab
             onClick={() => {
-              Page.setPage(item.name);
+              // Page.setPage(item.route);
+              navigate(item.route);
               resetDetail();
             }}
-            w={
-              item.custom
-                ? { base: "25%", md: "22%" }
-                : { base: "15.5%", md: "14%" }
-            }
+            w={item.custom ? "25%" : "15.5%"}
           >
             <Flex
               flexDirection={"column"}
@@ -93,13 +92,13 @@ const Navbar = () => {
               color={
                 item.custom
                   ? "white"
-                  : Page.page === item.name
+                  : url === item.route
                   ? "black"
                   : "gray"
               }
               mt={item.custom ? -7 : 1}
             >
-              {Page.page === item.name ? (
+              {url === item.route ? (
                 <>
                   {item.a_logo}
                   {!item.custom && <IconActive />}

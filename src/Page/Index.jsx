@@ -12,28 +12,29 @@ import Camera from "./Camera";
 // import HitungHama from "./HitungHama";
 import PersebaranHama from "./PersebaranHama";
 import Profil from "./Profil";
+import { Route, Routes } from "react-router-dom";
 // import Artikel from "./Artikel";
 // import History from "./History";
 
-const componentMap = {
-  Home: Dashboard,
-  // History: History,
-  "Ramalan Cuaca": RamalanCuaca,
-  // Artikel: Artikel,
-  Camera: Camera,
-  // HitungHama: HitungHama,
-  ManajemenHamaDetail: ManajemenHamaDetail,
-  // ManajemenHamaPage: ManajemenHamaPage,
-  // "Manajemen Hama": ManajemenHamaPage,
-  "Prediksi Hama": ManajemenHamaPage,
-  "Sebaran Hama": PersebaranHama,
-  Profil: Profil,
-  "Prediksi Cuaca": FormModel,
-};
+// const componentMap = {
+//   Home: Dashboard,
+//   // History: History,
+//   "Ramalan Cuaca": RamalanCuaca,
+//   // Artikel: Artikel,
+//   Camera: Camera,
+//   // HitungHama: HitungHama,
+//   ManajemenHamaDetail: ManajemenHamaDetail,
+//   // ManajemenHamaPage: ManajemenHamaPage,
+//   // "Manajemen Hama": ManajemenHamaPage,
+//   "Prediksi Hama": ManajemenHamaPage,
+//   "Sebaran Hama": PersebaranHama,
+//   Profil: Profil,
+//   "Prediksi Cuaca": FormModel,
+// };
 
 const Index = () => {
   const { page } = usePage();
-  const Component = componentMap[page] || <Dashboard />;
+  // const Component = componentMap[page] || <Dashboard />;
 
   return (
     <Box
@@ -45,7 +46,18 @@ const Index = () => {
     >
       {/* {page === "Home" && <Dashboard />}
       {page === "Prediksi Cuaca" && <FormModel />} */}
-      <Component />
+      {/* <Component /> */}
+
+      <Routes>
+        <Route path="/" element={<Dashboard/>}/>
+        <Route path="/persebaran-hama" element={<PersebaranHama/>}/>
+        <Route path="/kamera" element={<Camera/>}/>
+        <Route path="/manajemen-hama" element={<ManajemenHamaPage/>}/>
+        <Route path="/profil" element={<Profil/>}/>
+        <Route path="/ramalan-cuaca" element={<RamalanCuaca/>}/>
+        <Route path="/prediksi" element={<FormModel/>}/>
+        <Route path="/informasi-hama" element={<FormModel/>}/>
+      </Routes>
 
       {/* {page !== "Sebaran Hama" || page !== "Camera" ? (
         <Box h={"7vh"}></Box>

@@ -2,13 +2,13 @@ import { Box, Image, Button, Text, Flex } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { MdFlipCameraAndroid } from "react-icons/md";
 import Webcam from "react-webcam";
-import { usePage } from "../state";
 import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const Camera = () => {
   const [facing, setFacing] = useState("user");
   const [captured, setCaptured] = useState(null);
-  const { setPage } = usePage();
+  const navigate = useNavigate();
 
   const videoConstraints = {
     width: 1280,
@@ -64,7 +64,7 @@ const Camera = () => {
           p={2}
           ms={5}
           onClick={() => {
-            setPage("Home");
+            navigate("/");
           }}
         >
           <IoIosArrowBack size={"auto"} />

@@ -7,9 +7,11 @@ import { FaArrowRight } from "react-icons/fa6";
 import { MdOutlineAccountCircle, MdVerified } from "react-icons/md";
 import "../Components/Styles/Profil.css";
 import { LuHistory } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
 
 const Profil = () => {
-  const { home } = usePage();
+  const navigate = useNavigate();
+
   return (
     <Flex
       className="container"
@@ -33,7 +35,7 @@ const Profil = () => {
           pos={"absolute"}
           left={0}
           onClick={() => {
-            home();
+            navigate("/")
           }}
         >
           <IoIosArrowBack size={"auto"} fill="white" />
