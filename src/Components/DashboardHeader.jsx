@@ -1,7 +1,6 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { FaCalendarAlt } from "react-icons/fa";
-import { usePage } from "../state";
 import { Link, useNavigate } from "react-router-dom";
 
 

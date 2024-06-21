@@ -2,7 +2,6 @@ import { Box, Flex, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import MapComponent from "../Components/Map";
 import { IoIosArrowBack } from "react-icons/io";
-import { usePage } from "../state";
 import { useNavigate } from "react-router-dom";
 
 const PersebaranHama = () => {

@@ -4,7 +4,7 @@ import Dashboard from "./Dashboard";
 import { Box } from "@chakra-ui/react";
 import Navbar from "../Components/Navbar";
 import FormModel from "./FormModel";
-import ManajemenHamaDetail from "./ManajemenHamaDetail";
+// import ManajemenHamaDetail from "./ManajemenHamaDetail";
 import ManajemenHamaPage from "./ManajemenHamaPage";
 import RamalanCuaca from "./RamalanCuaca";
 // import ModelTest from "./ModelTest";

@@ -1,7 +1,6 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { IoIosArrowBack, IoIosHelpCircleOutline } from "react-icons/io";
-import { usePage } from "../state";
 import { FaRegEdit } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa6";
 import { MdOutlineAccountCircle, MdVerified } from "react-icons/md";
