@@ -77,7 +77,7 @@ const ManajemenHama = () => {
                 }}
               >
                 <Image
-                  src="/assets/lalat buah.png"
+                  src={`/assets/${item.nama.toLocaleLowerCase()}.png`}
                   pos={"absolute"}
                   right={0}
                   h={"60%"}

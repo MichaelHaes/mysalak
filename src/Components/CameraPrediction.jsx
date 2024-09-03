@@ -63,7 +63,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
           />
         </Flex>
         <Text lineHeight={"normal"} fontSize={'2vh'} fontWeight={600}>Jumlah Hama</Text>
-        <Text fontWeight={"800"} fontSize={"4.5vh"} mt={1} lineHeight={"normal"}>
+        <Text fontWeight={"800"} fontSize={"5vh"} mt={1} lineHeight={"normal"}>
           20
         </Text>
       </Flex>
