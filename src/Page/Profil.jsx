@@ -57,7 +57,7 @@ const Profil = () => {
         ></Image>
         <Image
           pos={"relative"}
-          src="/assets/lalat buah.png"
+          src="/assets/profil.png"
           h={"10vh"}
           w={"10vh"}
           mx={"auto"}
@@ -66,6 +66,7 @@ const Profil = () => {
           border={"3.5px solid #F4F4F4"}
           zIndex={2}
           mt={"-13%"}
+          objectPosition={"63%"}
         ></Image>
       </Box>
       <Flex direction={"column"} id="identity" align={"center"}>
