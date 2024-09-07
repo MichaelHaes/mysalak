@@ -49,9 +49,17 @@ const CameraPrediction = ({ togglePredict, captured }) => {
         Hitung Hama
       </Text>
 
-      <Flex flexDir={"column"} px={5} pt={'14vh'}>
-        <Text fontSize={'2vh'} fontWeight={600}>Foto Hama</Text>
-        <Flex h={"30vh"} w={"90vw"} mx={"auto"} mt={2} mb={8}>
+      <Flex flexDir={"column"} px={5} pt={"14vh"}>
+        <Text fontSize={"2vh"} fontWeight={600}>
+          Foto Hama
+        </Text>
+        <Flex
+          h={"30vh"}
+          w={"100%"}
+          mx={"auto"}
+          mt={2}
+          mb={8}
+        >
           <Image
             h={"inherit"}
             w={"inherit"}
@@ -62,7 +70,9 @@ const CameraPrediction = ({ togglePredict, captured }) => {
             alt="hama"
           />
         </Flex>
-        <Text lineHeight={"normal"} fontSize={'2vh'} fontWeight={600}>Jumlah Hama</Text>
+        <Text lineHeight={"normal"} fontSize={"2vh"} fontWeight={600}>
+          Jumlah Hama
+        </Text>
         <Text fontWeight={"800"} fontSize={"5vh"} mt={1} lineHeight={"normal"}>
           20
         </Text>
