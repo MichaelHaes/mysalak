@@ -90,7 +90,7 @@ const InformasiHama = (props) => {
       </Flex>
       <Box pos={"absolute"} top={0} left={0} h={"40vh"} w={"100%"}>
         <Image
-          src="/assets/lalat buah.png"
+          src={`/assets/${data.jenis.toLocaleLowerCase()}.png`}
           h={"100%"}
           w={"100%"}
           objectFit={"cover"}
@@ -135,11 +135,33 @@ const InformasiHama = (props) => {
             {data.jumlah}
           </Text>
         </Flex>
-        <Text mt={2} fontSize={"1.3vh"}>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui
-          asperiores maxime voluptates blanditiis alias ea esse labore eaque,
-          distinctio laboriosam!
-        </Text>
+        {data.jenis.toLocaleLowerCase() === "lalat buah" ? (
+          <Text mt={2} fontSize={"1.3vh"}>
+            Hama yang menyerang berbagai jenis buah, termasuk salak. Mereka
+            bertelur di dalam buah, dan larva yang menetas memakan daging buah,
+            menyebabkan kerusakan dan busuk.
+          </Text>
+        ) : data.jenis.toLocaleLowerCase() === "tikus" ? (
+          <Text mt={2} fontSize={"1.3vh"}>
+            Tikus di perkebunan salak sering kali merusak tanaman dengan
+            menggali dan memakan akar serta batang muda. Mereka juga bisa
+            memakan buah salak yang sudah matang, menyebabkan kerusakan besar
+            pada hasil panen.
+          </Text>
+        ) : data.jenis.toLocaleLowerCase() === "bajing" ? (
+          <Text mt={2} fontSize={"1.3vh"}>
+            Bajing adalah hama yang sering menyerang perkebunan salak dengan
+            memakan buah yang masih muda. Mereka menyebabkan buah menjadi tidak
+            layak jual dan merusak hasil panen secara signifikan.
+          </Text>
+        ) : (
+          <Text mt={2} fontSize={"1.3vh"}>
+            Kutu putih merupakan hama yang menyerang tanaman salak dengan
+            menghisap cairan dari daun dan batang. Hal ini menyebabkan daun
+            menguning, menghambat pertumbuhan, dan menurunkan kualitas serta
+            kuantitas buah salak.
+          </Text>
+        )}
       </Box>
 
       <Box my={9} w={"100%"} px={8} mx={"auto"}>
