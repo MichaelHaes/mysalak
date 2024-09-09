@@ -50,9 +50,6 @@ const ManajemenHama = () => {
           py={1}
           px={2}
           borderRadius={"30px"}
-          // onClick={() => {
-          //   setPage("Prediksi Hama");
-          // }}
         >
           <Link to="/manajemen-hama">Lihat Semua</Link>
         </Button>

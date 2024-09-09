@@ -4,20 +4,14 @@ import { BsCloudRain } from "react-icons/bs";
 import { GoSun } from "react-icons/go";
 import { IoIosPartlySunny } from "react-icons/io";
 import { WiHumidity } from "react-icons/wi";
-import { usePage } from "../state";
 import "./Styles/Weather.css";
 import { Link } from "react-router-dom";
 
 const Weather = () => {
-  const { setPage } = usePage();
-
   return (
     <Flex justifyContent={"center"} pos={"relative"} my={9}>
       <Button
         variant={"unstyled"}
-        // onClick={() => {
-        //   setPage("Ramalan Cuaca");
-        // }}
         w={"85%"}
         mx={"auto"}
         h={"19vh"}
