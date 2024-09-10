@@ -1,6 +1,5 @@
 import { Stack, Image, Tag, Text, Heading, Box } from "@chakra-ui/react";
 import { BsDot, BsBookmark, BsBookmarkFill } from "react-icons/bs";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const ArtipsCard = ({

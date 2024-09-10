@@ -18,6 +18,7 @@ import { RiSearchLine } from "react-icons/ri";
 import ArtipsCard from "../Components/ArtipsCard";
 import NewArticlesCard from "../Components/NewArticlesCard";
 import ArticleData from "../Components/data/ArticleData";
+import { BsBookmarkFill } from "react-icons/bs";
 
 const Artikel = () => {
   const [isViewAll, setIsViewAll] = useState(false);
@@ -206,22 +207,34 @@ const Artikel = () => {
                 )}
               </TabPanel>
               <TabPanel p={0}>
-                {ArticleData.filter((article) =>
-                  savedArticles.includes(article.id)
-                ).map((article, index) => (
-                  <ArtipsCard
-                    key={index}
-                    id={article.id}
-                    imageSrc={article.imageSrc}
-                    tag={article.tag}
-                    readTime={article.readTime}
-                    title={article.title}
-                    author={article.author}
-                    date={article.date}
-                    isSaved={savedArticles.includes(article.id)}
-                    onBookmarkToggle={handleBookmarkToggle}
-                  />
-                ))}
+                {/* check if no articles are being saved */}
+                {savedArticles.length !== 0 ? (
+                  <>
+                    {ArticleData.filter((article) =>
+                      savedArticles.includes(article.id)
+                    ).map((article, index) => (
+                      <ArtipsCard
+                        key={index}
+                        id={article.id}
+                        imageSrc={article.imageSrc}
+                        tag={article.tag}
+                        readTime={article.readTime}
+                        title={article.title}
+                        author={article.author}
+                        date={article.date}
+                        isSaved={savedArticles.includes(article.id)}
+                        onBookmarkToggle={handleBookmarkToggle}
+                      />
+                    ))}
+                  </>
+                ) : (
+                  <Stack direction="row" align={"center"}>
+                    <Heading size={"sm"} direction="row">
+                      Belum ada artikel yang disimpan
+                    </Heading>
+                    <BsBookmarkFill color={"#2C3631"} size={16} />
+                  </Stack>
+                )}
               </TabPanel>
             </TabPanels>
           </Tabs>
