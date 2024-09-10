@@ -76,7 +76,8 @@ const Artikel = () => {
           borderRadius={5}
           size="md"
           w={"full"}
-          mx={6}
+          ml={!isViewAll ? "1.5rem" : "1rem"}
+          mr={!isViewAll ? "1.5rem" : "0.5rem"}
           color="#2C3631"
         >
           <InputLeftElement
@@ -105,7 +106,7 @@ const Artikel = () => {
       {isViewAll && (
         <Stack pb={"2vh"}>
           <Tabs variant="unstyled" borderRadius={"full"} p={0}>
-            <TabList borderRadius={"full"} h={"2rem"} gap={3} p={0}>
+            <TabList borderRadius={"full"} h={"2rem"} gap={2} p={0}>
               <Tab
                 borderRadius={"full"}
                 border={"1px solid #2C3631"}
@@ -113,6 +114,7 @@ const Artikel = () => {
                   color: "white",
                   bg: "#2C3631",
                 }}
+                fontSize={"0.75rem"}
               >
                 Semua
               </Tab>
@@ -123,6 +125,7 @@ const Artikel = () => {
                   color: "white",
                   bg: "#2C3631",
                 }}
+                fontSize={"0.75rem"}
               >
                 Tips & Trik
               </Tab>
@@ -133,8 +136,20 @@ const Artikel = () => {
                   color: "white",
                   bg: "#2C3631",
                 }}
+                fontSize={"0.75rem"}
               >
                 Artikel
+              </Tab>
+              <Tab
+                borderRadius={"full"}
+                border={"1px solid #2C3631"}
+                _selected={{
+                  color: "white",
+                  bg: "#2C3631",
+                }}
+                fontSize={"0.75rem"}
+              >
+                Disimpan
               </Tab>
             </TabList>
             <TabPanels pt={5}>
@@ -189,6 +204,24 @@ const Artikel = () => {
                     />
                   )
                 )}
+              </TabPanel>
+              <TabPanel p={0}>
+                {ArticleData.filter((article) =>
+                  savedArticles.includes(article.id)
+                ).map((article, index) => (
+                  <ArtipsCard
+                    key={index}
+                    id={article.id}
+                    imageSrc={article.imageSrc}
+                    tag={article.tag}
+                    readTime={article.readTime}
+                    title={article.title}
+                    author={article.author}
+                    date={article.date}
+                    isSaved={savedArticles.includes(article.id)}
+                    onBookmarkToggle={handleBookmarkToggle}
+                  />
+                ))}
               </TabPanel>
             </TabPanels>
           </Tabs>

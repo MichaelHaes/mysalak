@@ -64,7 +64,7 @@ const ArtipsCard = ({
           >
             {tag}
           </Tag>
-          <BsDot color={"#2C3631"} size={32} />
+          <BsDot color={"#2C3631"} size={26} />
           <Text color={"#2C3631"} fontSize={"0.7rem"}>
             {readTime}
           </Text>
@@ -81,7 +81,7 @@ const ArtipsCard = ({
         >
           <Stack gap={0} direction={"row"} align={"center"}>
             <Text fontSize={"0.65rem"}>{author}</Text>
-            <BsDot size={26} color={"#909090"} />
+            <BsDot size={22} color={"#909090"} />
             <Text fontSize={"0.65rem"}>{date}</Text>
           </Stack>
           <Box
