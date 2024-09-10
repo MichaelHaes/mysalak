@@ -74,7 +74,13 @@ const Artikel = () => {
           </Box>
         )}
         {/* Search Bar */}
-        <InputGroup borderRadius={5} size="md" w={"full"} mx={6}>
+        <InputGroup
+          borderRadius={5}
+          size="md"
+          w={"full"}
+          mx={6}
+          color="#2C3631"
+        >
           <InputLeftElement
             pointerEvents="none"
             children={<RiSearchLine color="#2C3631" size={20} />}
@@ -85,13 +91,21 @@ const Artikel = () => {
             placeholder="Cari artikel/tips & trik lainnya..."
             shadow={"md"}
             w={"full"}
+            color={"#2C3631"}
+            fontWeight={"bold"}
+            _active={{
+              borderColor: "#2C3631",
+            }}
+            _focus={{
+              borderColor: "#2C3631",
+            }}
           />
         </InputGroup>
       </Stack>
 
       {/* Tab View */}
       {isViewAll && (
-        <Stack pb={"8vh"}>
+        <Stack pb={"2vh"}>
           <Tabs variant="unstyled" borderRadius={"full"} p={0}>
             <TabList borderRadius={"full"} h={"2rem"} gap={3} p={0}>
               <Tab
@@ -239,7 +253,7 @@ const Artikel = () => {
                 Lihat Semua
               </Button>
             </Stack>
-            <Stack pb={"8vh"} gap={0}>
+            <Stack pb={"4vh"} gap={0}>
               {ArticleData.map((article, index) => (
                 <ArtipsCard
                   key={index}
