@@ -7,6 +7,7 @@ const ArticleData = [
     title: "Lalat Buah: Cara Pencegahan dan Pembasmian",
     author: "Universitas Gadjah Mada",
     date: "7 Mei 2024",
+    isSaved: false,
     description: `
       **Status**: Hama primer\n
       **Bagian Tanaman yang Diserang**: Buah\n
@@ -38,6 +39,7 @@ const ArticleData = [
     title: "Kutu Putih dan Pengelolaannya",
     author: "Universitas Gadjah Mada",
     date: "1 Juni 2024",
+    isSaved: false,
     description: `
       **Status**: Hama kadang-kadang\n
       **Bagian Tanaman yang Diserang**: Buah\n
@@ -63,6 +65,7 @@ const ArticleData = [
     title: "Pengelolaan Penggerek Titik Tumbuh Salak",
     author: "Universitas Gadjah Mada",
     date: "15 April 2024",
+    isSaved: false,
     description: `
       **Status**: Hama kadang-kadang\n
       **Bagian Tanaman yang Diserang**: Titik tumbuh\n
@@ -85,6 +88,7 @@ const ArticleData = [
     title: "Tikus Pohon dan Pengelolaannya",
     author: "Universitas Gadjah Mada",
     date: "6 Mei 2024",
+    isSaved: false,
     description: `
       **Status**: Hama kadang-kadang\n
       **Bagian Tanaman yang Diserang**: Buah\n
@@ -103,6 +107,7 @@ const ArticleData = [
     title: "Bajing dan Pengelolaannya",
     author: "Universitas Gadjah Mada",
     date: "17 April 2024",
+    isSaved: false,
     description: `
       **Status**: Hama kadang-kadang\n
       **Bagian Tanaman yang Diserang**: Buah\n

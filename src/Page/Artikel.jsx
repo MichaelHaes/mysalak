@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Stack,
   Heading,
@@ -16,11 +16,34 @@ import {
 import { IoIosArrowBack } from "react-icons/io";
 import { RiSearchLine } from "react-icons/ri";
 import ArtipsCard from "../Components/ArtipsCard";
-import { useState } from "react";
+import NewArticlesCard from "../Components/NewArticlesCard";
 import ArticleData from "../Components/data/ArticleData";
 
 const Artikel = () => {
   const [isViewAll, setIsViewAll] = useState(false);
+  const [savedArticles, setSavedArticles] = useState([]);
+
+  // Load saved articles from localStorage on component mount
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("savedArticles")) || [];
+    setSavedArticles(saved);
+  }, []);
+
+  // Handle bookmark toggle for both cards
+  const handleBookmarkToggle = (id) => {
+    let updatedSavedArticles = [...savedArticles];
+
+    if (updatedSavedArticles.includes(id)) {
+      updatedSavedArticles = updatedSavedArticles.filter(
+        (articleId) => articleId !== id
+      );
+    } else {
+      updatedSavedArticles.push(id);
+    }
+
+    setSavedArticles(updatedSavedArticles);
+    localStorage.setItem("savedArticles", JSON.stringify(updatedSavedArticles));
+  };
 
   return (
     <Stack pt={"6vh"} padding={"1.5rem"}>
@@ -30,12 +53,14 @@ const Artikel = () => {
         align={"center"}
         position={"sticky"}
         top={0}
-        zIndex={1}
+        zIndex={999}
         justify={"space-between"}
         flex={1}
         bgColor={"#f5f5f5"}
         py={5}
         backdropFilter={"blur(50px)"}
+        ml={"-1.5rem"}
+        mr={"-1.5rem"}
       >
         {isViewAll && (
           <Box
@@ -49,14 +74,12 @@ const Artikel = () => {
           </Box>
         )}
         {/* Search Bar */}
-        <InputGroup borderRadius={5} size="md" w={"full"}>
+        <InputGroup borderRadius={5} size="md" w={"full"} mx={6}>
           <InputLeftElement
-            ml={3}
             pointerEvents="none"
             children={<RiSearchLine color="#2C3631" size={20} />}
           />
           <Input
-            ml={3}
             borderRadius={"full"}
             type="text"
             placeholder="Cari artikel/tips & trik lainnya..."
@@ -65,6 +88,8 @@ const Artikel = () => {
           />
         </InputGroup>
       </Stack>
+
+      {/* Tab View */}
       {isViewAll && (
         <Stack pb={"8vh"}>
           <Tabs variant="unstyled" borderRadius={"full"} p={0}>
@@ -112,6 +137,8 @@ const Artikel = () => {
                     title={article.title}
                     author={article.author}
                     date={article.date}
+                    isSaved={savedArticles.includes(article.id)}
+                    onBookmarkToggle={handleBookmarkToggle}
                   />
                 ))}
               </TabPanel>
@@ -128,6 +155,8 @@ const Artikel = () => {
                     title={article.title}
                     author={article.author}
                     date={article.date}
+                    isSaved={savedArticles.includes(article.id)}
+                    onBookmarkToggle={handleBookmarkToggle}
                   />
                 ))}
               </TabPanel>
@@ -143,6 +172,8 @@ const Artikel = () => {
                       title={article.title}
                       author={article.author}
                       date={article.date}
+                      isSaved={savedArticles.includes(article.id)}
+                      onBookmarkToggle={handleBookmarkToggle}
                     />
                   )
                 )}
@@ -151,6 +182,7 @@ const Artikel = () => {
           </Tabs>
         </Stack>
       )}
+
       {/* Artikel Terbaru */}
       {!isViewAll && (
         <>
@@ -158,8 +190,33 @@ const Artikel = () => {
             <Heading color={"#2C3631"} size={"md"}>
               Terbaru
             </Heading>
+            <Stack
+              mt={3}
+              direction={"row"}
+              flex={1}
+              overflowX={"auto"}
+              css={{
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
+              }}
+            >
+              {ArticleData.map((article, index) => (
+                <NewArticlesCard
+                  key={index}
+                  id={article.id}
+                  imageSrc={article.imageSrc}
+                  tag={article.tag}
+                  readTime={article.readTime}
+                  title={article.title}
+                  author={article.author}
+                  date={article.date}
+                  isSaved={savedArticles.includes(article.id)}
+                  onBookmarkToggle={handleBookmarkToggle}
+                />
+              ))}
+            </Stack>
           </Stack>
-          {/* Untuk Anda */}
           <Stack mt={6}>
             <Stack
               justify={"space-between"}
@@ -182,7 +239,6 @@ const Artikel = () => {
                 Lihat Semua
               </Button>
             </Stack>
-            {/* Map through dummy data to render ArtipsCard */}
             <Stack pb={"8vh"} gap={0}>
               {ArticleData.map((article, index) => (
                 <ArtipsCard
@@ -194,6 +250,8 @@ const Artikel = () => {
                   title={article.title}
                   author={article.author}
                   date={article.date}
+                  isSaved={savedArticles.includes(article.id)}
+                  onBookmarkToggle={handleBookmarkToggle}
                 />
               ))}
             </Stack>

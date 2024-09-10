@@ -1,14 +1,36 @@
 import { Stack, Image, Tag, Text, Heading, Box } from "@chakra-ui/react";
 import { BsDot, BsBookmark, BsBookmarkFill } from "react-icons/bs";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ArtipsCard = ({ id, imageSrc, tag, readTime, title, author, date }) => {
-  const [isSaved, setIsSaved] = useState(false);
+const ArtipsCard = ({
+  id,
+  imageSrc,
+  tag,
+  readTime,
+  title,
+  author,
+  date,
+  isSaved,
+  onBookmarkToggle,
+}) => {
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   const savedArticles =
+  //     JSON.parse(localStorage.getItem("savedArticles")) || [];
+  //   if (savedArticles.includes(id)) {
+  //     setIsSaved(true);
+  //   }
+  // }, [id]);
 
   const handleCardClick = () => {
     navigate(`/artikel/${id}`);
+  };
+
+  const handleBookmarkClick = (e) => {
+    e.stopPropagation();
+    onBookmarkToggle(id);
   };
 
   return (
@@ -65,25 +87,13 @@ const ArtipsCard = ({ id, imageSrc, tag, readTime, title, author, date }) => {
           <Box
             _hover={{ transform: "scale(1.1)" }}
             transition={"transform 0.3s ease"}
+            onClick={handleBookmarkClick}
           >
-            {
-              // Bookmark Icon
-              isSaved ? (
-                <BsBookmarkFill
-                  color={"#2C3631"}
-                  size={16}
-                  cursor={"pointer"}
-                  onClick={() => setIsSaved(!isSaved)}
-                />
-              ) : (
-                <BsBookmark
-                  color={"#2C3631"}
-                  size={16}
-                  cursor={"pointer"}
-                  onClick={() => setIsSaved(!isSaved)}
-                />
-              )
-            }
+            {isSaved ? (
+              <BsBookmarkFill color={"#2C3631"} size={16} cursor={"pointer"} />
+            ) : (
+              <BsBookmark color={"#2C3631"} size={16} cursor={"pointer"} />
+            )}
           </Box>
         </Stack>
       </Stack>
