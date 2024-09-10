@@ -1,7 +1,6 @@
 import { Stack, Tag, Text, Heading, Box } from "@chakra-ui/react";
 import { BsDot, BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
 
 const NewArticlesCard = ({
   id,
