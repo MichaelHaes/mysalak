@@ -23,13 +23,11 @@ const Artikel = () => {
   const [isViewAll, setIsViewAll] = useState(false);
   const [savedArticles, setSavedArticles] = useState([]);
 
-  // Load saved articles from localStorage on component mount
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("savedArticles")) || [];
     setSavedArticles(saved);
   }, []);
 
-  // Handle bookmark toggle for both cards
   const handleBookmarkToggle = (id) => {
     let updatedSavedArticles = [...savedArticles];
 
@@ -59,8 +57,8 @@ const Artikel = () => {
         bgColor={"#f5f5f5"}
         py={5}
         backdropFilter={"blur(50px)"}
-        ml={"-1.5rem"}
-        mr={"-1.5rem"}
+        ml={isViewAll ? "0" : "-1.5rem"}
+        mr={isViewAll ? "0" : "-1.5rem"}
       >
         {isViewAll && (
           <Box
