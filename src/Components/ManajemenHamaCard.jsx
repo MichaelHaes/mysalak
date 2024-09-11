@@ -28,7 +28,7 @@ const ManajemenHamaCard = (props) => {
         zIndex={3}
       >
         <Image
-          src={`/assets/${data.jenis.toLocaleLowerCase()}.png`}
+          src={`/assets/lalat buah.png`}
           pos={"absolute"}
           top={0}
           left={0}
@@ -66,14 +66,14 @@ const ManajemenHamaCard = (props) => {
           borderRadius={"full"}
           fontSize={"1vh"}
         >
-          <Moment format="DD/M/YYYY">{data.date}</Moment>
+          <Moment format="DD/M/YYYY">{data.createdAt}</Moment>
         </Text>
         <Box textAlign={"end"}>
           <Text fontSize={"2.5vh"} lineHeight={1} fontWeight={"bold"}>
             {data.jumlah}
           </Text>
           <Text fontSize={"1.2vh"} fontWeight={600}>
-            {data.jenis}
+            {data.KelompokTani.nama}
           </Text>
         </Box>
       </Flex>

@@ -1,36 +1,29 @@
 import { Box, Button, Flex, Text, Image } from "@chakra-ui/react";
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useHama } from "../state";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import env from "react-dotenv";
+import Moment from "react-moment";
 
 const ManajemenHama = () => {
   const navigate = useNavigate();
-  const { setIndex, toggleDetail, setFrom } = useHama();
+  const { setIndex, toggleDetail, setFrom, hama, setHama } = useHama();
 
-  const hama = [
-    {
-      date: "2024-5-20",
-      nama: "Lalat Buah",
-      jumlah: 400,
-    },
-    {
-      date: "2024-4-20",
-      nama: "Bajing",
-      jumlah: 2,
-    },
-    {
-      date: "2024-3-20",
-      nama: "Kutu Putih",
-      jumlah: 30,
-    },
-    {
-      date: "2024-3-20",
-      nama: "Tikus",
-      jumlah: 3,
+  const fetchHama = async () => {
+    try {
+      const response = await axios.get(`${env.API_URL}/tangkapan-hama`);
+      setHama(response.data);
+    } catch (e) {
+      console.log(e.message);
     }
-  ];
+  }
+
+  useEffect(() => {
+    fetchHama();
+  }, [])
 
   return (
     <Box w={"85%"} mx={"auto"} pos={"relative"}>
@@ -70,7 +63,7 @@ const ManajemenHama = () => {
                 }}
               >
                 <Image
-                  src={`/assets/${item.nama.toLocaleLowerCase()}.png`}
+                  src={`/assets/lalat buah.png`}
                   pos={"absolute"}
                   right={0}
                   h={"60%"}
@@ -121,10 +114,10 @@ const ManajemenHama = () => {
                       fontSize={"8pt"}
                       lineHeight={1}
                     >
-                      {item.nama}
+                      {item.KelompokTani.nama}
                     </Text>
                     <Text fontSize={"6pt"} color={"#d4d4d4"}>
-                      {item.date}
+                    <Moment format="DD/M/YYYY">{item.createdAt}</Moment>
                     </Text>
                   </Flex>
                 </Flex>

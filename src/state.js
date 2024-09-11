@@ -31,8 +31,10 @@ export const useWeatherPred = create((set) => ({
 
 export const useHama = create((set) => ({
   from: "",
+  hama: [],
   index: null,
   detail: false,
+  setHama: (val) => set({hama: val}),
   setFrom: (val) => set({from: val}),
   setIndex: (val) => set({ index: val }),
   resetDetail: () => set({ detail: false }),

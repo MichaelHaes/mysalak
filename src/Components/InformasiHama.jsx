@@ -8,7 +8,7 @@ import {
   SliderTrack,
   Select,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import Moment from "react-moment";
 import "./Styles/InformasiHama.css";
 import { IoIosArrowBack, IoIosArrowDropdownCircle } from "react-icons/io";
@@ -18,9 +18,13 @@ import { useHama } from "../state";
 import { useNavigate } from "react-router-dom";
 
 const InformasiHama = (props) => {
-  const { from, setFrom, resetDetail } = useHama();
+  const { from, setFrom, resetDetail, hama, index } = useHama();
   const navigate = useNavigate();
-  const data = props.item;
+  const data = hama[index];
+
+  useEffect(() => {
+    console.log(index);
+  }, [])
 
   const chartOptions = {
     chart: {
@@ -90,7 +94,7 @@ const InformasiHama = (props) => {
       </Flex>
       <Box pos={"absolute"} top={0} left={0} h={"40vh"} w={"100%"}>
         <Image
-          src={`/assets/${data.jenis.toLocaleLowerCase()}.png`}
+          src={`/assets/lalat buah.png`}
           h={"100%"}
           w={"100%"}
           objectFit={"cover"}
@@ -116,10 +120,10 @@ const InformasiHama = (props) => {
               fontSize={"1.2vh"}
               mb={2.5}
             >
-              <Moment format="DD/M/YYYY">{data.date}</Moment>
+              <Moment format="DD/M/YYYY">{data.createdAt}</Moment>
             </Text>
             <Text fontSize={"2.2vh"} lineHeight={1} fontWeight={"bold"}>
-              {data.jenis}
+              {data.KelompokTani.nama}
             </Text>
           </Flex>
 
@@ -135,7 +139,12 @@ const InformasiHama = (props) => {
             {data.jumlah}
           </Text>
         </Flex>
-        {data.jenis.toLocaleLowerCase() === "lalat buah" ? (
+        <Text mt={2} fontSize={"1.3vh"}>
+          Hama yang menyerang berbagai jenis buah, termasuk salak. Mereka
+          bertelur di dalam buah, dan larva yang menetas memakan daging buah,
+          menyebabkan kerusakan dan busuk.
+        </Text>
+        {/* {data.jenis.toLocaleLowerCase() === "lalat buah" ? (
           <Text mt={2} fontSize={"1.3vh"}>
             Hama yang menyerang berbagai jenis buah, termasuk salak. Mereka
             bertelur di dalam buah, dan larva yang menetas memakan daging buah,
@@ -161,7 +170,7 @@ const InformasiHama = (props) => {
             menguning, menghambat pertumbuhan, dan menurunkan kualitas serta
             kuantitas buah salak.
           </Text>
-        )}
+        )} */}
       </Box>
 
       <Box my={9} w={"100%"} px={8} mx={"auto"}>
