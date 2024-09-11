@@ -27,14 +27,18 @@ const InformasiHama = (props) => {
   const [history, setHistory] = useState([]);
 
   const getHistory = async () => {
-    const response = await axios.get(`${env.API_URL}/tangkapan-hama/${data.id_kelompok_tani}/${moment().format('M')}`)
-    
+    const response = await axios.get(
+      `${env.API_URL}/tangkapan-hama/${data.id_kelompok_tani}/${moment().format(
+        "M"
+      )}`
+    );
+
     let tmp = [];
-    response.data.forEach(item => {
-      tmp.push(item.jumlah)
+    response.data.forEach((item) => {
+      tmp.push(item.jumlah);
     });
     setHistory(tmp);
-  }
+  };
 
   const months = [
     "Januari",
@@ -97,7 +101,7 @@ const InformasiHama = (props) => {
   ];
 
   return (
-    <Flex direction={"column"} height={"fit-content"} pb={"15vh"}>
+    <Flex direction={"column"} height={"fit-content"}>
       <Flex
         justify={"center"}
         align={"center"}
@@ -169,9 +173,12 @@ const InformasiHama = (props) => {
           </Text>
         </Flex>
         <Text mt={2} fontSize={"1.3vh"}>
-          Hama yang menyerang berbagai jenis buah, termasuk salak. Mereka
-          bertelur di dalam buah, dan larva yang menetas memakan daging buah,
-          menyebabkan kerusakan dan busuk.
+          Jumlah lalat buah yang tertangkap oleh kelompok tani{" "}
+          {data.KelompokTani.nama} pada tanggal{" "}
+          <Moment format="DD MMMM YYYY">{data.createdAt}</Moment>. Tercatat ada{" "}
+          {data.jumlah} lalat yang tertangkap, dan kondisi kebun berada pada
+          kondisi{" "}
+          {data.jumlah > 50 ? "bahaya" : data.jumlah > 10 ? "waspada" : "aman"}.
         </Text>
         {/* {data.jenis.toLocaleLowerCase() === "lalat buah" ? (
           <Text mt={2} fontSize={"1.3vh"}>
@@ -202,7 +209,7 @@ const InformasiHama = (props) => {
         )} */}
       </Box>
 
-      <Box my={9} w={"100%"} px={8} mx={"auto"}>
+      <Box mt={5} mb={-2} w={"100%"} px={8} mx={"auto"}>
         <Slider isReadOnly={true}>
           <SliderMark value={data.jumlah > 100 ? 100 : data.jumlah}>
             {
