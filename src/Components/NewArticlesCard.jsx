@@ -34,7 +34,7 @@ const NewArticlesCard = ({
   return (
     <Stack
       h={"225px"}
-      minW={"350px"}
+      minW={"100%"}
       backgroundImage={imageSrc}
       backgroundSize={"cover"}
       backgroundPosition={"center"}
