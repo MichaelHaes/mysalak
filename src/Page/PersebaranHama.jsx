@@ -14,32 +14,47 @@ import { useNavigate } from "react-router-dom";
 const PersebaranHama = () => {
   const navigate = useNavigate();
   const [detail, setDetail] = useState({});
-  const [total, setTotal] = useState(0);
+  // const [total, setTotal] = useState(0);
+
+  // const sebaran = [
+  //   {
+  //     nama: "Kebun Bu Endang",
+  //     luas: "250ha",
+  //     lat: -7.61674751163635,
+  //     lng: 110.40200419177316,
+  //     hama: [
+  //       {
+  //         jenis: "Lalat Buah",
+  //         jumlah: 87,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     nama: "Kebun Pak Suroto",
+  //     luas: "250ha",
+  //     lat: -7.611351174065228,
+  //     lng: 110.40550925108614,
+  //     hama: [
+  //       {
+  //         jenis: "Lalat Buah",
+  //         jumlah: 43,
+  //       },
+  //     ],
+  //   },
+  // ];
 
   const sebaran = [
     {
       nama: "Kebun Bu Endang",
-      luas: "250ha",
       lat: -7.61674751163635,
       lng: 110.40200419177316,
-      hama: [
-        {
-          jenis: "Lalat Buah",
-          jumlah: 87,
-        },
-      ],
+      jumlah: 87,
     },
     {
       nama: "Kebun Pak Suroto",
-      luas: "250ha",
       lat: -7.611351174065228,
       lng: 110.40550925108614,
-      hama: [
-        {
-          jenis: "Lalat Buah",
-          jumlah: 43,
-        },
-      ],
+      jumlah: 43,
     },
   ];
 
@@ -53,12 +68,12 @@ const PersebaranHama = () => {
     });
   }
 
-  useEffect(() => {
-    if (detail.hama && detail.hama.length > 0) {
-      const totalHama = detail.hama.reduce((acc, item) => acc + item.jumlah, 0);
-      setTotal(totalHama);
-    }
-  }, [detail.hama]);
+  // useEffect(() => {
+  //   if (detail.hama && detail.hama.length > 0) {
+  //     const totalHama = detail.hama.reduce((acc, item) => acc + item.jumlah, 0);
+  //     setTotal(totalHama);
+  //   }
+  // }, [detail.hama]);
 
   return (
     <Flex direction={"column"} pos={"relative"} w={"100%"} h={"100vh"}>
@@ -178,7 +193,7 @@ const PersebaranHama = () => {
               justify={"space-between"}
               bg={"#F5F5F5"}
             >
-              <Flex direction={"column"}>
+              {/* <Flex direction={"column"}>
                 <Text fontSize={"1.5vh"}>Jenis Hama</Text>
                 <UnorderedList fontWeight={"bold"}>
                   {detail.hama && detail.hama.length > 0 ? (
@@ -202,7 +217,9 @@ const PersebaranHama = () => {
                     <></>
                   )}
                 </Flex>
-              </Flex>
+              </Flex> */}
+              <Text fontSize={"1.5vh"}>Jumlah Lalat Buah</Text>
+              <Text fontSize={"1.5vh"}>{detail.jumlah}</Text>
             </Flex>
 
             <Flex
@@ -212,9 +229,20 @@ const PersebaranHama = () => {
               p={2}
               borderRadius={"12px"}
               fontWeight={"bold"}
+              boxShadow={
+                detail.jumlah > 50 ? "inset 0 0 5px .5px #A9D2B5"
+                : detail.jumlah > 10 ? "inset 0 0 5px .5px #F4F091"
+                : "inset 0 0 5px .5px #EBB5B5"
+              }
             >
-              <Text>Total Jumlah Hama</Text>
-              <Text>{total}</Text>
+              <Text>Status</Text>
+              {detail.jumlah > 50 ? (
+                <Text>Bahaya</Text>
+              ) : detail.jumlah > 10 ? (
+                <Text>Waspada</Text>
+              ) : (
+                <Text>Aman</Text>
+              )}
             </Flex>
           </Flex>
         </Box>
