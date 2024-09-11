@@ -115,9 +115,29 @@ const Artikel = () => {
           />
         </InputGroup>
       </Stack>
-
+      {/* Search View */}
+      {isSearch && (
+        <Stack pt={5} pb={"4vh"}>
+          {ArticleData.filter((article) =>
+            article.title.toLowerCase().includes(query.toLowerCase())
+          ).map((article, index) => (
+            <ArtipsCard
+              key={index}
+              id={article.id}
+              imageSrc={article.imageSrc}
+              tag={article.tag}
+              readTime={article.readTime}
+              title={article.title}
+              author={article.author}
+              date={article.date}
+              isSaved={savedArticles.includes(article.id)}
+              onBookmarkToggle={handleBookmarkToggle}
+            />
+          ))}
+        </Stack>
+      )}
       {/* Tab View */}
-      {isViewAll && (
+      {isViewAll && !isSearch && (
         <Stack pb={"2vh"}>
           <Tabs variant="unstyled" borderRadius={"full"} p={0}>
             <TabList borderRadius={"full"} h={"2rem"} gap={2} p={0}>
@@ -255,7 +275,7 @@ const Artikel = () => {
       )}
 
       {/* Artikel Terbaru */}
-      {!isViewAll && (
+      {!isViewAll && !isSearch && (
         <>
           <Stack>
             <Heading color={"#2C3631"} size={"md"}>
