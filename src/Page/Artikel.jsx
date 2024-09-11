@@ -22,6 +22,8 @@ import { BsBookmarkFill } from "react-icons/bs";
 
 const Artikel = () => {
   const [isViewAll, setIsViewAll] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
+  const [query, setQuery] = useState("");
   const [savedArticles, setSavedArticles] = useState([]);
 
   useEffect(() => {
@@ -44,6 +46,14 @@ const Artikel = () => {
     localStorage.setItem("savedArticles", JSON.stringify(updatedSavedArticles));
   };
 
+  // const handleSearch = (e) => {
+  //   setQuery(e.target.value);
+
+  //   if (e.target.value === "") {
+  //     setIsSearch(false);
+  //   } else setIsSearch(true);
+  // };
+
   return (
     <Stack pt={"6vh"} padding={"1.5rem"}>
       {/* Search Bar */}
@@ -58,20 +68,24 @@ const Artikel = () => {
         bgColor={"#f5f5f5"}
         py={5}
         backdropFilter={"blur(50px)"}
-        ml={isViewAll ? "0" : "-1.5rem"}
-        mr={isViewAll ? "0" : "-1.5rem"}
+        ml={isViewAll || isSearch ? "0" : "-1.5rem"}
+        mr={isViewAll || isSearch ? "0" : "-1.5rem"}
       >
-        {isViewAll && (
-          <Box
-            bgColor={"#2C3631"}
-            borderRadius={"full"}
-            p={1}
-            cursor={"pointer"}
-            onClick={() => setIsViewAll(!isViewAll)}
-          >
-            <IoIosArrowBack color="white" size={25} />
-          </Box>
-        )}
+        {isViewAll ||
+          (isSearch && (
+            <Box
+              bgColor={"#2C3631"}
+              borderRadius={"full"}
+              p={1}
+              cursor={"pointer"}
+              onClick={() => {
+                setIsSearch(false);
+                setQuery("");
+              }}
+            >
+              <IoIosArrowBack color="white" size={25} />
+            </Box>
+          ))}
         {/* Search Bar */}
         <InputGroup
           borderRadius={5}
@@ -98,6 +112,14 @@ const Artikel = () => {
             }}
             _focus={{
               borderColor: "#2C3631",
+            }}
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+
+              if (e.target.value === "") {
+                setIsSearch(false);
+              } else setIsSearch(true);
             }}
           />
         </InputGroup>
