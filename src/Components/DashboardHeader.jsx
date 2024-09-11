@@ -1,11 +1,13 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { FaCalendarAlt } from "react-icons/fa";
+import Moment from "react-moment";
 import { Link, useNavigate } from "react-router-dom";
 
 
 const DashboardHeader = () => {
   const navigate = useNavigate();
+  const today = new Date(); 
 
   return (
     <Box>
@@ -51,7 +53,7 @@ const DashboardHeader = () => {
             ps={5}
             w={"50%"}
           >
-            <Text fontSize={"1.4vh"}>Selamat pagi, Bu Endang!</Text>
+            {/* <Text fontSize={"1.4vh"}>Selamat pagi, Bu Endang!</Text> */}
             <Text
               mt={{ base: 1, md: 2 }}
               mb={{ base: 2, md: 3 }}
@@ -65,7 +67,7 @@ const DashboardHeader = () => {
             <Flex alignItems={"center"}>
               <FaCalendarAlt size={"1.5vh"} fill="white" />
               <Text fontSize={"1.4vh"} ml={2}>
-                Selasa, 3 September 2024
+                <Moment format="dddd, DD MMMM YYYY">{today}</Moment>
               </Text>
             </Flex>
           </Box>
@@ -75,11 +77,11 @@ const DashboardHeader = () => {
             alignItems={"end"}
             pe={10}
             w={"50%"}
-            onClick={() => {
-              navigate("/profil")
-            }}
+            // onClick={() => {
+            //   navigate("/profil")
+            // }}
           >
-            <Link to={"/profil"}>
+            {/* <Link to={"/profil"}>
               <Image
                 src="/assets/profil.png"
                 borderRadius={"50%"}
@@ -89,7 +91,7 @@ const DashboardHeader = () => {
                 objectFit={"cover"}
                 objectPosition={"63%"}
               />
-            </Link>
+            </Link> */}
           </Flex>
         </Flex>
       </Box>
