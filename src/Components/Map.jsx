@@ -11,8 +11,18 @@ const MapComponent = (props) => {
 
   const sebaran = props.sebaran;
 
-  const customIcon = new L.divIcon({
-    html: "<div class='custom-marker'></div>",
+  const markerBahaya = new L.divIcon({
+    html: "<div class='custom-marker status-bahaya'></div>",
+    iconSize: [50, 50],
+  });
+
+  const markerWaspada = new L.divIcon({
+    html: "<div class='custom-marker status-waspada'></div>",
+    iconSize: [50, 50],
+  });
+
+  const markerAman = new L.divIcon({
+    html: "<div class='custom-marker status-aman'></div>",
     iconSize: [50, 50],
   });
 
@@ -38,7 +48,10 @@ const MapComponent = (props) => {
 
       {sebaran.map((item) => (
         <Marker
-          icon={customIcon}
+          icon={item.jumlah > 50 ? markerBahaya
+                : item.jumlah > 10 ? markerWaspada
+                : markerAman
+          }
           position={[item.lat, item.lng]}
           eventHandlers={{
             click: () => {

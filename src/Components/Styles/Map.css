@@ -7,13 +7,27 @@
 .custom-marker {
   width: 100%;
   height: 100%;
-  background: rgba(255, 105, 0, 0.8);
   border-radius: 50%;
   filter: blur(.5px);
-
-  box-shadow: rgba(255, 105, 0);
   transform: scale(1);
-  animation: pulse 2s infinite;
+}
+
+.status-bahaya {
+  background: rgba(255, 105, 0, 0.8);
+  box-shadow: rgba(255, 105, 0);
+  animation: pulse-bahaya 2s infinite;
+}
+
+.status-waspada {
+  background: rgba(244, 240, 145, 0.8);
+  box-shadow: rgba(244, 240, 145);
+  animation: pulse-waspada 2s infinite;
+}
+
+.status-aman {
+  background: rgba(235, 181, 181, 0.8);
+  box-shadow: rgba(235, 181, 181);
+  animation: pulse-aman 2s infinite;
 }
 
 .leaflet-div-icon {
@@ -21,7 +35,7 @@
   border: none;
 }
 
-@keyframes pulse {
+@keyframes pulse-bahaya {
   0% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(255, 105, 0, 0.7);
@@ -40,5 +54,49 @@
   100% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgba(255, 105, 0, 0);
+  }
+}
+
+@keyframes pulse-waspada {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(244, 240, 145, 0.7);
+  }
+
+  40% {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 30px rgba(244, 240, 145, 0);
+  }
+
+  60% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(244, 240, 145, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(244, 240, 145, 0);
+  }
+}
+
+@keyframes pulse-aman {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(235, 181, 181, 0.7);
+  }
+
+  40% {
+    transform: scale(1.2);
+    box-shadow: 0 0 0 30px rgba(235, 181, 181, 0);
+  }
+
+  60% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(235, 181, 181, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(235, 181, 181, 0);
   }
 }
