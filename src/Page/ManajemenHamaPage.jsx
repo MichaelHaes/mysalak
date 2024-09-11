@@ -27,11 +27,6 @@ const ManajemenHamaPage = () => {
       date: "2024-3-20",
       jenis: "Tikus",
       jumlah: 3,
-    },
-    {
-      date: "2024-3-20",
-      jenis: "Lalat Buah",
-      jumlah: 300,
     }
   ];
 

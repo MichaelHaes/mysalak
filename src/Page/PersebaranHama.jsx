@@ -18,27 +18,19 @@ const PersebaranHama = () => {
       hama: [
         {
           jenis: "Lalat Buah",
-          jumlah: 200,
-        },
-        {
-          jenis: "Tikus",
-          jumlah: 20,
+          jumlah: 87,
         },
       ],
     },
     {
-      nama: "Bukan Kebun Bu Endang",
+      nama: "Kebun Pa Suroto",
       luas: "250ha",
       lat: -7.611351174065228,
       lng: 110.40550925108614,
       hama: [
         {
           jenis: "Lalat Buah",
-          jumlah: 20,
-        },
-        {
-          jenis: "Tikus",
-          jumlah: 2,
+          jumlah: 43,
         },
       ],
     },

@@ -11,29 +11,25 @@ const ManajemenHama = () => {
 
   const hama = [
     {
+      date: "2024-5-20",
       nama: "Lalat Buah",
-      jumlah: 200,
+      jumlah: 400,
     },
     {
-      nama: "Tikus",
-      jumlah: 50,
+      date: "2024-4-20",
+      nama: "Bajing",
+      jumlah: 2,
     },
     {
+      date: "2024-3-20",
       nama: "Kutu Putih",
-      jumlah: 100,
+      jumlah: 30,
     },
     {
-      nama: "Lalat Buah",
-      jumlah: 200,
-    },
-    {
+      date: "2024-3-20",
       nama: "Tikus",
-      jumlah: 50,
-    },
-    {
-      nama: "Kutu Putih",
-      jumlah: 100,
-    },
+      jumlah: 3,
+    }
   ];
 
   return (
@@ -128,7 +124,7 @@ const ManajemenHama = () => {
                       {item.nama}
                     </Text>
                     <Text fontSize={"6pt"} color={"#d4d4d4"}>
-                      20/2/2024
+                      {item.date}
                     </Text>
                   </Flex>
                 </Flex>
