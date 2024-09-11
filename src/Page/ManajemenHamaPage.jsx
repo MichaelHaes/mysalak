@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ManajemenHamaCard from "../Components/ManajemenHamaCard";
+import ManajemenHamaSquareCard from "../Components/ManajemenHamaSquareCard";
 import { Flex, Text } from "@chakra-ui/react";
 import InformasiHama from "../Components/InformasiHama";
 import { useHama } from "../state";
@@ -51,9 +52,15 @@ const ManajemenHamaPage = () => {
         </Flex>
       </Flex>
 
-      <Flex direction={"column"} gap={5}>
+      {/* <Flex direction={"column"} gap={5}>
         {hama.map((item, index) => (
           <ManajemenHamaCard item={item} index={index}/>
+        ))}
+      </Flex> */}
+
+      <Flex flexWrap={"wrap"} justifyContent={"space-between"} w={"100%"} rowGap={4}>
+        {hama.map((item, index) => (
+          <ManajemenHamaSquareCard item={item} index={index}/>
         ))}
       </Flex>
     </Flex>
