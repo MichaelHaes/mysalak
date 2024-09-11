@@ -46,14 +46,6 @@ const Artikel = () => {
     localStorage.setItem("savedArticles", JSON.stringify(updatedSavedArticles));
   };
 
-  // const handleSearch = (e) => {
-  //   setQuery(e.target.value);
-
-  //   if (e.target.value === "") {
-  //     setIsSearch(false);
-  //   } else setIsSearch(true);
-  // };
-
   return (
     <Stack pt={"6vh"} padding={"1.5rem"}>
       {/* Search Bar */}
@@ -71,21 +63,20 @@ const Artikel = () => {
         ml={isViewAll || isSearch ? "0" : "-1.5rem"}
         mr={isViewAll || isSearch ? "0" : "-1.5rem"}
       >
-        {isViewAll ||
-          (isSearch && (
-            <Box
-              bgColor={"#2C3631"}
-              borderRadius={"full"}
-              p={1}
-              cursor={"pointer"}
-              onClick={() => {
-                setIsSearch(false);
-                setQuery("");
-              }}
-            >
-              <IoIosArrowBack color="white" size={25} />
-            </Box>
-          ))}
+        {(isViewAll || isSearch) && (
+          <Box
+            bgColor={"#2C3631"}
+            borderRadius={"full"}
+            p={1}
+            cursor={"pointer"}
+            onClick={() => {
+              setIsViewAll(false);
+              setIsSearch(false);
+            }}
+          >
+            <IoIosArrowBack color="white" size={25} />
+          </Box>
+        )}
         {/* Search Bar */}
         <InputGroup
           borderRadius={5}
