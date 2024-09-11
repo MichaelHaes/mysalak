@@ -1,7 +1,14 @@
-import { Box, Flex, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  ListItem,
+  Text,
+  UnorderedList,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import MapComponent from "../Components/Map";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack, IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 
 const PersebaranHama = () => {
@@ -23,7 +30,7 @@ const PersebaranHama = () => {
       ],
     },
     {
-      nama: "Kebun Pa Suroto",
+      nama: "Kebun Pak Suroto",
       luas: "250ha",
       lat: -7.611351174065228,
       lng: 110.40550925108614,
@@ -37,9 +44,13 @@ const PersebaranHama = () => {
   ];
 
   function handleDetail(val) {
-    console.log("clicked");
-    console.log(val);
     setDetail(val);
+  }
+
+  function resetDetail() {
+    setDetail({
+      nama: "",
+    });
   }
 
   useEffect(() => {
@@ -119,18 +130,44 @@ const PersebaranHama = () => {
             py={5}
             px={5}
           >
+            {/* <Button
+              position={"absolute"}
+              borderRadius={"50%"}
+              bg={"rgba(255,255,255,.9)"}
+              top={-5}
+              right={-5}
+              variant={"unstyled"}
+              onClick={() => resetDetail()}
+              fontSize={"2.5vh"}
+              display={"flex"}
+              justifyContent={"center"}
+              p={0}
+            >
+              <IoMdClose/>
+            </Button> */}
             <Flex align={"center"} justify={"space-between"}>
               <Text fontWeight={"bold"} fontSize={"2vh"}>
                 {detail.nama}
               </Text>
-              <Text
+              {/* <Text
                 bg={"#F5F5F5"}
                 p={2}
                 borderRadius={"full"}
                 fontWeight={"bold"}
               >
                 {detail.luas}
-              </Text>
+              </Text> */}
+              <Button
+                borderRadius={"full"}
+                bg={"#F5F5F5"}
+                variant={"unstyled"}
+                onClick={() => resetDetail()}
+                fontSize={"2vh"}
+                display={"flex"}
+                justifyContent={"center"}
+              >
+                <IoMdClose />
+              </Button>
             </Flex>
 
             <Flex

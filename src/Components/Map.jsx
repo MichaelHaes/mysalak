@@ -42,7 +42,7 @@ const MapComponent = (props) => {
           position={[item.lat, item.lng]}
           eventHandlers={{
             click: () => {
-              console.log("click");
+              // console.log("click");
               props.handleDetail(item);
             },
           }}
