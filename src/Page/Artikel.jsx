@@ -118,8 +118,11 @@ const Artikel = () => {
       {/* Search View */}
       {isSearch && (
         <Stack pt={5} pb={"4vh"}>
-          {ArticleData.filter((article) =>
-            article.title.toLowerCase().includes(query.toLowerCase())
+          {ArticleData.filter(
+            (article) =>
+              article.title.toLowerCase().includes(query.toLowerCase()) ||
+              article.tag.toLowerCase().includes(query.toLowerCase()) ||
+              article.author.toLowerCase().includes(query.toLowerCase())
           ).map((article, index) => (
             <ArtipsCard
               key={index}
