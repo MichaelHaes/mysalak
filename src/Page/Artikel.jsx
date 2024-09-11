@@ -18,13 +18,14 @@ import { RiSearchLine } from "react-icons/ri";
 import ArtipsCard from "../Components/ArtipsCard";
 import NewArticlesCard from "../Components/NewArticlesCard";
 import ArticleData from "../Components/data/ArticleData";
-import { BsBookmarkFill } from "react-icons/bs";
+import { BsBookmarkFill, BsBookmark } from "react-icons/bs";
 
 const Artikel = () => {
   const [isViewAll, setIsViewAll] = useState(false);
   const [isSearch, setIsSearch] = useState(false);
   const [query, setQuery] = useState("");
   const [savedArticles, setSavedArticles] = useState([]);
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("savedArticles")) || [];
@@ -265,7 +266,7 @@ const Artikel = () => {
                   </>
                 ) : (
                   <Stack direction="row" align={"center"}>
-                    <Heading size={"sm"} direction="row">
+                    <Heading size={"sm"} direction="row" fontWeight={"400"}>
                       Belum ada artikel yang disimpan
                     </Heading>
                     <BsBookmarkFill color={"#2C3631"} size={16} />
@@ -321,34 +322,85 @@ const Artikel = () => {
               <Heading color={"#2C3631"} size={"md"}>
                 Untuk Anda
               </Heading>
-              <Button
-                borderRadius={"full"}
-                color={"#2C3631"}
-                fontSize={"0.75rem"}
-                shadow={"sm"}
-                variant={"ghost"}
-                h={"2rem"}
-                onClick={() => setIsViewAll(!isViewAll)}
-              >
-                Lihat Semua
-              </Button>
+              <Stack direction="row">
+                <Button
+                  borderRadius={"full"}
+                  color={"#2C3631"}
+                  fontSize={"0.75rem"}
+                  shadow={"sm"}
+                  variant={"ghost"}
+                  h={"2rem"}
+                  onClick={() => setIsViewAll(!isViewAll)}
+                >
+                  Lihat Semua
+                </Button>
+                {/* button bookmark */}
+                <Button
+                  borderRadius={"full"}
+                  color={"#2C3631"}
+                  fontSize={"0.75rem"}
+                  shadow={"sm"}
+                  variant={"ghost"}
+                  h={"2rem"}
+                  onClick={() => setIsSaved(!isSaved)}
+                >
+                  {isSaved ? (
+                    <BsBookmarkFill color={"#2C3631"} size={20} />
+                  ) : (
+                    <BsBookmark color={"#2C3631"} size={20} />
+                  )}
+                </Button>
+              </Stack>
             </Stack>
-            <Stack pb={"4vh"} gap={0}>
-              {ArticleData.map((article, index) => (
-                <ArtipsCard
-                  key={index}
-                  id={article.id}
-                  imageSrc={article.imageSrc}
-                  tag={article.tag}
-                  readTime={article.readTime}
-                  title={article.title}
-                  author={article.author}
-                  date={article.date}
-                  isSaved={savedArticles.includes(article.id)}
-                  onBookmarkToggle={handleBookmarkToggle}
-                />
-              ))}
-            </Stack>
+            {isSaved ? (
+              <>
+                {/* // check if no articles are being saved */}
+                {savedArticles.length !== 0 ? (
+                  <>
+                    {ArticleData.filter((article) =>
+                      savedArticles.includes(article.id)
+                    ).map((article, index) => (
+                      <ArtipsCard
+                        key={index}
+                        id={article.id}
+                        imageSrc={article.imageSrc}
+                        tag={article.tag}
+                        readTime={article.readTime}
+                        title={article.title}
+                        author={article.author}
+                        date={article.date}
+                        isSaved={savedArticles.includes(article.id)}
+                        onBookmarkToggle={handleBookmarkToggle}
+                      />
+                    ))}
+                  </>
+                ) : (
+                  <Stack direction="row" align={"center"}>
+                    <Heading size={"sm"} fontWeight={"400"} direction="row">
+                      Belum ada artikel yang disimpan
+                    </Heading>
+                    <BsBookmarkFill color={"#2C3631"} size={16} />
+                  </Stack>
+                )}
+              </>
+            ) : (
+              <>
+                {ArticleData.map((article, index) => (
+                  <ArtipsCard
+                    key={index}
+                    id={article.id}
+                    imageSrc={article.imageSrc}
+                    tag={article.tag}
+                    readTime={article.readTime}
+                    title={article.title}
+                    author={article.author}
+                    date={article.date}
+                    isSaved={savedArticles.includes(article.id)}
+                    onBookmarkToggle={handleBookmarkToggle}
+                  />
+                ))}
+              </>
+            )}
           </Stack>
         </>
       )}
