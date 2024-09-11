@@ -1,11 +1,11 @@
 import { Box, Flex, ListItem, Text, UnorderedList } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MapComponent from "../Components/Map";
 import { IoIosArrowBack } from "react-icons/io";
-import { usePage } from "../state";
+import { useNavigate } from "react-router-dom";
 
 const PersebaranHama = () => {
-  const { home } = usePage();
+  const navigate = useNavigate();
   const [detail, setDetail] = useState({});
   const [total, setTotal] = useState(0);
 
@@ -50,6 +50,13 @@ const PersebaranHama = () => {
     setDetail(val);
   }
 
+  useEffect(() => {
+    if (detail.hama && detail.hama.length > 0) {
+      const totalHama = detail.hama.reduce((acc, item) => acc + item.jumlah, 0);
+      setTotal(totalHama);
+    }
+  }, [detail.hama]);
+
   return (
     <Flex direction={"column"} pos={"relative"} w={"100%"} h={"100vh"}>
       <Box
@@ -80,7 +87,7 @@ const PersebaranHama = () => {
         pos={"absolute"}
         zIndex={11}
         onClick={() => {
-          home();
+          navigate("/");
         }}
       >
         <IoIosArrowBack size={"auto"} fill="white" />
@@ -104,7 +111,7 @@ const PersebaranHama = () => {
           position={"absolute"}
           w={"100%"}
           h={"fit-content"}
-          bottom={0}
+          bottom={"11vh"}
           zIndex={10}
         >
           <Flex
@@ -178,7 +185,7 @@ const PersebaranHama = () => {
               fontWeight={"bold"}
             >
               <Text>Total Jumlah Hama</Text>
-              <Text>220</Text>
+              <Text>{total}</Text>
             </Flex>
           </Flex>
         </Box>

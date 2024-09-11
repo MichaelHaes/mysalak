@@ -58,10 +58,10 @@ const RamalanCuaca = () => {
 
   useEffect(() => {
     setAll(false);
-  }, [])
+  }, []);
 
   return !all ? (
-    <Box pb={"10vh"}>
+    <Box pb={"10vh"} w={"inherit"} h={"100%"}>
       <IndikatorHeader />
       <IndikatorCard />
       <RamalanMingguan
@@ -108,20 +108,17 @@ const RamalanCuaca = () => {
             scrollbarWidth: "none",
           }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
-          repudiandae sequi hic, rem recusandae reprehenderit modi sit
-          repellendus optio aperiam fuga aut fugit iste ea laudantium
-          praesentium. Dignissimos ipsa dicta recusandae magnam deleniti enim
-          totam. Beatae similique fugiat perspiciatis commodi delectus repellat!
-          Assumenda sapiente dignissimos saepe similique harum reiciendis vero?
+          Data suhu, kelembaban, keterangan cahaya dan curah hujan yang
+          diperoleh berasal dari sensor sensor pada IoT (Internet of Things)
+          yang diimplementasikan pada beberapa titik di lokasi perkebunan salak.
+          Kemudian data mentah yang diperoleh tersebut akan diolah dengan
+          menggunakan AI (Artificial Intelligence) sehingga dapat menghasilkan
+          data perkiraan cuaca.
         </Text>
       </Flex>
     </Box>
   ) : (
-    <RamalanMingguanFull
-      item={ramalanDetails}
-      toggleAll={toggleAll}
-    />
+    <RamalanMingguanFull item={ramalanDetails} toggleAll={toggleAll} />
   );
 };
 

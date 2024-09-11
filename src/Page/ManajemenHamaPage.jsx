@@ -15,14 +15,24 @@ const ManajemenHamaPage = () => {
     },
     {
       date: "2024-4-20",
-      jenis: "Lalat Buah",
-      jumlah: 200,
+      jenis: "Bajing",
+      jumlah: 2,
+    },
+    {
+      date: "2024-3-20",
+      jenis: "Kutu Putih",
+      jumlah: 30,
+    },
+    {
+      date: "2024-3-20",
+      jenis: "Tikus",
+      jumlah: 3,
     },
     {
       date: "2024-3-20",
       jenis: "Lalat Buah",
       jumlah: 300,
-    },
+    }
   ];
 
   useEffect(() => {

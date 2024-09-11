@@ -56,7 +56,7 @@ const FormModel = () => {
 
   return (
     <Box overflow={"hidden"} paddingTop={'6vh'}>
-      <Heading size="md" textAlign={"center"} marginBottom={'20px'}>Prediksi Cuaca</Heading>
+      <Heading size="md" textAlign={"center"} marginBottom={'20px'}>Prediksi Hama</Heading>
       <Flex
         justify={"center"}
         align={"center"}

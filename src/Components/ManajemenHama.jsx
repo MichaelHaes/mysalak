@@ -2,11 +2,12 @@ import { Box, Button, Flex, Text, Image } from "@chakra-ui/react";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { usePage, useHama } from "../state";
+import { useHama } from "../state";
+import { Link, useNavigate } from "react-router-dom";
 
 const ManajemenHama = () => {
-  const {setPage} = usePage();
-  const {setIndex, toggleDetail, setFrom} = useHama();
+  const navigate = useNavigate();
+  const { setIndex, toggleDetail, setFrom } = useHama();
 
   const hama = [
     {
@@ -49,17 +50,15 @@ const ManajemenHama = () => {
           py={1}
           px={2}
           borderRadius={"30px"}
-          onClick={() => {setPage("Prediksi Hama")}}
         >
-          Lihat Semua
+          <Link to="/manajemen-hama">Lihat Semua</Link>
         </Button>
       </Flex>
 
       <Box h={"fit-content"} pos={"relative"}>
         <Swiper spaceBetween={20} slidesPerView={2.5} slidesOffsetAfter={30}>
           {hama.map((item, index) => (
-            <SwiperSlide
-            key={index}>
+            <SwiperSlide key={index}>
               <Button
                 variant={"unstyled"}
                 pos={"relative"}
@@ -71,11 +70,11 @@ const ManajemenHama = () => {
                   setIndex(index);
                   setFrom("Home");
                   toggleDetail();
-                  setPage('Prediksi Hama');
+                  navigate("/manajemen-hama");
                 }}
               >
                 <Image
-                  src="/assets/lalat buah.png"
+                  src={`/assets/${item.nama.toLocaleLowerCase()}.png`}
                   pos={"absolute"}
                   right={0}
                   h={"60%"}

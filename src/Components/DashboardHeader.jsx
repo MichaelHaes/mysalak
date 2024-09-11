@@ -1,17 +1,19 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { FaCalendarAlt } from "react-icons/fa";
-import { usePage } from "../state";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const DashboardHeader = () => {
-  const {setPage} = usePage();
+  const navigate = useNavigate();
+
   return (
     <Box>
       <Box pos={"relative"} height={"28vh"}>
         <Box pos={"relative"} h={"100%"} w={"100%"}>
           <Image
             src="
-            /assets/curah hujan_indikator.png"
+            /assets/pohon salak.png"
             pos={"absolute"}
             top={0}
             left={0}
@@ -63,7 +65,7 @@ const DashboardHeader = () => {
             <Flex alignItems={"center"}>
               <FaCalendarAlt size={"1.5vh"} fill="white" />
               <Text fontSize={"1.4vh"} ml={2}>
-                Senin, 1 Desember 2024
+                Selasa, 3 September 2024
               </Text>
             </Flex>
           </Box>
@@ -73,16 +75,21 @@ const DashboardHeader = () => {
             alignItems={"end"}
             pe={10}
             w={"50%"}
-            onClick={() => {setPage("Profil")}}
+            onClick={() => {
+              navigate("/profil")
+            }}
           >
-            <Image
-              src="/assets/lalat buah.png"
-              borderRadius={"50%"}
-              w={"80px"}
-              h={"80px"}
-              border={"2px solid #a6c4a6"}
-              objectFit={"cover"}
-            />
+            <Link to={"/profil"}>
+              <Image
+                src="/assets/profil.png"
+                borderRadius={"50%"}
+                w={"85px"}
+                h={"85px"}
+                border={"2px solid #a6c4a6"}
+                objectFit={"cover"}
+                objectPosition={"63%"}
+              />
+            </Link>
           </Flex>
         </Flex>
       </Box>
@@ -137,23 +144,21 @@ const DashboardHeader = () => {
             i
           </Text>
         </Box>
-        <Box pos={"absolute"} zIndex={4} width={"41%"} py={"1.3vh"} ps={5}>
-          <Text fontWeight={"bold"} fontSize={"1.55vh"} mb={1}>
+        <Box pos={"absolute"} zIndex={4} width={"45%"} py={"1.3vh"} ps={5}>
+          <Text fontWeight={"bold"} fontSize={"1.57vh"} mb={1}>
             Waspada Lalat Buah!
           </Text>
           <Text
-            fontSize={"1.1vh"}
+            fontSize={"1.15vh"}
             lineHeight={1}
             maxH={"3.3vh"}
             overflowY={"auto"}
             wordBreak={"break-word"}
             style={{
-              scrollbarWidth: "none"
+              scrollbarWidth: "none",
             }}
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-            voluptates distinctio quaerat neque officia fugit explicabo totam!
-            Hic, nobis asperiores.
+            Cuaca saat ini berpotensi meningkatkan jumlah lalat buah
           </Text>
         </Box>
       </Flex>

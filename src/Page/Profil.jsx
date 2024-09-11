@@ -1,15 +1,16 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { IoIosArrowBack, IoIosHelpCircleOutline } from "react-icons/io";
-import { usePage } from "../state";
 import { FaRegEdit } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa6";
 import { MdOutlineAccountCircle, MdVerified } from "react-icons/md";
 import "../Components/Styles/Profil.css";
 import { LuHistory } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
 
 const Profil = () => {
-  const { home } = usePage();
+  const navigate = useNavigate();
+
   return (
     <Flex
       className="container"
@@ -19,6 +20,7 @@ const Profil = () => {
       align={"center"}
       pos={"relative"}
       pt={"15%"}
+      pb={"25%"}
     >
       {/* Back & Title */}
       <Flex w={"100%"} pos={"relative"} justify={"center"} align={"center"}>
@@ -32,7 +34,7 @@ const Profil = () => {
           pos={"absolute"}
           left={0}
           onClick={() => {
-            home();
+            navigate("/")
           }}
         >
           <IoIosArrowBack size={"auto"} fill="white" />
@@ -55,7 +57,7 @@ const Profil = () => {
         ></Image>
         <Image
           pos={"relative"}
-          src="/assets/lalat buah.png"
+          src="/assets/profil.png"
           h={"10vh"}
           w={"10vh"}
           mx={"auto"}
@@ -64,6 +66,7 @@ const Profil = () => {
           border={"3.5px solid #F4F4F4"}
           zIndex={2}
           mt={"-13%"}
+          objectPosition={"63%"}
         ></Image>
       </Box>
       <Flex direction={"column"} id="identity" align={"center"}>

@@ -1,14 +1,13 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { IoIosArrowBack, IoIosPartlySunny } from "react-icons/io";
-import { usePage } from "../state";
 import { BsCloudRain } from "react-icons/bs";
 import { GoSun } from "react-icons/go";
 import { WiHumidity } from "react-icons/wi";
+import { useNavigate } from "react-router-dom";
 
 const IndikatorHeader = () => {
-  const { home } = usePage();
-
+  const navigate = useNavigate();
   const indikatorDetails = [
     {
       jenis: 1,
@@ -77,7 +76,7 @@ const IndikatorHeader = () => {
               pos={"absolute"}
               left={7}
               onClick={() => {
-                home();
+                navigate("/");
               }}
             >
               <IoIosArrowBack size={"auto"} fill="black" />

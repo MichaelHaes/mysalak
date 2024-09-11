@@ -1,8 +1,7 @@
 import React, { useRef } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { Box } from "@chakra-ui/react";
 import "./Styles/Map.css";
 
 const MapComponent = (props) => {
@@ -11,10 +10,6 @@ const MapComponent = (props) => {
   const longitude = 110.40267984934648;
 
   const sebaran = props.sebaran;
-
-  //   const marker = (
-  //     <Box borderRadius={"50%"} w={"100px"} h={"100px"} bg={"red"}></Box>
-  //   );
 
   const customIcon = new L.divIcon({
     html: "<div class='custom-marker'></div>",
