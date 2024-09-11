@@ -31,7 +31,7 @@ const Navbar = () => {
       a_logo: <IoBug size={"auto"} />,
     },
     {
-      route: "/prediksi",
+      route: "/artikel",
       a_logo: <MdArticle size={"auto"} />,
     },
   ];
@@ -90,11 +90,7 @@ const Navbar = () => {
               p={item.custom ? 2 : 0}
               border={item.custom ? "5px solid rgba(231,231,231,1)" : "0px"}
               color={
-                item.custom
-                  ? "white"
-                  : url === item.route
-                  ? "black"
-                  : "gray"
+                item.custom ? "white" : url === item.route ? "black" : "gray"
               }
               mt={item.custom ? -7 : 1}
             >

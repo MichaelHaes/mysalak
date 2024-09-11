@@ -8,7 +8,9 @@ import Camera from "./Page/Camera";
 import ManajemenHamaPage from "./Page/ManajemenHamaPage";
 import Profil from "./Page/Profil";
 import RamalanCuaca from "./Page/RamalanCuaca";
-import FormModel from "./Page/FormModel";
+import Artikel from "./Page/Artikel";
+// import FormModel from "./Page/FormModel";
+import ArticleDetail from "./Page/ArticleDetail";
 import Navbar from "./Components/Navbar";
 
 function App() {
@@ -31,7 +33,8 @@ function App() {
             <Route path="/manajemen-hama" element={<ManajemenHamaPage />} />
             <Route path="/profil" element={<Profil />} />
             <Route path="/ramalan-cuaca" element={<RamalanCuaca />} />
-            <Route path="/prediksi" element={<FormModel />} />
+            <Route path="/artikel" element={<Artikel />} />
+            <Route path="/artikel/:id" element={<ArticleDetail />} />
           </Routes>
           {location.pathname !== "/kamera" && <Navbar />}
         </Box>
