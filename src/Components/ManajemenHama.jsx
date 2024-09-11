@@ -14,7 +14,7 @@ const ManajemenHama = () => {
 
   const fetchHama = async () => {
     try {
-      const response = await axios.get(`${env.API_URL}/tangkapan-hama`);
+      const response = await axios.get(`${env.API_URL}/tangkapan-hama-latest`);
       setHama(response.data);
     } catch (e) {
       console.log(e.message);

@@ -8,7 +8,7 @@ import {
   SliderTrack,
   Select,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Moment from "react-moment";
 import "./Styles/InformasiHama.css";
 import { IoIosArrowBack, IoIosArrowDropdownCircle } from "react-icons/io";
@@ -16,15 +16,44 @@ import Chart from "react-apexcharts";
 import { FaChartLine } from "react-icons/fa6";
 import { useHama } from "../state";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
+import axios from "axios";
+import env from "react-dotenv";
 
 const InformasiHama = (props) => {
   const { from, setFrom, resetDetail, hama, index } = useHama();
   const navigate = useNavigate();
   const data = hama[index];
+  const [history, setHistory] = useState([]);
+
+  const getHistory = async () => {
+    const response = await axios.get(`${env.API_URL}/tangkapan-hama/${data.id_kelompok_tani}/${moment().format('M')}`)
+    
+    let tmp = [];
+    response.data.forEach(item => {
+      tmp.push(item.jumlah)
+    });
+    setHistory(tmp);
+  }
+
+  const months = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
 
   useEffect(() => {
-    console.log(index);
-  }, [])
+    getHistory();
+  }, []);
 
   const chartOptions = {
     chart: {
@@ -34,7 +63,7 @@ const InformasiHama = (props) => {
       },
     },
     xaxis: {
-      categories: [1, 8, 16, 24, 30],
+      categories: [1, 8, 15, 22, 29],
       min: 1,
       max: 5,
     },
@@ -42,14 +71,14 @@ const InformasiHama = (props) => {
       tickAmount: 4,
       labels: {
         formatter: (value) => {
-          if ([100, 200, 300, 400].includes(value)) {
+          if ([25, 50, 75, 100, 150].includes(value)) {
             return value;
           }
           return "";
         },
       },
       min: 0,
-      max: 400,
+      max: 150,
     },
     stroke: {
       curve: "smooth",
@@ -63,7 +92,7 @@ const InformasiHama = (props) => {
   const chartSeries = [
     {
       name: "Jumlah Hama",
-      data: [180, 0, 250, 300, 400],
+      data: history,
     },
   ];
 
@@ -262,8 +291,10 @@ const InformasiHama = (props) => {
             borderRadius={"25px"}
             icon={<IoIosArrowDropdownCircle />}
           >
-            <option value="Mei">Mei</option>
-            <option value="Mei">Desember</option>
+            {/* {months.map((month) => 
+              (<option value={`${month}`} selected={moment().format("MMMM") === month}>{month}</option>)
+            )} */}
+            <option value="September">September</option>
           </Select>
         </Flex>
         <Box width="90%" height="80%" m={"auto"}>
