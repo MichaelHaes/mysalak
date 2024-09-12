@@ -52,7 +52,7 @@ const MapComponent = (props) => {
                 : item.jumlah > 10 ? markerWaspada
                 : markerAman
           }
-          position={[item.lat, item.lng]}
+          position={[item.KelompokTani.latitude, item.KelompokTani.longitude]}
           eventHandlers={{
             click: () => {
               // console.log("click");

@@ -10,53 +10,22 @@ import React, { useEffect, useState } from "react";
 import MapComponent from "../Components/Map";
 import { IoIosArrowBack, IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import env from "react-dotenv";
 
 const PersebaranHama = () => {
   const navigate = useNavigate();
   const [detail, setDetail] = useState({});
-  // const [total, setTotal] = useState(0);
+  const [kelompok, setKelompok] = useState([]);
 
-  // const sebaran = [
-  //   {
-  //     nama: "Kebun Bu Endang",
-  //     luas: "250ha",
-  //     lat: -7.61674751163635,
-  //     lng: 110.40200419177316,
-  //     hama: [
-  //       {
-  //         jenis: "Lalat Buah",
-  //         jumlah: 87,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     nama: "Kebun Pak Suroto",
-  //     luas: "250ha",
-  //     lat: -7.611351174065228,
-  //     lng: 110.40550925108614,
-  //     hama: [
-  //       {
-  //         jenis: "Lalat Buah",
-  //         jumlah: 43,
-  //       },
-  //     ],
-  //   },
-  // ];
+  const getKelompokTani = async () => {
+    const response = await axios.get(`${env.API_URL}/tangkapan-hama-latest`);
+    setKelompok(response.data);
+  };
 
-  const sebaran = [
-    {
-      nama: "Kebun Bu Endang",
-      lat: -7.61674751163635,
-      lng: 110.40200419177316,
-      jumlah: 87,
-    },
-    {
-      nama: "Kebun Pak Suroto",
-      lat: -7.611351174065228,
-      lng: 110.40550925108614,
-      jumlah: 43,
-    },
-  ];
+  useEffect(() => {
+    getKelompokTani();
+  }, []);
 
   function handleDetail(val) {
     setDetail(val);
@@ -122,9 +91,9 @@ const PersebaranHama = () => {
       >
         Persebaran Hama
       </Text>
-      <MapComponent sebaran={sebaran} handleDetail={handleDetail} />
+      <MapComponent sebaran={kelompok} handleDetail={handleDetail} />
 
-      {detail.nama && (
+      {detail.jumlah && (
         <Box
           position={"absolute"}
           w={"100%"}
@@ -162,7 +131,7 @@ const PersebaranHama = () => {
             </Button> */}
             <Flex align={"center"} justify={"space-between"}>
               <Text fontWeight={"bold"} fontSize={"2vh"}>
-                {detail.nama}
+                {detail.KelompokTani.nama}
               </Text>
               {/* <Text
                 bg={"#F5F5F5"}
@@ -230,9 +199,11 @@ const PersebaranHama = () => {
               borderRadius={"12px"}
               fontWeight={"bold"}
               boxShadow={
-                detail.jumlah > 50 ? "inset 0 0 5px .5px #A9D2B5"
-                : detail.jumlah > 10 ? "inset 0 0 5px .5px #F4F091"
-                : "inset 0 0 5px .5px #EBB5B5"
+                detail.jumlah > 50
+                  ? "inset 0 0 5px .5px #A9D2B5"
+                  : detail.jumlah > 10
+                  ? "inset 0 0 5px .5px #F4F091"
+                  : "inset 0 0 5px .5px #EBB5B5"
               }
             >
               <Text>Status</Text>
