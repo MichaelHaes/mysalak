@@ -45,7 +45,17 @@ const ManajemenHama = () => {
       </Flex>
 
       <Box h={"fit-content"} pos={"relative"}>
-        <Swiper spaceBetween={20} slidesPerView={2.5} slidesOffsetAfter={30}>
+        <Swiper spaceBetween={'25px'} slidesOffsetAfter={30}
+        breakpoints={{
+          // Define the minimum and maximum slides per view
+          0: {
+            slidesPerView: 2.3, // Minimum slides per view for small screens
+          },
+          400: {
+            slidesPerView: 2.6, 
+          },
+        }}
+        >
           {hama.map((item, index) => (
             <SwiperSlide key={index}>
               <Button
