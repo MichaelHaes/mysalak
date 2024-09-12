@@ -48,7 +48,7 @@ const Artikel = () => {
   };
 
   return (
-    <Stack pt={"6vh"} padding={"1.5rem"} mb={"3.5rem"}>
+    <Stack pt={"6vh"} padding={"1.5rem"} pb={"4rem"}>
       {/* Search Bar */}
       <Stack
         direction={"row"}
