@@ -270,7 +270,7 @@ const InformasiHama = (props) => {
         w={"85%"}
         h={"fit-content"}
         mx={"auto"}
-        mt={20}
+        my={20}
         bg={"#FFFFFF"}
         borderRadius={"22px"}
         boxShadow={"0 2px 5px 1px #e5e9e6"}
