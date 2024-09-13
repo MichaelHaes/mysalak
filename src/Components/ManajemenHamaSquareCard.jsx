@@ -64,7 +64,7 @@ const ManajemenHamaSquareCard = (props) => {
         borderRadius={"20px"}
       ></Box>
 
-      <Flex direction={"column-reverse"} py={2} px={1} zIndex={4}>
+      <Flex direction={"column-reverse"} py={2} px={1} zIndex={4} w={"65%"}>
         <Text
           color={"#E4EFE9"}
           fontWeight={800}
@@ -81,6 +81,8 @@ const ManajemenHamaSquareCard = (props) => {
         h={"100%"}
         py={3}
         px={2}
+        pos={"absolute"}
+        right={0}
       >
         <Text
           bg={"#f9f9f9"}
