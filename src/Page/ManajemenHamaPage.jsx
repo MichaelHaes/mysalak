@@ -9,20 +9,7 @@ import env from "react-dotenv";
 import Moment from "react-moment";
 
 const ManajemenHamaPage = () => {
-  const { from, index, detail, resetDetail, hama, setHama } = useHama();
-
-  const fetchHama = async () => {
-    try {
-      const response = await axios.get(`${env.API_URL}/tangkapan-hama-latest`);
-      setHama(response.data);
-    } catch (e) {
-      console.log(e.message);
-    }
-  }
-
-  useEffect(() => {
-    if(hama.length === 0) fetchHama();
-  }, [])
+  const { from, index, detail, resetDetail, hama } = useHama();
 
   useEffect(() => {
     if (from !== "Home") resetDetail();
