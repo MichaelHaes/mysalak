@@ -99,7 +99,7 @@ const DashboardHeader = () => {
       <Flex
         w={"85%"}
         mx={"auto"}
-        h={"9vh"}
+        h={"8vh"}
         border={"1px solid #CFCFCF"}
         boxShadow={"0 2px 5px 1px #e5e9e6"}
         mt={"-8%"}
@@ -146,11 +146,11 @@ const DashboardHeader = () => {
             i
           </Text>
         </Box>
-        <Box pos={"absolute"} zIndex={4} width={"45%"} py={"1.3vh"} ps={5}>
-          <Text fontWeight={"bold"} fontSize={"1.57vh"} mb={1}>
+        <Box alignSelf={"center"} pos={"absolute"} zIndex={4} width={"100%"} py={"1.3vh"} ps={5}>
+          <Text fontWeight={"bold"} fontSize={"2vh"}  mb={1}>
             Waspada Lalat Buah!
           </Text>
-          <Text
+          {/* <Text
             fontSize={"1.15vh"}
             lineHeight={1}
             maxH={"3.3vh"}
@@ -161,7 +161,7 @@ const DashboardHeader = () => {
             }}
           >
             Cuaca saat ini berpotensi meningkatkan jumlah lalat buah
-          </Text>
+          </Text> */}
         </Box>
       </Flex>
     </Box>

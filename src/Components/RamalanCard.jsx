@@ -32,31 +32,33 @@ const RamalanCard = (props) => {
           p={1}
         >
           <Text fontWeight={"bold"} lineHeight={1}>
-            <Moment format="DD">{data.date}</Moment>
+            <Moment format="DD">
+              {new Date(new Date().setDate(new Date().getDate() + index + 1))}
+            </Moment>
           </Text>
           <Text fontSize={"0.8vh"} lineHeight={1}>
-            <Moment format="MMMM">{data.date}</Moment>
+            <Moment format="MMMM">
+              {new Date(new Date().setMonth(new Date().getMonth() + index + 1))}
+            </Moment>
           </Text>
         </Flex>
 
         <Flex direction={"column"} ms={4}>
-          <Text fontSize={"1vh"} lineHeight={1}>
+          <Text fontSize={"1.8vh"} fontWeight={"bold"} lineHeight={1}>
             {index === 0
-              ? "Hari ini"
-              : index === 1
               ? "Besok"
-              : index === 2
+              : index === 1
               ? "Lusa"
-              : `${index} hari lagi`}
+              : `${index + 1} hari lagi`}
           </Text>
-          <Text fontWeight={"bold"} fontSize={"1.8vh"} lineHeight={1.3}>
+          {/* <Text fontWeight={"bold"} fontSize={"1.8vh"} lineHeight={1.3}>
             {data.cuaca}
-          </Text>
+          </Text> */}
         </Flex>
       </Flex>
 
       <Text fontWeight={"bold"} fontSize={"2.2vh"}>
-        {data.suhu}°C
+        {data.tavg.toPrecision(3)}°C
       </Text>
     </Flex>
   );

@@ -1,31 +1,33 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoIosArrowBack, IoIosPartlySunny } from "react-icons/io";
 import { BsCloudRain } from "react-icons/bs";
 import { GoSun } from "react-icons/go";
 import { WiHumidity } from "react-icons/wi";
 import { useNavigate } from "react-router-dom";
+import { useWeather } from "../state";
+import axios from "axios";
+import env from "react-dotenv";
 
 const IndikatorHeader = () => {
   const navigate = useNavigate();
-  const indikatorDetails = [
-    {
-      jenis: 1,
-      val: "100",
-    },
-    {
-      jenis: 2,
-      val: "4000",
-    },
-    {
-      jenis: 3,
-      val: "30",
-    },
-  ];
+
+  const { latest, setLatest } = useWeather();
+  const [show, setShow] = useState(false);
+
+  const getWeather = async () => {
+    const response = await axios.get(`${env.API_URL}/raspi-latest`);
+    setLatest(response.data);
+    setShow(true);
+  };
+
+  useEffect(() => {
+    getWeather();
+  }, [])
 
   return (
     <Box>
-      <Box pos={"relative"} height={"41.5vh"}>
+      <Box pos={"relative"} height={"39vh"}>
         <Box pos={"relative"} h={"100%"} w={"100%"}>
           <Image
             src="
@@ -37,7 +39,7 @@ const IndikatorHeader = () => {
             w={"100%"}
             objectFit={"cover"}
             zIndex={0}
-            borderRadius={"0 0 65px 65px"}
+            borderRadius={"0 0 50px 50px"}
           ></Image>
           <Box
             pos={"absolute"}
@@ -49,7 +51,7 @@ const IndikatorHeader = () => {
               "linear-gradient(to bottom, rgba(102, 169, 134, 0.35), rgba(58, 96, 76, 0.8) 22%, #0C2315 80%)"
             }
             opacity={0.9}
-            borderRadius={"0 0 65px 65px"}
+            borderRadius={"0 0 50px 50px"}
           ></Box>
         </Box>
 
@@ -106,14 +108,14 @@ const IndikatorHeader = () => {
               WebkitBackgroundClip: "text",
             }}
           >
-            30°C
+            {show && latest.temperature.toPrecision(3)}°C
           </Text>
-          <Flex align={"center"}>
+          {/* <Flex align={"center"}>
             <IoIosPartlySunny />
             <Text fontSize={"1.5vh"} ms={2}>
               Cerah Berawan
             </Text>
-          </Flex>
+          </Flex> */}
 
           {/*3 Box indikator */}
 
@@ -125,7 +127,7 @@ const IndikatorHeader = () => {
             justify={"center"}
             color={"white"}
           >
-            {indikatorDetails.map((item) => (
+            {Array.from({length:3}).map((item, index) => (
               <Flex
                 className="indikator-header-card"
                 direction={"column"}
@@ -145,11 +147,11 @@ const IndikatorHeader = () => {
                   bg={"white"}
                   w={"2.5vh"}
                   h={"2.5vh"}
-                  p={item.jenis !== 3 ? 1 : 0}
+                  p={index !== 3 ? 1 : 0}
                 >
-                  {item.jenis === 1 ? (
+                  {index === 0 ? (
                     <BsCloudRain fill="black" size={"auto"} />
-                  ) : item.jenis === 2 ? (
+                  ) : index === 2 ? (
                     <GoSun fill="black" size={"auto"} />
                   ) : (
                     <WiHumidity fill="black" size={"auto"} />
@@ -157,13 +159,15 @@ const IndikatorHeader = () => {
                 </Box>
                 <Box>
                   <Text fontSize={"2.2vh"} fontWeight={"bold"}>
-                    {item.val}
-                    {item.jenis === 2 ? "cd" : "%"}
+                    {index === 0 ? latest.tips:
+                    index === 1 ? latest.lux:
+                    latest.humidity}
+                    {index === 1 ? "cd" : "%"}
                   </Text>
                   <Text fontSize={"1vh"} fontWeight={"light"}>
-                    {item.jenis === 1
+                    {index === 0
                       ? "Curah Hujan"
-                      : item.jenis === 2
+                      : index === 1
                       ? "Intensitas Cahaya"
                       : "Kelembaban"}
                   </Text>

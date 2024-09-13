@@ -34,9 +34,16 @@ export const useHama = create((set) => ({
   hama: [],
   index: null,
   detail: false,
-  setHama: (val) => set({hama: val}),
-  setFrom: (val) => set({from: val}),
+  setHama: (val) => set({ hama: val }),
+  setFrom: (val) => set({ from: val }),
   setIndex: (val) => set({ index: val }),
   resetDetail: () => set({ detail: false }),
   toggleDetail: () => set((state) => ({ detail: !state.detail })),
+}));
+
+export const useWeather = create((set) => ({
+  preds: [],
+  latest: {},
+  setPreds: (val) => set({ preds: val }),
+  setLatest: (val) => set({ latest: val }),
 }));

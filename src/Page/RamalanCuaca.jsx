@@ -4,52 +4,19 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import IndikatorCard from "../Components/IndikatorCard";
 import RamalanMingguan from "../Components/RamalanMingguan";
 import RamalanMingguanFull from "../Components/RamalanMingguanFull";
+import { useWeather } from "../state";
+import env from "react-dotenv";
+import axios from "axios";
 
 const RamalanCuaca = () => {
+  const { preds, setPreds } = useWeather();
   const [all, setAll] = useState(false);
 
-  const ramalanDetails = [
-    {
-      date: "2024-5-10",
-      cuaca: "Cerah Berawan",
-      suhu: "20",
-    },
-    {
-      date: "2024-5-11",
-      cuaca: "Hujan Lebat",
-      suhu: "20",
-    },
-    {
-      date: "2024-5-12",
-      cuaca: "Hujan Lebat",
-      suhu: "20",
-    },
-    {
-      date: "2024-5-13",
-      cuaca: "Cerah Berawan",
-      suhu: "20",
-    },
-    {
-      date: "2024-5-14",
-      cuaca: "Hujan Lebat",
-      suhu: "20",
-    },
-    {
-      date: "2024-5-15",
-      cuaca: "Hujan Lebat",
-      suhu: "20",
-    },
-    {
-      date: "2024-5-16",
-      cuaca: "Hujan Lebat",
-      suhu: "20",
-    },
-    {
-      date: "2024-5-17",
-      cuaca: "Hujan Lebat",
-      suhu: "20",
-    },
-  ];
+  const getPred = async () => {
+    const response = await axios.get(`${env.API_URL}/ramalan`);
+    setPreds(response.data);
+    console.log(response.data);
+  }
 
   function toggleAll() {
     setAll(!all);
@@ -58,14 +25,15 @@ const RamalanCuaca = () => {
 
   useEffect(() => {
     setAll(false);
+    getPred();
   }, []);
 
   return !all ? (
     <Box pb={"10vh"} w={"inherit"} h={"100%"}>
       <IndikatorHeader />
-      <IndikatorCard />
+      {/* <IndikatorCard /> */}
       <RamalanMingguan
-        item={ramalanDetails.slice(0, 3)}
+        item={preds.slice(0, 3)}
         toggleAll={toggleAll}
       />
 
@@ -118,7 +86,7 @@ const RamalanCuaca = () => {
       </Flex>
     </Box>
   ) : (
-    <RamalanMingguanFull item={ramalanDetails} toggleAll={toggleAll} />
+    <RamalanMingguanFull item={preds} toggleAll={toggleAll} />
   );
 };
 

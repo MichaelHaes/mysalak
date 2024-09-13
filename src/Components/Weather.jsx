@@ -1,13 +1,29 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsCloudRain } from "react-icons/bs";
 import { GoSun } from "react-icons/go";
 import { IoIosPartlySunny } from "react-icons/io";
 import { WiHumidity } from "react-icons/wi";
 import "./Styles/Weather.css";
 import { Link } from "react-router-dom";
+import { useWeather } from "../state";
+import axios from "axios";
+import env from "react-dotenv";
 
 const Weather = () => {
+  const { latest, setLatest } = useWeather();
+  const [show, setShow] = useState(false);
+
+  const getWeather = async () => {
+    const response = await axios.get(`${env.API_URL}/raspi-latest`);
+    setLatest(response.data);
+    setShow(true);
+  };
+
+  useEffect(() => {
+    getWeather();
+  }, [])
+
   return (
     <Flex justifyContent={"center"} pos={"relative"} my={9}>
       <Button
@@ -76,24 +92,24 @@ const Weather = () => {
               ps={1}
             >
               <Flex align={"center"}>
-                <Box w={"7vh"} h={"7vh"}>
+                {/* <Box w={"7vh"} h={"7vh"}>
                   <IoIosPartlySunny size="auto" fill="white" />
-                </Box>
+                </Box> */}
 
                 <Flex ms={1} direction={"column"} align={"start"} mb={-4}>
-                  <Text fontSize={"1.1vh"} mb={"-1vh"}>
+                  <Text fontSize={"1.5vh"} mb={"-1vh"}>
                     Saat ini
                   </Text>
-                  <Text fontSize={"4vh"} fontWeight={"bold"}>
-                    30°C
+                  <Text fontSize={"6vh"} fontWeight={"bold"}>
+                    {show && latest.temperature.toPrecision(3)}°C
                   </Text>
                 </Flex>
               </Flex>
-              <Text fontSize={"1.5vh"} mt={0} fontWeight={500} mb={3}>
+              {/* <Text fontSize={"1.5vh"} mt={0} fontWeight={500} mb={3}>
                 Cerah Berawan
-              </Text>
+              </Text> */}
 
-              <Flex gap={4} textAlign={"center"} fontSize={"1.4vh"}>
+              {/* <Flex gap={4} textAlign={"center"} fontSize={"1.4vh"}>
                 <Flex direction={"column"}>
                   <IoIosPartlySunny size={"4vh"} />
                   <Text mt={"-10%"}>12.00</Text>
@@ -106,7 +122,7 @@ const Weather = () => {
                   <IoIosPartlySunny size={"4vh"} />
                   <Text mt={"-10%"}>20.00</Text>
                 </Flex>
-              </Flex>
+              </Flex> */}
             </Flex>
 
             {/* Kanan */}
@@ -127,7 +143,7 @@ const Weather = () => {
                   </Box>
                   <Flex className="text-wrapper">
                     <Text>Curah Hujan</Text>
-                    <Text>100%</Text>
+                    <Text>{latest.tips}mm/h</Text>
                   </Flex>
                 </Flex>
 
@@ -137,7 +153,7 @@ const Weather = () => {
                   </Box>
                   <Flex className="text-wrapper">
                     <Text>Intensitas Cahaya</Text>
-                    <Text>4000cd</Text>
+                    <Text>{latest.lux}Cd</Text>
                   </Flex>
                 </Flex>
 
@@ -147,7 +163,7 @@ const Weather = () => {
                   </Box>
                   <Flex className="text-wrapper">
                     <Text>Kelembaban</Text>
-                    <Text>30%</Text>
+                    <Text>{latest.humidity}%</Text>
                   </Flex>
                 </Flex>
               </Flex>
