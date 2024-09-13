@@ -29,7 +29,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
         "Content-Type": "multipart/form-data",
       },
     });
-    
+
     console.log(response);
     setDetected(response.data.num_detections);
   };
@@ -132,6 +132,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
           color={"white"}
           onClick={() => {
             postCalculation();
+            navigate("/");
           }}
         >
           Simpan
