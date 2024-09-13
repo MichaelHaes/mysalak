@@ -68,7 +68,8 @@
   },
   "react-dotenv": {
     "whitelist": [
-      "API_URL"
+      "API_URL",
+      "MODEL_URL"
     ]
   }
 }

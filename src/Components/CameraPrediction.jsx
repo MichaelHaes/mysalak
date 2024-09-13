@@ -1,10 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Flex, Button, Text, Image } from "@chakra-ui/react";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import env from "react-dotenv";
 
 const CameraPrediction = ({ togglePredict, captured }) => {
   const navigate = useNavigate();
+  const [detected, setDetected] = useState(0);
+
+  const getPrediction = async () => {
+    // Convert base64 string to Blob
+    const byteString = atob(captured.split(",")[1]); // Extract base64 content
+    const mimeString = captured.split(",")[0].split(":")[1].split(";")[0]; // Extract mime type
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([ab], { type: mimeString });
+
+    const formData = new FormData();
+    formData.append("image", blob);
+
+    // Send request
+    const response = await axios.post(`${env.MODEL_URL}/yolo`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    
+    console.log(response);
+    setDetected(response.data.boxes.length);
+  };
+
+  useEffect(() => {
+    getPrediction();
+    console.log(`detected: ${detected}`);
+  }, []);
+
+  useEffect(() => {
+    console.log(detected);
+  }, [detected]);
 
   const postCalculation = () => {
     console.log("saved");
@@ -53,13 +90,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
         <Text fontSize={"2vh"} fontWeight={600}>
           Foto Hama
         </Text>
-        <Flex
-          h={"30vh"}
-          w={"100%"}
-          mx={"auto"}
-          mt={2}
-          mb={8}
-        >
+        <Flex h={"30vh"} w={"100%"} mx={"auto"} mt={2} mb={8}>
           <Image
             h={"inherit"}
             w={"inherit"}
@@ -74,7 +105,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
           Jumlah Hama
         </Text>
         <Text fontWeight={"800"} fontSize={"5vh"} mt={1} lineHeight={"normal"}>
-          20
+          {detected}
         </Text>
       </Flex>
 

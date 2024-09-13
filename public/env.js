@@ -1,3 +1,4 @@
 window.env = {
-  "API_URL": "http://localhost:8000"
+  "API_URL": "http://localhost:8000",
+  "MODEL_URL": "http://localhost:8888"
 };
