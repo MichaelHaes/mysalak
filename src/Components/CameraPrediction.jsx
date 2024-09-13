@@ -31,7 +31,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
     });
     
     console.log(response);
-    setDetected(response.data.boxes.length);
+    setDetected(response.data.num_detections);
   };
 
   useEffect(() => {
