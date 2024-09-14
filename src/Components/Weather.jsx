@@ -13,10 +13,12 @@ import env from "react-dotenv";
 const Weather = () => {
   const { latest, setLatest } = useWeather();
   const [show, setShow] = useState(false);
+  const [humidity, setHumidity] = useState(0);
 
   const getWeather = async () => {
     const response = await axios.get(`${env.API_URL}/raspi-latest`);
     setLatest(response.data);
+    setHumidity(response.data.humidity);
     setShow(true);
   };
 
@@ -163,7 +165,7 @@ const Weather = () => {
                   </Box>
                   <Flex className="text-wrapper">
                     <Text>Kelembaban</Text>
-                    <Text>{latest.humidity}%</Text>
+                    <Text>{humidity.toPrecision(3)}%</Text>
                   </Flex>
                 </Flex>
               </Flex>

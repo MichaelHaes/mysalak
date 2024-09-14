@@ -14,10 +14,12 @@ const IndikatorHeader = () => {
 
   const { latest, setLatest } = useWeather();
   const [show, setShow] = useState(false);
+  const [humidity, setHumidity] = useState(0);
 
   const getWeather = async () => {
     const response = await axios.get(`${env.API_URL}/raspi-latest`);
     setLatest(response.data);
+    setHumidity(response.data.humidity);
     setShow(true);
   };
 
@@ -161,7 +163,7 @@ const IndikatorHeader = () => {
                   <Text fontSize={"2.2vh"} fontWeight={"bold"}>
                     {index === 0 ? latest.tips:
                     index === 1 ? latest.lux:
-                    latest.humidity}
+                    humidity.toPrecision(3)}
                     {index === 1 ? "cd" : "%"}
                   </Text>
                   <Text fontSize={"1vh"} fontWeight={"light"}>
