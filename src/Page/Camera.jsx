@@ -7,7 +7,6 @@ const Camera = () => {
   const [captured, setCaptured] = useState(null);
 
   const changeCaptured = (img) => {
-    console.log(img);
     setCaptured(img);
   };
 
