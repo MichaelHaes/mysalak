@@ -161,7 +161,7 @@ const IndikatorHeader = () => {
                   <Text fontSize={"2.2vh"} fontWeight={"bold"}>
                     {index === 0 ? latest.tips:
                     index === 1 ? latest.lux:
-                    latest.humidity}
+                    latest.humidity.toPrecision(4)}
                     {index === 1 ? "cd" : "%"}
                   </Text>
                   <Text fontSize={"1vh"} fontWeight={"light"}>
