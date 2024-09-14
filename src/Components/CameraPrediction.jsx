@@ -10,9 +10,8 @@ const CameraPrediction = ({ togglePredict, captured }) => {
   const [detected, setDetected] = useState(0);
 
   const getPrediction = async () => {
-    // Convert base64 string to Blob
-    const byteString = atob(captured.split(",")[1]); // Extract base64 content
-    const mimeString = captured.split(",")[0].split(":")[1].split(";")[0]; // Extract mime type
+    const byteString = atob(captured.split(",")[1]);
+    const mimeString = captured.split(",")[0].split(":")[1].split(";")[0];
     const ab = new ArrayBuffer(byteString.length);
     const ia = new Uint8Array(ab);
     for (let i = 0; i < byteString.length; i++) {
@@ -23,25 +22,18 @@ const CameraPrediction = ({ togglePredict, captured }) => {
     const formData = new FormData();
     formData.append("image", blob);
 
-    // Send request
     const response = await axios.post(`${env.MODEL_URL}/yolo`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
 
-    console.log(response);
     setDetected(response.data.num_detections);
   };
 
   useEffect(() => {
     getPrediction();
-    console.log(`detected: ${detected}`);
   }, []);
-
-  useEffect(() => {
-    console.log(detected);
-  }, [detected]);
 
   const postCalculation = () => {
     console.log("saved");
