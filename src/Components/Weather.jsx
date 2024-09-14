@@ -22,7 +22,7 @@ const Weather = () => {
 
   useEffect(() => {
     getWeather();
-  }, []);
+  }, [])
 
   return (
     <Flex justifyContent={"center"} pos={"relative"} my={9}>
@@ -163,7 +163,7 @@ const Weather = () => {
                   </Box>
                   <Flex className="text-wrapper">
                     <Text>Kelembaban</Text>
-                    <Text>{latest.humidity.toPrecision(4)}%</Text>
+                    <Text>{latest.humidity}%</Text>
                   </Flex>
                 </Flex>
               </Flex>
