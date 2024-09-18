@@ -29,7 +29,7 @@ const MapComponent = (props) => {
   return (
     <MapContainer
       center={[latitude, longitude]}
-      zoom={16}
+      zoom={14}
       ref={mapRef}
       zoomControl={false}
       style={{
