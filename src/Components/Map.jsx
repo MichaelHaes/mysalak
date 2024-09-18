@@ -6,8 +6,8 @@ import "./Styles/Map.css";
 
 const MapComponent = (props) => {
   const mapRef = useRef(null);
-  const latitude = -7.6081624308551445;
-  const longitude = 110.40267984934648;
+  const latitude = -7.621672504970947;
+  const longitude = 110.39189700526022;
 
   const sebaran = props.sebaran;
 
