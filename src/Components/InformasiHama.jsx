@@ -33,9 +33,12 @@ const InformasiHama = (props) => {
       )}`
     );
 
+    const sortedData = response.data.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+
     let tmp = [];
-    response.data.forEach((item) => {
-      tmp.push(item.jumlah);
+    sortedData.forEach((item) => {
+      const obj = {x: moment(item.createdAt).format("D"), y: item.jumlah}
+      tmp.push(obj);
     });
     setHistory(tmp);
   };
@@ -67,20 +70,11 @@ const InformasiHama = (props) => {
       },
     },
     xaxis: {
-      categories: [1, 8, 15, 22, 29],
       min: 1,
-      max: 5,
+      max: history.length,
     },
     yaxis: {
-      tickAmount: 4,
-      labels: {
-        formatter: (value) => {
-          if ([25, 50, 75, 100, 150].includes(value)) {
-            return value;
-          }
-          return "";
-        },
-      },
+      tickAmount: 3,
       min: 0,
       max: 150,
     },
@@ -305,7 +299,7 @@ const InformasiHama = (props) => {
           </Select>
         </Flex>
         <Box width="90%" height="80%" m={"auto"}>
-          <Chart options={chartOptions} series={chartSeries} type="line" />
+          <Chart options={chartOptions} series={chartSeries}  type="line" />
         </Box>
       </Flex>
     </Flex>
