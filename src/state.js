@@ -47,3 +47,10 @@ export const useWeather = create((set) => ({
   setPreds: (val) => set({ preds: val }),
   setLatest: (val) => set({ latest: val }),
 }));
+
+export const useCoordinate = create((set) => ({
+  longitude: 0,
+  latitude: 0,
+  setLongitude: (val) => set({longitude: val}),
+  setLatitude: (val) => set({latitude: val}),
+}));

@@ -1,14 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Image, Button, Text, Flex } from "@chakra-ui/react";
 import { MdFlipCameraAndroid } from "react-icons/md";
 import Webcam from "react-webcam";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { useCoordinate } from "../state";
 
 const MainCamera = ({ changeCaptured, togglePredict }) => {
   const [facing, setFacing] = useState({ exact: "environment" });
   const [captured, setCaptured] = useState(null);
   const navigate = useNavigate();
+  const { setLongitude, setLatitude } = useCoordinate();
+
+  const getUserLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setLongitude(longitude);
+          setLatitude(latitude);
+        },
+        (error) => {
+          console.error("Error getting user location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  };
+
+  useEffect(() => {
+    getUserLocation();
+  }, []);
 
   const videoConstraints = {
     width: 1280,

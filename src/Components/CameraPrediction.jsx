@@ -4,10 +4,21 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import env from "react-dotenv";
+import { getPreciseDistance } from "geolib";
+import { useCoordinate } from "../state";
 
 const CameraPrediction = ({ togglePredict, captured }) => {
+  const { latitude, longitude } = useCoordinate();
   const navigate = useNavigate();
   const [detected, setDetected] = useState(0);
+  const [able, setAble] = useState(false);
+  const [kelompoks, setKelompoks] = useState([]);
+  const [selected, setSelected] = useState({});
+  const [saving, setSaving] = useState(false);
+  const center = {
+    latitude: -7.621672504970947,
+    longitude: 110.39189700526022,
+  };
 
   const getPrediction = async () => {
     const byteString = atob(captured.split(",")[1]);
@@ -31,12 +42,59 @@ const CameraPrediction = ({ togglePredict, captured }) => {
     setDetected(response.data.num_detections);
   };
 
+  const getKelompokTani = async () => {
+    const response = await axios.get(`${env.API_URL}/kelompok-tani`);
+    setKelompoks(response.data);
+  };
+
+  const checkPostEligibility = () => {
+    const distanceCalc = getPreciseDistance(
+      { latitude: latitude, longitude: longitude },
+      { latitude: center.latitude, longitude: center.longitude }
+    );
+    if (distanceCalc >= 8000) return;
+    else {
+      setAble(true);
+      getNearest();
+    }
+  };
+
+  const getNearest = () => {
+    let prevDistance = 0;
+    kelompoks.forEach((kel) => {
+      console.log(kel);
+      const distance = getPreciseDistance(
+        { latitude: latitude, longitude: longitude },
+        { latitude: kel.latitude, longitude: kel.longitude }
+      );
+      console.log(distance);
+      if (prevDistance === 0 || distance < prevDistance) {
+        prevDistance = distance;
+        setSelected(kel);
+        console.log("get");
+      }
+    });
+  };
+
   useEffect(() => {
     getPrediction();
+    getKelompokTani();
   }, []);
 
-  const postCalculation = () => {
-    console.log("saved");
+  useEffect(() => {
+    checkPostEligibility();
+  });
+
+  const postCalculation = async () => {
+    setSaving(true);
+
+    const payload = {
+      id_kelompok_tani: selected.id,
+      jumlah: detected,
+    };
+    const response = await axios.post(`${env.API_URL}/tangkapan-hama`, payload);
+    console.log(response);
+    navigate("/manajemen-hama");
   };
 
   return (
@@ -99,6 +157,21 @@ const CameraPrediction = ({ togglePredict, captured }) => {
         <Text fontWeight={"800"} fontSize={"5vh"} mt={1} lineHeight={"normal"}>
           {detected}
         </Text>
+        {able && (
+          <>
+            <Text lineHeight={"normal"} fontSize={"2vh"} fontWeight={600}>
+              Kelompok Tani
+            </Text>
+            <Text
+              fontWeight={"800"}
+              fontSize={"5vh"}
+              mt={1}
+              lineHeight={"normal"}
+            >
+              {selected.nama}
+            </Text>
+          </>
+        )}
       </Flex>
 
       <Flex
@@ -113,22 +186,24 @@ const CameraPrediction = ({ togglePredict, captured }) => {
           borderRadius={"20px"}
           border={"1px solid #2c3631"}
           onClick={() => togglePredict()}
-          w={"42%"}
+          w={!able ? "90%" : "42%"}
         >
           Foto Ulang
         </Button>
-        <Button
-          w={"42%"}
-          borderRadius={"20px"}
-          bg={"#2c3631"}
-          color={"white"}
-          onClick={() => {
-            postCalculation();
-            navigate("/");
-          }}
-        >
-          Simpan
-        </Button>
+        {able && (
+          <Button
+            w={"42%"}
+            borderRadius={"20px"}
+            bg={"#2c3631"}
+            color={"white"}
+            onClick={() => {
+              postCalculation();
+            }}
+            disabled={saving}
+          >
+            {saving ? "Menyimpan..." : "Simpan"}
+          </Button>
+        )}
       </Flex>
     </Flex>
   );
