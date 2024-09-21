@@ -146,8 +146,8 @@ const DashboardHeader = () => {
             i
           </Text>
         </Box>
-        <Box alignSelf={"center"} pos={"absolute"} zIndex={4} width={"100%"} py={"1.3vh"} ps={5}>
-          <Text fontWeight={"bold"} fontSize={"2vh"}  mb={1}>
+        <Box alignSelf={"center"} pos={"absolute"} zIndex={4} width={"90%"} py={"1.3vh"}>
+          <Text fontWeight={"bold"} fontSize={"2vh"}  mb={1} ps={5}>
             Waspada Lalat Buah!
           </Text>
           {/* <Text
