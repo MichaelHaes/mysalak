@@ -20,7 +20,7 @@ function App() {
     <ChakraProvider>
       <div id="app">
         <Box
-          w={{ base: "100%", md: "420px" }}
+          w={{ base: "100%", md: "380px" }}
           minH={"100vh"}
           mx={"auto"}
           bg={"#f5f5f5"}
