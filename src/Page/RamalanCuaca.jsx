@@ -15,12 +15,12 @@ const RamalanCuaca = () => {
   const getPred = async () => {
     const response = await axios.get(`${env.API_URL}/ramalan`);
     setPreds(response.data);
-    console.log(response.data);
+    // console.log(response.data);
   }
 
   function toggleAll() {
     setAll(!all);
-    console.log("toggled");
+    // console.log("toggled");
   }
 
   useEffect(() => {
