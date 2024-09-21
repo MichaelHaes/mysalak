@@ -167,7 +167,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
                 src={`data:image/jpeg;base64,${detected.image}`}
                 // src={captured}
                 borderRadius={"20px"}
-                objectFit={cover ? "cover":"contain"}
+                objectFit={cover ? "cover" : "contain"}
                 alt="hama"
                 bg={"lightgrey"}
                 onClick={() => setCover(!cover)}
@@ -178,42 +178,40 @@ const CameraPrediction = ({ togglePredict, captured }) => {
               </Flex>
             )}
           </Flex>
-          <Flex justify={"space-between"} w={"100%"}>
-            <Box w={"50%"}>
-              <Text lineHeight={"normal"} fontSize={"2vh"} fontWeight={600}>
-                Jumlah Hama
+          <Box w={"50%"}>
+            <Text lineHeight={"normal"} fontSize={"2vh"} fontWeight={600}>
+              Jumlah Hama
+            </Text>
+            {!loading ? (
+              <Text
+                fontWeight={"800"}
+                fontSize={"5vh"}
+                mt={1}
+                lineHeight={"normal"}
+              >
+                {detected.total}
               </Text>
-              {!loading ? (
-                <Text
-                  fontWeight={"800"}
-                  fontSize={"5vh"}
-                  mt={1}
-                  lineHeight={"normal"}
-                >
-                  {detected.total}
-                </Text>
-              ) : (
-                <Spinner />
-              )}
-            </Box>
-            {able && (
-              <Flex direction={"column"} alignItems={"end"} w={"50%"}>
-                <Text lineHeight={"normal"} fontSize={"2vh"} fontWeight={600}>
-                  Kelompok Tani
-                </Text>
-                <Text
-                  fontWeight={"800"}
-                  fontSize={"5vh"}
-                  mt={1}
-                  lineHeight={"normal"}
-                  display={loading ? "none" : "block"}
-                >
-                  {selected.nama}
-                </Text>
-                <Spinner display={loading ? "block" : "none"} />
-              </Flex>
+            ) : (
+              <Spinner />
             )}
-          </Flex>
+          </Box>
+          {able && (
+            <>
+              <Text lineHeight={"normal"} fontSize={"2vh"} fontWeight={600}>
+                Kelompok Tani
+              </Text>
+              <Text
+                fontWeight={"800"}
+                fontSize={"5vh"}
+                mt={1}
+                lineHeight={"normal"}
+                display={loading ? "none" : "block"}
+              >
+                {selected.nama}
+              </Text>
+              <Spinner display={loading ? "block" : "none"} />
+            </>
+          )}
         </Flex>
 
         <Flex
