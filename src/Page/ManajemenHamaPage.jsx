@@ -36,7 +36,7 @@ const ManajemenHamaPage = () => {
         >
           Manajemen Hama
         </Text>
-        <Flex
+        {/* <Flex
           justify={"center"}
           align={"center"}
           w={"30px"}
@@ -46,7 +46,7 @@ const ManajemenHamaPage = () => {
           p={2}
         >
           <Text>?</Text>
-        </Flex>
+        </Flex> */}
       </Flex>
 
       {/* <Flex direction={"column"} gap={5}>
