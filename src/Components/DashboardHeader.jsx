@@ -131,7 +131,7 @@ const DashboardHeader = () => {
                 "linear-gradient(to right, rgba(237, 237, 237, 0), rgba(237, 237, 237, 1))",
             }}
           />
-          <Text
+          {/* <Text
             pos={"absolute"}
             width={"15px"}
             height={"15px"}
@@ -144,7 +144,7 @@ const DashboardHeader = () => {
             borderRadius={"50%"}
           >
             i
-          </Text>
+          </Text> */}
         </Box>
         <Box alignSelf={"center"} pos={"absolute"} zIndex={4} width={"90%"} py={"1.3vh"}>
           <Text fontWeight={"bold"} fontSize={"2vh"}  mb={1} ps={5}>
