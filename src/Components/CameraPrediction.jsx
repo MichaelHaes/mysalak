@@ -6,6 +6,7 @@ import axios from "axios";
 import env from "react-dotenv";
 import { getPreciseDistance } from "geolib";
 import { useCoordinate } from "../state";
+import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 
 const CameraPrediction = ({ togglePredict, captured }) => {
   const [loading, setLoading] = useState(true);
@@ -20,6 +21,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
     latitude: -7.621672504970947,
     longitude: 110.39189700526022,
   };
+  const [full, setFull] = useState(false);
   const [cover, setCover] = useState(false);
 
   const resetState = () => {
@@ -154,11 +156,41 @@ const CameraPrediction = ({ togglePredict, captured }) => {
           Hitung Hama
         </Text>
 
+        {/* {full && (
+        <Image
+          src={`data:image/jpeg;base64,${detected.image}`}
+          w={full ? "85vw" : 0}
+          h={full ? "85vh" : 0}
+          bg={"lightgrey"}
+          transition={".3s ease"}
+          onClick={() => setFull(false)}
+          mt={"14vh"}
+          objectFit={"contain"}
+        />
+      )} */}
+
         <Flex flexDir={"column"} px={5} pt={"14vh"}>
-          <Text fontSize={"2vh"} fontWeight={600}>
-            Foto Hama
-          </Text>
-          <Flex h={"30vh"} w={"100%"} mx={"auto"} mt={2} mb={8}>
+          <Flex justify={"space-between"} align={"center"}>
+            <Text fontSize={"2vh"} fontWeight={600}>
+              Foto Hama
+            </Text>
+            <Flex
+              variant={"unstyled"}
+              bg={"white"}
+              borderRadius={"50%"}
+              onClick={() => setCover(!cover)}
+              w={"25px"}
+              h={"25px"}
+              p={1}
+            >
+              {cover ? (
+                <RxExitFullScreen size={"auto"} />
+              ) : (
+                <RxEnterFullScreen size={"aut0"} />
+              )}
+            </Flex>
+          </Flex>
+          <Flex h={full ? "68vh" : "30vh"} w={"100%"} mx={"auto"} mt={2} mb={8}>
             {!loading ? (
               <Image
                 h={"inherit"}
@@ -167,10 +199,12 @@ const CameraPrediction = ({ togglePredict, captured }) => {
                 src={`data:image/jpeg;base64,${detected.image}`}
                 // src={captured}
                 borderRadius={"20px"}
-                objectFit={cover ? "cover" : "contain"}
                 alt="hama"
                 bg={"lightgrey"}
-                onClick={() => setCover(!cover)}
+                onClick={() => setFull(!full)}
+                transition={".3s"}
+                objectFit={cover ? "cover" : "contain"}
+                zIndex={10}
               />
             ) : (
               <Flex w={"100%"} h={"100%"} justify={"center"} align={"center"}>
@@ -178,7 +212,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
               </Flex>
             )}
           </Flex>
-          <Box w={"50%"}>
+          <Box display={full ? "none" : "block"} transition={".3s linear"}>
             <Text lineHeight={"normal"} fontSize={"2vh"} fontWeight={600}>
               Jumlah Hama
             </Text>
@@ -196,7 +230,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
             )}
           </Box>
           {able && (
-            <>
+            <Box display={full ? "none" : "block"} transition={".3s linear"}>
               <Text lineHeight={"normal"} fontSize={"2vh"} fontWeight={600}>
                 Kelompok Tani
               </Text>
@@ -210,7 +244,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
                 {selected.nama}
               </Text>
               <Spinner display={loading ? "block" : "none"} />
-            </>
+            </Box>
           )}
         </Flex>
 
