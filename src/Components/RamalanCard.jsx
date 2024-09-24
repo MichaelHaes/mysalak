@@ -8,6 +8,7 @@ const RamalanCard = (props) => {
   moment.locale("id");
   const data = props.item;
   const index = props.index;
+  const now = new Date();
 
   return (
     <Flex
@@ -37,9 +38,13 @@ const RamalanCard = (props) => {
             </Moment>
           </Text>
           <Text fontSize={"0.8vh"} lineHeight={1}>
-            <Moment format="MMMM">
-              {new Date(new Date().setMonth(new Date().getMonth() + index + 1))}
-            </Moment>
+              {now.getDate() + index >= 30 ? (
+                <Moment format="MMMM">
+                  {new Date(new Date().setMonth(new Date().getMonth() + 1))}
+              </Moment>
+              ) : (<Moment format="MMMM">
+                  {new Date(new Date().setDate(new Date().getMonth()))}
+              </Moment>)}
           </Text>
         </Flex>
 
