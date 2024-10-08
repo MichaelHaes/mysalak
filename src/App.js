@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Box, ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
@@ -12,9 +12,15 @@ import Artikel from "./Page/Artikel";
 // import FormModel from "./Page/FormModel";
 import ArticleDetail from "./Page/ArticleDetail";
 import Navbar from "./Components/Navbar";
+import {requestForToken} from "./firebaseNotification/firebase";
+import Notification from "./firebaseNotification/Notification";
 
 function App() {
   const location = useLocation();
+
+  useEffect(() => {
+    requestForToken()
+  }, []);
 
   return (
     <ChakraProvider>
@@ -38,6 +44,7 @@ function App() {
           </Routes>
           {location.pathname !== "/kamera" && <Navbar />}
         </Box>
+        <Notification/>
       </div>
     </ChakraProvider>
   );

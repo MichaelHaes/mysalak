@@ -1,4 +1,4 @@
 window.env = {
-  "API_URL": "http://localhost:8000",
-  "MODEL_URL": "http://localhost:8888"
+  "API_URL": "https://node.mysalak.com",
+  "MODEL_URL": "https://flask.mysalak.com"
 };
