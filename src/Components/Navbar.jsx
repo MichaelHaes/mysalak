@@ -66,10 +66,10 @@ const Navbar = () => {
         paddingX={"5%"}
         w={"100%"}
       >
-        {navItems.map((item) => (
+        {navItems.map((item, index) => (
           <Tab
+            key={index}
             onClick={() => {
-              // Page.setPage(item.route);
               navigate(item.route);
               resetDetail();
             }}

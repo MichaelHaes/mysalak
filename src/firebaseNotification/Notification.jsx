@@ -1,33 +1,42 @@
-import React, {useState, useEffect} from 'react'
-import {requestForToken, onMessageListener} from './firebase';
-import {toast} from 'react-toastify';
+import React, { useState, useEffect } from 'react';
+import { onMessageListener } from './firebase';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Notification = () => {
-  const [notification, setNotification] = useState({title: '', body: ''});
-  const notify = () => toast(<ToastDisplay/>);
+  const [notificationPayload, setNotificationPayload] = useState(null);
 
-  function ToastDisplay() {
-    return (
+  const notify = (title, body) =>
+    toast(
       <div>
-        <p><b>{notification?.title}</b></p>
-        <p>{notification?.body}</p>
+        <strong>{title}</strong>
+        <p>{body}</p>
       </div>
     );
-  }
 
   useEffect(() => {
-    if (notification?.title) {
-      notify()
+    const subscribeToNotifications = () => {
+      onMessageListener()
+        .then((payload) => {
+          console.log('Notification received!');
+          setNotificationPayload(payload);
+          notify(payload?.notification?.title, payload?.notification?.body);
+        })
+        .catch((err) => console.log('Failed to listen for notification: ', err));
+    };
+
+    subscribeToNotifications();
+
+    if (notificationPayload) {
+      subscribeToNotifications();
     }
-  }, [notification])
 
-  requestForToken();
+  }, [notificationPayload]);
 
-  onMessageListener()
-    .then((payload) => {
-      setNotification({title: payload?.notification?.title, body: payload?.notification?.body});
-    })
-    .catch((err) => console.log('failed: ', err));
-}
+  return (
+    <>
+      <Toaster />
+    </>
+  );
+};
 
-export default Notification
+export default Notification;
