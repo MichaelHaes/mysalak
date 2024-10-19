@@ -19,6 +19,7 @@ import { useKelompokTaniList } from "../../state";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import {useNavigate} from "react-router-dom";
+import env from "react-dotenv";
 
 const PetaniCreate = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
