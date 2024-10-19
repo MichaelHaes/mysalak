@@ -3,6 +3,9 @@
 
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage, isSupported } from 'firebase/messaging';
+import axios from "axios";
+import env from "react-dotenv";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBmYSzdYzj9CeSHKrQWTKH6s9Uribwr6G0",
@@ -36,8 +39,19 @@ export const requestForToken = async () => {
 
         } else if (!localStorage.getItem('fcmToken')) {
           localStorage.setItem('fcmToken', currentToken);
-
         }
+
+        const user_name = JSON.parse(localStorage.getItem('user_name'));
+        const role_id = JSON.parse(localStorage.getItem('role_id'));
+
+        axios.post(`${env.API_URL}/mysalak/register-token`, { nama:user_name, role_id:role_id, token:currentToken })
+          .then((response) => {
+            console.log("response: ", response)
+          })
+          .catch((error) => {
+            console.log("error: ", error)
+          })
+
       } else {
         console.log('No registration token available. Request permission to generate one.');
       }

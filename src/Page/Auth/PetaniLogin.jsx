@@ -2,7 +2,6 @@ import {
   Box,
   Flex,
   VStack,
-  Image,
   Text,
   Input,
   FormControl,
@@ -39,6 +38,8 @@ const PetaniLogin = () => {
         .then((response) => {
           showToast(response.data.message)
           localStorage.setItem("JWT_Token", JSON.stringify(response.data.token))
+          localStorage.setItem("role_id", JSON.stringify(response.data.role_id))
+          localStorage.setItem("user_name", JSON.stringify(data.nama))
           navigate("/dashboard")
         })
         .catch((response) => {

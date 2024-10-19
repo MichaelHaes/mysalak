@@ -10,8 +10,6 @@ import Profil from "./Page/Profil";
 import RamalanCuaca from "./Page/RamalanCuaca";
 import Artikel from "./Page/Artikel";
 import ArticleDetail from "./Page/ArticleDetail";
-import Navbar from "./Components/Navbar";
-import {requestForToken} from "./firebaseNotification/firebase";
 import Notification from "./firebaseNotification/Notification";
 import LoginPage from "./Page/Auth/LoginPage";
 import PetaniCreate from "./Page/Auth/PetaniCreate";
@@ -48,7 +46,6 @@ function App() {
   }
 
   useEffect(() => {
-    requestForToken();
     getKelompokTaniList();
   }, []);
 

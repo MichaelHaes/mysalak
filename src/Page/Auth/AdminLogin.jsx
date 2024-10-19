@@ -36,6 +36,8 @@ const AdminLogin = () => {
         .then((response) => {
           showToast(response.data.message)
           localStorage.setItem("JWT_Token", JSON.stringify(response.data.token))
+          localStorage.setItem("role_id", JSON.stringify(response.data.role_id))
+          localStorage.setItem("user_name", JSON.stringify(response.data.admin_nama))
           navigate("/dashboard")
         })
         .catch((response) => {
@@ -85,7 +87,6 @@ const AdminLogin = () => {
                 <FormLabel fontSize="small" fontWeight="bold">Password</FormLabel>
                 <InputGroup>
                   <Input
-                    type="tel"
                     placeholder="Masukkan password"
                     {...register("password", {
                       required: "No Telepon is required"
