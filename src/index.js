@@ -5,6 +5,7 @@ import App from "./App";
 import PWAPrompt from "react-ios-pwa-prompt";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
     <App />
@@ -15,4 +16,4 @@ root.render(
       permanentlyHideOnDismiss={false}
     />
   </React.StrictMode>
-);
+)

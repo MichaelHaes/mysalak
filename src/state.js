@@ -1,11 +1,5 @@
 import { create } from "zustand";
 
-export const useStore = create((set) => ({
-  count: 0,
-  decrease: () => set((state) => ({ count: state.count - 1 })),
-  increase: () => set((state) => ({ count: state.count + 1 })),
-}));
-
 export const usePage = create((set) => ({
   page: "Home",
   // prevPage: "",
@@ -53,4 +47,9 @@ export const useCoordinate = create((set) => ({
   latitude: 0,
   setLongitude: (val) => set({longitude: val}),
   setLatitude: (val) => set({latitude: val}),
+}));
+
+export const useKelompokTaniList = create((set) => ({
+  kelompokTani: [],
+  setKelompokTani: (val) => set({ kelompokTani: val }),
 }));
