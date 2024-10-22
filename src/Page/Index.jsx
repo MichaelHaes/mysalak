@@ -1,4 +1,4 @@
-import React from "react";
+import React, { } from "react";
 import { usePage } from "../state";
 import Dashboard from "./Dashboard";
 import { Box } from "@chakra-ui/react";
@@ -33,7 +33,7 @@ import { Route, Routes } from "react-router-dom";
 // };
 
 const Index = () => {
-  const { page } = usePage();
+
   // const Component = componentMap[page] || <Dashboard />;
 
   return (
@@ -49,7 +49,7 @@ const Index = () => {
       {/* <Component /> */}
 
       <Routes>
-        <Route path="/" element={<Dashboard/>}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/persebaran-hama" element={<PersebaranHama/>}/>
         <Route path="/kamera" element={<Camera/>}/>
         <Route path="/manajemen-hama" element={<ManajemenHamaPage/>}/>
@@ -64,8 +64,6 @@ const Index = () => {
       ) : (
         <></>
       )} */}
-
-      {page !== "Camera" ? <Navbar /> : <></>}
     </Box>
   );
 };

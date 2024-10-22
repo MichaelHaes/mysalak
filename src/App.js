@@ -19,6 +19,7 @@ import env from "react-dotenv";
 import PetaniLogin from "./Page/Auth/PetaniLogin";
 import ProtectedRoutes from "./Hooks/useProtectedRoutes";
 import AdminLogin from "./Page/Auth/AdminLogin";
+import Navbar from "./Components/Navbar";
 
 function App() {
   const location = useLocation();
@@ -75,6 +76,7 @@ function App() {
               <Route path="/artikel/:id" element={<ArticleDetail />} />
             </Route>
           </Routes>
+          {!localStorage.getItem("JWT_Token") || location.pathname.includes("camera") ? <></> : <Navbar/>}
         </Box>
         <Notification/>
       </div>

@@ -32,7 +32,7 @@ const AdminLogin = () => {
 
   const onSubmit = (data) => {
     try{
-      axios.post(`${env.API_URL}/auth/admin/login`, { data })
+      axios.post(`${env.API_URL}/auth/admin/login`, data )
         .then((response) => {
           showToast(response.data.message)
           localStorage.setItem("JWT_Token", JSON.stringify(response.data.token))
