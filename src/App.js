@@ -20,6 +20,7 @@ import PetaniLogin from "./Page/Auth/PetaniLogin";
 import ProtectedRoutes from "./Hooks/useProtectedRoutes";
 import AdminLogin from "./Page/Auth/AdminLogin";
 import Navbar from "./Components/Navbar";
+import UnauthorizedRoute from "./Hooks/useUnprotectedRoutes";
 
 function App() {
   const location = useLocation();
@@ -29,7 +30,6 @@ function App() {
     axios.get(`${env.API_URL}/kelompok-tani`)
       .then((response) => {
         let kelompokTaniTemp = []
-        console.log("res: ", response.data)
         response.data.forEach((kelompok) => {
           kelompokTaniTemp.push({
             id: kelompok.id,
@@ -61,10 +61,12 @@ function App() {
           pos={"relative"}
         >
           <Routes>
-            <Route path="/" element={<LoginPage />} />
-            <Route path="/create-petani" element={<PetaniCreate />} />
-            <Route path="/login-petani" element={<PetaniLogin />} />
-            <Route path="/login-admin" element={<AdminLogin />} />
+            <Route element={<UnauthorizedRoute/>}>
+              <Route path="/" element={<LoginPage />} />
+              <Route path="/create-petani" element={<PetaniCreate />} />
+              <Route path="/login-petani" element={<PetaniLogin />} />
+              <Route path="/login-admin" element={<AdminLogin />} />
+            </Route>
             <Route element={<ProtectedRoutes />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/persebaran-hama" element={<PersebaranHama />} />
