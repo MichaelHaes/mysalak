@@ -29,17 +29,20 @@ const PetaniLogin = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    watch
   } = useForm();
 
   const onSubmit = (data) => {
     try{
       axios.post(`${env.API_URL}/auth/petani/login`, { ...data, kelompok_tani: selectedKelompok.id })
         .then((response) => {
+          const kelompok_tani = selectedKelompok.id;
+          const user_id = `${kelompok_tani}-${watch("no_telp")}-${watch("nama")}`;
           showToast(response.data.message)
           localStorage.setItem("JWT_Token", JSON.stringify(response.data.token))
           localStorage.setItem("role_id", JSON.stringify(response.data.role_id))
-          localStorage.setItem("user_name", JSON.stringify(data.nama))
+          localStorage.setItem("user_id", JSON.stringify(user_id))
           navigate("/dashboard")
         })
         .catch((response) => {
@@ -83,7 +86,6 @@ const PetaniLogin = () => {
                 />
                 {errors.namaLengkap && <FormErrorMessage>{errors.namaLengkap.message}</FormErrorMessage>}
               </FormControl>
-
               <FormControl id="noTelepon" isInvalid={errors.noTelepon} marginTop="5%">
                 <FormLabel fontSize="small" fontWeight="bold">No Telepon</FormLabel>
                 <Input

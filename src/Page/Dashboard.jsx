@@ -7,7 +7,9 @@ import {requestForToken} from "../firebaseNotification/firebase";
 const Dashboard = () => {
 
   useEffect(() => {
-    requestForToken();
+    if(!localStorage.getItem('fcmToken')){
+      requestForToken();
+    }
   }, []);
 
   return (
