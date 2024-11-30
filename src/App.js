@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Box, ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
@@ -14,7 +14,7 @@ import Notification from "./firebaseNotification/Notification";
 import LoginPage from "./Page/Auth/LoginPage";
 import PetaniCreate from "./Page/Auth/PetaniCreate";
 import axios from "axios";
-import {useKelompokTaniList} from "./state";
+import { useKelompokTaniList } from "./state";
 import env from "react-dotenv";
 import PetaniLogin from "./Page/Auth/PetaniLogin";
 import ProtectedRoutes from "./Hooks/useProtectedRoutes";
@@ -23,28 +23,28 @@ import Navbar from "./Components/Navbar";
 import UnauthorizedRoute from "./Hooks/useUnprotectedRoutes";
 
 function App() {
-  const location = useLocation();
   const setKelompokTani = useKelompokTaniList().setKelompokTani;
 
   const getKelompokTaniList = () => {
-    axios.get(`${env.API_URL}/kelompok-tani`)
+    axios
+      .get(`${env.API_URL}/kelompok-tani`)
       .then((response) => {
-        let kelompokTaniTemp = []
+        let kelompokTaniTemp = [];
         response.data.forEach((kelompok) => {
           kelompokTaniTemp.push({
             id: kelompok.id,
             nama: kelompok.nama,
             ketua: kelompok.ketua,
             lat: kelompok.latitude,
-            long: kelompok.longitude
+            long: kelompok.longitude,
           });
         });
         setKelompokTani(kelompokTaniTemp);
       })
       .catch((error) => {
         console.log(error);
-      })
-  }
+      });
+  };
 
   useEffect(() => {
     getKelompokTaniList();
@@ -61,7 +61,7 @@ function App() {
           pos={"relative"}
         >
           <Routes>
-            <Route element={<UnauthorizedRoute/>}>
+            <Route element={<UnauthorizedRoute />}>
               <Route path="/" element={<LoginPage />} />
               <Route path="/create-petani" element={<PetaniCreate />} />
               <Route path="/login-petani" element={<PetaniLogin />} />
@@ -78,9 +78,8 @@ function App() {
               <Route path="/artikel/:id" element={<ArticleDetail />} />
             </Route>
           </Routes>
-          {!localStorage.getItem("JWT_Token") || location.pathname.includes("camera") ? <></> : <Navbar/>}
         </Box>
-        <Notification/>
+        <Notification />
       </div>
     </ChakraProvider>
   );
