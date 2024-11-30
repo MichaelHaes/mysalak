@@ -153,7 +153,7 @@ const PetaniLogin = () => {
             bgColor={Colors.Dark_Green}
             onClick={handleSubmit(onSubmit)}
           >
-            Login
+            Masuk
           </Button>
         </Box>
       </Flex>
