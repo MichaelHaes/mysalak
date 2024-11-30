@@ -81,7 +81,7 @@ const DashboardHeader = () => {
             //   navigate("/profil")
             // }}
           >
-            {/* <Link to={"/profil"}> */}
+            <Link to={"/profil"}>
               <Image
                 src="/assets/profil.png"
                 borderRadius={"50%"}
@@ -91,7 +91,7 @@ const DashboardHeader = () => {
                 objectFit={"cover"}
                 objectPosition={"63%"}
               />
-            {/* </Link> */}
+            </Link>
           </Flex>
         </Flex>
       </Box>

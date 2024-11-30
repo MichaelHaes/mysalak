@@ -1,5 +1,5 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import React from "react";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import React, { useEffect } from "react";
 import { IoIosArrowBack, IoIosHelpCircleOutline } from "react-icons/io";
 import { FaRegEdit } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa6";
@@ -7,9 +7,41 @@ import { MdOutlineAccountCircle, MdVerified } from "react-icons/md";
 import "../Components/Styles/Profil.css";
 import { LuHistory } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import env from "react-dotenv";
+import toast from "react-hot-toast";
+import { requestForToken } from "../firebaseNotification/firebase";
 
 const Profil = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("fcmToken")) {
+      requestForToken();
+    }
+  }, []);
+
+  const showToast = (response) =>
+    toast(
+      <div>
+        <p>{response}</p>
+      </div>
+    );
+
+  const handleLogOut = () => {
+    localStorage.removeItem("JWT_Token");
+    localStorage.removeItem("fcmToken");
+    localStorage.removeItem("role_id");
+    localStorage.removeItem("user_id");
+    axios
+      .post(`${env.API_URL}/mysalak/delete-token`, {
+        device_id: localStorage.getItem("device_id"),
+      })
+      .then((response) => {
+        showToast("Logout Success");
+        navigate("/");
+      });
+  };
 
   return (
     <Flex
@@ -34,7 +66,7 @@ const Profil = () => {
           pos={"absolute"}
           left={0}
           onClick={() => {
-            navigate("/")
+            navigate("/");
           }}
         >
           <IoIosArrowBack size={"auto"} fill="white" />
@@ -205,6 +237,24 @@ const Profil = () => {
           </Box>
         </Flex>
       </Flex>
+
+      <Button
+        onClick={() => {
+          handleLogOut();
+        }}
+        variant={"unstyled"}
+        // bg={"#FF8F8F"}
+        color={"#2c3631"}
+        _hover={{ bg: "#FF8F8F", color: "white" }}
+        px={2}
+        py={1}
+        mt={5}
+        borderRadius={"full"}
+        h={"fit-content"}
+        fontSize={"1.5vh"}
+      >
+        Logout
+      </Button>
 
       <Text fontSize={"1.2vh"} mt={5} color={"rgba(44, 54, 49, 0.5)"}>
         Versi 1.0.0
