@@ -70,7 +70,7 @@ const PetaniCreate = () => {
           <VStack alignItems="start" spacing={0}>
             <Text fontWeight="bold" fontSize="large">Selamat datang di</Text>
             <Image
-              src="/assets/login_mySalak_Dark.png"
+              src="/assets/login_mySalak_dark.png"
               w="60%"
               h="auto"
             />
