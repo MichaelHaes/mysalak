@@ -33,13 +33,13 @@ const Profil = () => {
     localStorage.removeItem("fcmToken");
     localStorage.removeItem("role_id");
     localStorage.removeItem("user_id");
+    navigate("/");
     axios
       .post(`${env.API_URL}/mysalak/delete-token`, {
         device_id: localStorage.getItem("device_id"),
       })
       .then((response) => {
         showToast("Logout Success");
-        navigate("/");
       });
   };
 
