@@ -115,7 +115,7 @@ const AdminLogin = () => {
             bgColor={Colors.Dark_Green}
             onClick={handleSubmit(onSubmit)}
           >
-            Masuk Akun Adna
+            Masuk
           </Button>
         </Box>
       </Flex>
