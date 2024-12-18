@@ -16,11 +16,11 @@ import env from "react-dotenv";
 const PersebaranHama = () => {
   const navigate = useNavigate();
   const [detail, setDetail] = useState({});
-  const [kelompok, setKelompok] = useState([]);
+  const [hama, setHama] = useState([]);
 
   const getKelompokTani = async () => {
     const response = await axios.get(`${env.API_URL}/tangkapan-hama-latest`);
-    setKelompok(response.data);
+    setHama(response.data);
   };
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const PersebaranHama = () => {
   }, []);
 
   function handleDetail(val) {
-    setDetail(val);
+    setDetail(hama[val]);
   }
 
   function resetDetail() {
@@ -91,7 +91,7 @@ const PersebaranHama = () => {
       >
         Persebaran Hama
       </Text>
-      <MapComponent sebaran={kelompok} handleDetail={handleDetail} />
+      <MapComponent sebaran={hama} handleDetail={handleDetail} />
 
       {detail.jumlah && (
         <Box

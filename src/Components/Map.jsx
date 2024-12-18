@@ -1,30 +1,26 @@
-import React, { useRef } from "react";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import React, { useState, useEffect, useRef } from "react";
+import { MapContainer, Marker, Polygon, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "./Styles/Map.css";
+import axios from "axios";
+import env from "react-dotenv";
 
 const MapComponent = (props) => {
   const mapRef = useRef(null);
   const latitude = -7.621672504970947;
   const longitude = 110.39189700526022;
-
+  const [polygons, setPolygons] = useState([]);
   const sebaran = props.sebaran;
 
-  const markerBahaya = new L.divIcon({
-    html: "<div class='custom-marker status-bahaya'></div>",
-    iconSize: [50, 50],
-  });
+  const getKelompokTani = async () => {
+    const response = await axios.get(`${env.API_URL}/kelompok-tani`);
+    setPolygons(response.data);
+  };
 
-  const markerWaspada = new L.divIcon({
-    html: "<div class='custom-marker status-waspada'></div>",
-    iconSize: [50, 50],
-  });
-
-  const markerAman = new L.divIcon({
-    html: "<div class='custom-marker status-aman'></div>",
-    iconSize: [50, 50],
-  });
+  useEffect(() => {
+    getKelompokTani();
+  }, []);
 
   return (
     <MapContainer
@@ -46,20 +42,23 @@ const MapComponent = (props) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {sebaran.map((item) => (
-        <Marker
-          icon={item.jumlah > 50 ? markerBahaya
-                : item.jumlah > 10 ? markerWaspada
-                : markerAman
-          }
-          position={[item.KelompokTani.latitude, item.KelompokTani.longitude]}
+      {polygons.map((item) => (
+        <Polygon
+          positions={item.coordinates}
+          pathOptions={{
+            color:
+              sebaran[item.id - 1].jumlah > 50
+                ? "rgba(255, 105, 0)"
+                : sebaran[item.id - 1].jumlah > 10
+                ? "rgba(244, 240, 145)"
+                : "rgba(235, 181, 181)",
+          }}
           eventHandlers={{
             click: () => {
-              // console.log("click");
-              props.handleDetail(item);
+              props.handleDetail(item.id - 1);
             },
           }}
-        ></Marker>
+        />
       ))}
     </MapContainer>
   );
