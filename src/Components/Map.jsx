@@ -47,9 +47,9 @@ const MapComponent = (props) => {
           positions={item.coordinates}
           pathOptions={{
             color:
-              sebaran[item.id - 1].jumlah > 50
+              sebaran[item.id - 1]?.jumlah > 50
                 ? "rgba(255, 105, 0)"
-                : sebaran[item.id - 1].jumlah > 10
+                : sebaran[item.id - 1]?.jumlah > 10
                 ? "rgba(244, 240, 145)"
                 : "rgba(235, 181, 181)",
           }}
