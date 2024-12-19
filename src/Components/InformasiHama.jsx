@@ -25,19 +25,22 @@ const InformasiHama = (props) => {
   const navigate = useNavigate();
   const data = hama[index];
   const [history, setHistory] = useState([]);
+  const thisMonth = moment().format("M");
+  const thisYear = moment().format("YYYY");
+  const [month, setMonth] = useState(thisMonth);
 
   const getHistory = async () => {
     const response = await axios.get(
-      `${env.API_URL}/tangkapan-hama/${data.id_kelompok_tani}/${moment().format(
-        "M"
-      )}`
+      `${env.API_URL}/tangkapan-hama/${data.id_kelompok_tani}/${month}/${thisYear}`
     );
 
-    const sortedData = response.data.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    const sortedData = response.data.sort(
+      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+    );
 
     let tmp = [];
     sortedData.forEach((item) => {
-      const obj = {x: moment(item.createdAt).format("D"), y: item.jumlah}
+      const obj = { x: moment(item.createdAt).format("D"), y: item.jumlah };
       tmp.push(obj);
     });
     setHistory(tmp);
@@ -60,7 +63,8 @@ const InformasiHama = (props) => {
 
   useEffect(() => {
     getHistory();
-  }, []);
+    console.log(month);
+  }, [month]);
 
   const chartOptions = {
     chart: {
@@ -291,15 +295,19 @@ const InformasiHama = (props) => {
             bg={"#F9F9F9"}
             borderRadius={"25px"}
             icon={<IoIosArrowDropdownCircle />}
+            value={month}
+            onChange={(e) => setMonth(Number(e.target.value))}
           >
-            {/* {months.map((month) => 
-              (<option value={`${month}`} selected={moment().format("MMMM") === month}>{month}</option>)
-            )} */}
-            <option value="September">September</option>
+            {months.slice(0, thisMonth).map((item, idx) => (
+              <option key={idx} value={idx + 1}>
+                {" "}
+                {item}
+              </option>
+            ))}
           </Select>
         </Flex>
         <Box width="90%" height="80%" m={"auto"}>
-          <Chart options={chartOptions} series={chartSeries}  type="line" />
+          <Chart options={chartOptions} series={chartSeries} type="line" />
         </Box>
       </Flex>
     </Flex>
