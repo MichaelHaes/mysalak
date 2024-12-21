@@ -37,9 +37,11 @@ export const useHama = create((set) => ({
 
 export const useWeather = create((set) => ({
   preds: [],
+  avgPreds: [],
   latest: {},
   setPreds: (val) => set({ preds: val }),
   setLatest: (val) => set({ latest: val }),
+  setAvgPreds: (val) => set({ avgPreds: val})
 }));
 
 export const useCoordinate = create((set) => ({

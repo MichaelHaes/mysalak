@@ -8,7 +8,6 @@ const RamalanCard = (props) => {
   moment.locale("id");
   const data = props.item;
   const index = props.index;
-  const now = new Date();
 
   return (
     <Flex
@@ -34,17 +33,13 @@ const RamalanCard = (props) => {
         >
           <Text fontWeight={"bold"} lineHeight={1}>
             <Moment format="DD">
-              {new Date(new Date().setDate(new Date().getDate() + index + 1))}
+              {data.date}
             </Moment>
           </Text>
           <Text fontSize={"0.8vh"} lineHeight={1}>
-              {now.getDate() + index >= 30 ? (
-                <Moment format="MMMM">
-                  {new Date(new Date().setMonth(new Date().getMonth() + 1))}
-              </Moment>
-              ) : (<Moment format="MMMM">
-                  {new Date(new Date().setDate(new Date().getMonth()))}
-              </Moment>)}
+            <Moment format="MMMM">
+              {data.date}
+            </Moment>
           </Text>
         </Flex>
 
@@ -63,7 +58,7 @@ const RamalanCard = (props) => {
       </Flex>
 
       <Text fontWeight={"bold"} fontSize={"2.2vh"}>
-        {data.tavg.toPrecision(3)}°C
+        {data.temperature.toPrecision(3)}°C
       </Text>
     </Flex>
   );

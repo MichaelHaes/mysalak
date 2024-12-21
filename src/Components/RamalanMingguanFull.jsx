@@ -1,7 +1,8 @@
 import { Flex, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import RamalanCard from "./RamalanCard";
 import { IoIosArrowBack } from "react-icons/io";
+import moment from "moment";
 
 const RamalanMingguanFull = (props) => {
   const data = props.item;

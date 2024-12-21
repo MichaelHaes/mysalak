@@ -9,23 +9,27 @@ import env from "react-dotenv";
 import axios from "axios";
 
 const RamalanCuaca = () => {
-  const { preds, setPreds } = useWeather();
+  const { preds, setPreds, avgPreds, setAvgPreds } = useWeather();
   const [all, setAll] = useState(false);
 
   const getPred = async () => {
     const response = await axios.get(`${env.API_URL}/ramalan`);
     setPreds(response.data);
-    // console.log(response.data);
+  }
+
+  const getAvgPreds = async () => {
+    const response = await axios.get(`${env.API_URL}/ramalan-avg`);
+    setAvgPreds(response.data);
   }
 
   function toggleAll() {
     setAll(!all);
-    // console.log("toggled");
   }
 
   useEffect(() => {
     setAll(false);
-    getPred();
+    if(!preds) getPred();
+    if(!avgPreds) getAvgPreds();
   }, []);
 
   return !all ? (
@@ -33,7 +37,7 @@ const RamalanCuaca = () => {
       <IndikatorHeader />
       {/* <IndikatorCard /> */}
       <RamalanMingguan
-        item={preds.slice(0, 3)}
+        item={avgPreds.slice(0, 3)}
         toggleAll={toggleAll}
       />
 
@@ -86,7 +90,7 @@ const RamalanCuaca = () => {
       </Flex>
     </Box>
   ) : (
-    <RamalanMingguanFull item={preds} toggleAll={toggleAll} />
+    <RamalanMingguanFull item={avgPreds} toggleAll={toggleAll} />
   );
 };
 
