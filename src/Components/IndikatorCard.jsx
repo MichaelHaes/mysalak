@@ -3,30 +3,10 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "./Styles/IndikatorCard.css";
 import { IoIosPartlySunny } from "react-icons/io";
+import moment from "moment";
 
-const IndikatorCard = () => {
-  const cardDetails = [
-    {
-      jam: "12.00",
-      suhu: "20°C",
-      cuaca: "Cerah Berawan",
-    },
-    {
-      jam: "16.00",
-      suhu: "20°C",
-      cuaca: "Cerah Berawan",
-    },
-    {
-      jam: "20.00",
-      suhu: "20°C",
-      cuaca: "Cerah Berawan",
-    },
-    {
-      jam: "00.00",
-      suhu: "20°C",
-      cuaca: "Cerah Berawan",
-    },
-  ];
+const IndikatorCard = (props) => {
+  const cardDetails = props.item;
 
   return (
     <Box w={"85%"} mx={"auto"} pos={"relative"}>
@@ -36,24 +16,32 @@ const IndikatorCard = () => {
 
       <Box h={"fit-content"} pos={"relative"}>
         <Swiper spaceBetween={30} slidesPerView={3.5} slidesOffsetAfter={30}>
-          {cardDetails.map((item) => (
-            <SwiperSlide>
-              <Box className="ramalan-card">
-                <Box className="ramalan-card-header white-text">
-                  <Text>{item.jam}</Text>
-                </Box>
-                <Box className="ramalan-card-body">
-                  <Box>
-                    <IoIosPartlySunny size={"auto"} />
+          {cardDetails
+            .filter(
+              (item) =>
+                moment(item.date).format("DD") === moment().format("DD") ||
+                moment(item.date).format("DD") ===
+                  moment().add(1, "days").format("DD")
+            )
+            .slice(moment().add(1, 'hours').format("HH"), moment().format("HH") + 24)
+            .map((item) => (
+              <SwiperSlide>
+                <Box className="ramalan-card">
+                  <Box className="ramalan-card-header white-text">
+                    <Text>{moment(item.date).format("HH")}:00</Text>
                   </Box>
-                  <Text>{item.suhu}</Text>
+                  <Box className="ramalan-card-body">
+                    <Box>
+                      <IoIosPartlySunny size={"auto"} />
+                    </Box>
+                    <Text>{item.temperature.toPrecision(3)}°C</Text>
+                  </Box>
+                  <Box className="ramalan-card-footer">
+                    <Text>H:{item.humidity.toPrecision(3)}%</Text>
+                  </Box>
                 </Box>
-                <Box className="ramalan-card-footer">
-                  <Text>{item.cuaca}</Text>
-                </Box>
-              </Box>
-            </SwiperSlide>
-          ))}
+              </SwiperSlide>
+            ))}
         </Swiper>
       </Box>
     </Box>
