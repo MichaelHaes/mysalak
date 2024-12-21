@@ -17,13 +17,9 @@ const IndikatorCard = (props) => {
       <Box h={"fit-content"} pos={"relative"}>
         <Swiper spaceBetween={30} slidesPerView={3.5} slidesOffsetAfter={30}>
           {cardDetails
-            .filter(
-              (item) =>
-                moment(item.date).format("DD") === moment().format("DD") ||
-                moment(item.date).format("DD") ===
-                  moment().add(1, "days").format("DD")
+            .filter((item) =>
+              moment(item.date).isBetween(moment(), moment().add(24, "hours"))
             )
-            .slice(moment().add(1, 'hours').format("HH"), moment().format("HH") + 24)
             .map((item) => (
               <SwiperSlide>
                 <Box className="ramalan-card">

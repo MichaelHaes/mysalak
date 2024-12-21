@@ -28,14 +28,14 @@ const RamalanCuaca = () => {
 
   useEffect(() => {
     setAll(false);
-    if(!preds) getPred();
-    if(!avgPreds) getAvgPreds();
+    getPred();
+    getAvgPreds();
   }, []);
 
   return !all ? (
     <Box pb={"10vh"} w={"inherit"} h={"100%"}>
       <IndikatorHeader />
-      {/* <IndikatorCard /> */}
+      <IndikatorCard item={preds}/>
       <RamalanMingguan
         item={avgPreds.slice(0, 3)}
         toggleAll={toggleAll}
