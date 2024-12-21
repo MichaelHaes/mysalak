@@ -9,9 +9,10 @@ import { Link } from "react-router-dom";
 import { useWeather } from "../state";
 import axios from "axios";
 import env from "react-dotenv";
+import moment from "moment";
 
 const Weather = () => {
-  const { latest, setLatest } = useWeather();
+  const { preds, setPreds, latest, setLatest } = useWeather();
   const [show, setShow] = useState(false);
   const [humidity, setHumidity] = useState(0);
 
@@ -22,9 +23,15 @@ const Weather = () => {
     setShow(true);
   };
 
+  const getPred = async () => {
+    const response = await axios.get(`${env.API_URL}/ramalan`);
+    setPreds(response.data);
+  };
+
   useEffect(() => {
     getWeather();
-  }, [])
+    getPred();
+  }, []);
 
   return (
     <Flex justifyContent={"center"} pos={"relative"} my={9}>
@@ -90,8 +97,10 @@ const Weather = () => {
               flexDir={"column"}
               width={"50%"}
               align={"start"}
+              h={"100%"}
               pb={2}
               ps={1}
+              justify={"space-around"}
             >
               <Flex align={"center"}>
                 {/* <Box w={"7vh"} h={"7vh"}>
@@ -102,7 +111,7 @@ const Weather = () => {
                   <Text fontSize={"1.5vh"} mb={"-1vh"}>
                     Saat ini
                   </Text>
-                  <Text fontSize={"6vh"} fontWeight={"bold"}>
+                  <Text fontSize={"5.5vh"} fontWeight={"bold"}>
                     {show && latest.temperature.toPrecision(3)}°C
                   </Text>
                 </Flex>
@@ -111,20 +120,23 @@ const Weather = () => {
                 Cerah Berawan
               </Text> */}
 
-              {/* <Flex gap={4} textAlign={"center"} fontSize={"1.4vh"}>
-                <Flex direction={"column"}>
-                  <IoIosPartlySunny size={"4vh"} />
-                  <Text mt={"-10%"}>12.00</Text>
-                </Flex>
-                <Flex direction={"column"}>
-                  <IoIosPartlySunny size={"4vh"} />
-                  <Text mt={"-10%"}>16.00</Text>
-                </Flex>
-                <Flex direction={"column"}>
-                  <IoIosPartlySunny size={"4vh"} />
-                  <Text mt={"-10%"}>20.00</Text>
-                </Flex>
-              </Flex> */}
+              <Flex gap={4} textAlign={"center"} fontSize={"1.4vh"}>
+                {preds
+                  .filter((item) =>
+                    moment(item.date).isBetween(
+                      moment(),
+                      moment().add(3, "hours")
+                    )
+                  )
+                  .map((item) => (
+                    <Flex direction={"column"} justify={"center"}>
+                      <Text fontWeight={"bold"} fontSize={"1.7vh"}>{item.temperature.toPrecision(3)}°C</Text>
+                      <Text fontWeight={"normal"}>
+                        {moment(item.date).format("HH")}:00
+                      </Text>
+                    </Flex>
+                  ))}
+              </Flex>
             </Flex>
 
             {/* Kanan */}
