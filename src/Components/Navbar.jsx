@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const navItems = [
     {
-      route: "/",
+      route: "/dashboard",
       a_logo: <GoHomeFill size={"auto"} />,
     },
     {
