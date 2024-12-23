@@ -1,0 +1,11 @@
+.custom-confirm-button{
+    border-radius: 30px;
+    background: var(--accent-secondary);
+}
+
+.custom-cancel-button{
+    border-radius: 30px;
+    border: solid 2px var(--accent-secondary);
+    background: transparent;
+    color: var(--accent-secondary);
+}
