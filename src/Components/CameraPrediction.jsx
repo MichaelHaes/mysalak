@@ -7,13 +7,16 @@ import env from "react-dotenv";
 import { getPreciseDistance } from "geolib";
 import { useCoordinate } from "../state";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import "../custom-swal.css"
 
-const CameraPrediction = ({ togglePredict, captured }) => {
+const CameraPrediction = ({ togglePredict, captured, changeCaptured }) => {
   const [loading, setLoading] = useState(true);
   const { latitude, longitude } = useCoordinate();
   const navigate = useNavigate();
   const [detected, setDetected] = useState({});
-  const [able, setAble] = useState(false);
+  const [able, setAble] = useState(true);
   const [kelompoks, setKelompoks] = useState([]);
   const [selected, setSelected] = useState({});
   const [saving, setSaving] = useState(false);
@@ -116,6 +119,63 @@ const CameraPrediction = ({ togglePredict, captured }) => {
     navigate("/manajemen-hama");
   };
 
+  const triggerSwal = () => {
+    withReactContent(Swal)
+      .fire({
+        html: "<p>Apakah benar hama yang anda foto adalah <strong>lalat buah</strong>?</p>",
+        // icon: "success",
+        showCancelButton: true,
+        confirmButtonText: "Benar",
+        cancelButtonText: "Tidak Benar",
+        reverseButtons: true,
+        customClass: {
+          confirmButton: 'custom-confirm-button',
+          cancelButton: 'custom-cancel-button',
+          imageUrl: "custom-image-swal"
+        },
+        imageUrl: "/assets/lalat buah.png"
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          withReactContent(Swal)
+            .fire({
+              title: "Terima kasih atas konfirmasinya",
+              text: "Jumlah lalat telah disimpan",
+              confirmButtonText: "Ke Manajemen Hama",
+              customClass: {
+                confirmButton: 'custom-confirm-button',
+                cancelButton: 'custom-cancel-button'
+              }
+            })
+            .then(() => {
+              postCalculation();
+            });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          withReactContent(Swal)
+            .fire({
+              title: "Terima kasih atas konfirmasinya",
+              text: "Apakah anda ingin mengulangi proses deteksi?",
+              showCancelButton: true,
+              confirmButtonText: "Ulangi",
+              cancelButtonText: "Tidak",
+              reverseButtons: true,
+              customClass: {
+                confirmButton: 'custom-confirm-button',
+                cancelButton: 'custom-cancel-button'
+              }
+            })
+            .then((res) => {
+              if (res.isConfirmed) {
+                togglePredict();
+                changeCaptured(null);
+              } else if (res.dismiss === Swal.DismissReason.cancel) {
+                navigate(-1);
+              }
+            });
+        }
+      });
+  };
+
   return (
     <>
       <Flex
@@ -156,7 +216,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
           Hitung Hama
         </Text>
 
-        {/* {full && (
+        {full && (
         <Image
           src={`data:image/jpeg;base64,${detected.image}`}
           w={full ? "85vw" : 0}
@@ -167,7 +227,7 @@ const CameraPrediction = ({ togglePredict, captured }) => {
           mt={"14vh"}
           objectFit={"contain"}
         />
-      )} */}
+      )}
 
         <Flex flexDir={"column"} px={5} pt={"14vh"}>
           <Flex justify={"space-between"} align={"center"}>
@@ -271,7 +331,8 @@ const CameraPrediction = ({ togglePredict, captured }) => {
               bg={"#2c3631"}
               color={"white"}
               onClick={() => {
-                postCalculation();
+                // postCalculation();
+                triggerSwal();
               }}
               disabled={saving}
             >
