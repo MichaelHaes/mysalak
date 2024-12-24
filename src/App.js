@@ -21,6 +21,8 @@ import ProtectedRoutes from "./Hooks/useProtectedRoutes";
 import AdminLogin from "./Page/Auth/AdminLogin";
 import Navbar from "./Components/Navbar";
 import UnauthorizedRoute from "./Hooks/useUnprotectedRoutes";
+import ManajemenAnggota from "./Page/Admin/UMN/ManajemenAnggota";
+import RoleBasedRoutes from "./Hooks/useRoleBasedRoutes";
 
 function App() {
   const setKelompokTani = useKelompokTaniList().setKelompokTani;
@@ -76,6 +78,34 @@ function App() {
               <Route path="/ramalan-cuaca" element={<RamalanCuaca />} />
               <Route path="/artikel" element={<Artikel />} />
               <Route path="/artikel/:id" element={<ArticleDetail />} />
+            </Route>
+            {/* admin umn */}
+            <Route element={<RoleBasedRoutes allowed={1}/>}>
+              <Route
+                path="/admin/manajemen-anggota"
+                element={<ManajemenAnggota />}
+              />
+            </Route>
+            {/* admin ugm */}
+            <Route element={<RoleBasedRoutes allowed={2}/>}>
+              {/* <Route
+                path="/admin/manajemen-anggota"
+                element={<ManajemenAnggota />}
+              /> */}
+            </Route>
+            {/* admin ketua kelompok tani */}
+            <Route element={<RoleBasedRoutes allowed={3}/>}>
+              {/* <Route
+                path="/admin/manajemen-anggota"
+                element={<ManajemenAnggota />}
+              /> */}
+            </Route>
+            {/* admin dinas */}
+            <Route element={<RoleBasedRoutes allowed={4}/>}>
+              {/* <Route
+                path="/admin/manajemen-anggota"
+                element={<ManajemenAnggota />}
+              /> */}
             </Route>
           </Routes>
         </Box>
