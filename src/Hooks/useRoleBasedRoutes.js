@@ -1,5 +1,6 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Navbar from "../Components/Navbar";
+import RedirectPage from "../Page/RedirectPage";
 
 const RoleBasedRoutes = ({allowed}) => {
   const token = JSON.parse(localStorage.getItem("JWT_Token"));
@@ -11,7 +12,8 @@ const RoleBasedRoutes = ({allowed}) => {
       <Navbar />
     </>
   ) : (
-    <Navigate to="/" />
+    <RedirectPage />
+    // <Navigate to="/" />
   );
 };
 

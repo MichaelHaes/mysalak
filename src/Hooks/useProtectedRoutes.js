@@ -1,6 +1,7 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Navbar from "../Components/Navbar";
+import RedirectPage from "../Page/RedirectPage";
 
 const ProtectedRoutes = () => {
   const token = JSON.parse(localStorage.getItem("JWT_Token"));
@@ -12,7 +13,7 @@ const ProtectedRoutes = () => {
       {location.pathname.includes("kamera") ? <></> : <Navbar />}
     </>
   ) : (
-    <Navigate to="/" />
+    <RedirectPage />
   );
 };
 
