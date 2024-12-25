@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Box, ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Dashboard from "./Page/Dashboard";
 import PersebaranHama from "./Page/PersebaranHama";
@@ -19,10 +19,11 @@ import env from "react-dotenv";
 import PetaniLogin from "./Page/Auth/PetaniLogin";
 import ProtectedRoutes from "./Hooks/useProtectedRoutes";
 import AdminLogin from "./Page/Auth/AdminLogin";
-import Navbar from "./Components/Navbar";
 import UnauthorizedRoute from "./Hooks/useUnprotectedRoutes";
-import ManajemenAnggota from "./Page/Admin/UMN/ManajemenAnggota";
 import RoleBasedRoutes from "./Hooks/useRoleBasedRoutes";
+import ManajemenAdmin from "./Page/Admin/UMN/ManajemenAdmin";
+import TambahAdmin from "./Page/Admin/UMN/TambahAdmin";
+import EditAdmin from "./Page/Admin/UMN/EditAdmin";
 
 function App() {
   const setKelompokTani = useKelompokTaniList().setKelompokTani;
@@ -82,8 +83,16 @@ function App() {
             {/* admin umn */}
             <Route element={<RoleBasedRoutes allowed={1}/>}>
               <Route
-                path="/admin/manajemen-anggota"
-                element={<ManajemenAnggota />}
+                path="/admin/manajemen-admin"
+                element={<ManajemenAdmin />}
+              />
+              <Route
+                path="/admin/manajemen-admin/tambah"
+                element={<TambahAdmin />}
+              />
+              <Route
+                path="/admin/manajemen-admin/:id/edit"
+                element={<EditAdmin />}
               />
             </Route>
             {/* admin ugm */}

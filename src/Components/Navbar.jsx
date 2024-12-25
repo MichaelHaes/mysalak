@@ -31,7 +31,7 @@ const Navbar = () => {
       role: 5,
     },
     {
-      route: "/admin/manajemen-anggota",
+      route: "/admin/manajemen-admin",
       a_logo: <BsFillPeopleFill size={"auto"} />,
       custom: true,
       role: 1,
