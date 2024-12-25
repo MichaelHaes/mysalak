@@ -9,11 +9,13 @@ import {
 import React, { useEffect, useState } from "react";
 import MapComponent from "../Components/Map";
 import { IoIosArrowBack, IoMdClose } from "react-icons/io";
+import { FaPlus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import env from "react-dotenv";
 
 const PersebaranHama = () => {
+  const nama = JSON.parse(localStorage.getItem('nama'));
   const navigate = useNavigate();
   const [detail, setDetail] = useState({});
   const [hama, setHama] = useState([]);
@@ -35,6 +37,19 @@ const PersebaranHama = () => {
     setDetail({
       nama: "",
     });
+  }
+
+  // function handleAddPerangkap() {
+  const handleAddPerangkap = () => {
+    setDetail((prevState) => ({
+      ...prevState,
+      KelompokTani: {
+        ...prevState.KelompokTani,
+        jumlah_perangkap: prevState.KelompokTani.jumlah_perangkap + 1
+      }
+    }));
+    console.log(detail)
+    axios.put(`${env.API_URL}/tambah-perangkap`, detail);
   }
 
   // useEffect(() => {
@@ -190,7 +205,42 @@ const PersebaranHama = () => {
               <Text fontSize={"1.5vh"}>Jumlah Lalat Buah</Text>
               <Text fontSize={"1.5vh"}>{detail.jumlah}</Text>
             </Flex>
-
+            {nama === detail.KelompokTani.ketua ?
+              <Flex gap={3}>
+                <Flex
+                  h={"fit-content"}
+                  w={"100%"}
+                  p={2}
+                  borderRadius={"12px"}
+                  align={"center"}
+                  justify={"space-between"}
+                  bg={"#F5F5F5"}
+                >
+                  <Text fontSize={"1.5vh"}>Jumlah Perangkap</Text>
+                  <Text fontSize={"1.5vh"}>{detail.KelompokTani.jumlah_perangkap}</Text>
+                </Flex>
+                <Button
+                  h={"inherit"}
+                  borderRadius={"12px"}
+                  bg={"#F5F5F5"}
+                  onClick={() => handleAddPerangkap()}
+                >
+                  <FaPlus />
+                </Button>
+              </Flex>
+              :
+              <Flex
+                h={"fit-content"}
+                p={2}
+                borderRadius={"12px"}
+                align={"center"}
+                justify={"space-between"}
+                bg={"#F5F5F5"}
+              >
+                <Text fontSize={"1.5vh"}>Jumlah Perangkap</Text>
+                <Text fontSize={"1.5vh"}>{detail.KelompokTani.jumlah_perangkap}</Text>
+              </Flex>
+            }
             <Flex
               align={"center"}
               justify={"space-between"}
@@ -202,8 +252,8 @@ const PersebaranHama = () => {
                 detail.jumlah > 50
                   ? "inset 0 0 5px .5px #A9D2B5"
                   : detail.jumlah > 10
-                  ? "inset 0 0 5px .5px #F4F091"
-                  : "inset 0 0 5px .5px #EBB5B5"
+                    ? "inset 0 0 5px .5px #F4F091"
+                    : "inset 0 0 5px .5px #EBB5B5"
               }
             >
               <Text>Status</Text>

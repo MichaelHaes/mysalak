@@ -38,6 +38,7 @@ const Profil = () => {
     localStorage.removeItem("JWT_Token");
     localStorage.removeItem("fcmToken");
     localStorage.removeItem("role_id");
+    localStorage.removeItem("nama");
     localStorage.removeItem("user_id");
     axios
       .post(`${env.API_URL}/mysalak/delete-token`, {

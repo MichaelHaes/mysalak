@@ -48,6 +48,7 @@ const AdminLogin = () => {
             JSON.stringify(response.data.role_id)
           );
           localStorage.setItem("user_id", JSON.stringify(data.email));
+          localStorage.setItem("nama", JSON.stringify(response.data.admin_nama));
           navigate("/dashboard");
         })
         .catch((response) => {
