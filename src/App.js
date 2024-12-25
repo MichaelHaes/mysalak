@@ -25,6 +25,7 @@ import ManajemenAdmin from "./Page/Admin/UMN/ManajemenAdmin";
 import TambahAdmin from "./Page/Admin/UMN/TambahAdmin";
 import EditAdmin from "./Page/Admin/UMN/EditAdmin";
 import VerifikasiAnggota from "./Page/Admin/Ketua/VerifikasiAnggota";
+import RedirectPage from "./Page/RedirectPage";
 
 function App() {
   const setKelompokTani = useKelompokTaniList().setKelompokTani;
@@ -117,6 +118,8 @@ function App() {
                 element={<ManajemenAnggota />}
               /> */}
             </Route>
+
+            <Route path="*" element={<RedirectPage message="Laman tidak tersedia"/>}/>
           </Routes>
         </Box>
         <Notification />
