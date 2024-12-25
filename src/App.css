@@ -27,3 +27,7 @@
 .white-text {
   color: var(--background);
 }
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}

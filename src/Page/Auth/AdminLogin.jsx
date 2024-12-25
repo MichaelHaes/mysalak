@@ -49,6 +49,7 @@ const AdminLogin = () => {
           );
           localStorage.setItem("user_id", JSON.stringify(data.email));
           localStorage.setItem("nama", JSON.stringify(response.data.admin_nama));
+          localStorage.setItem("kelompok_tani", JSON.stringify(response.data.kelompok_tani));
           navigate("/dashboard");
         })
         .catch((response) => {

@@ -24,6 +24,7 @@ import RoleBasedRoutes from "./Hooks/useRoleBasedRoutes";
 import ManajemenAdmin from "./Page/Admin/UMN/ManajemenAdmin";
 import TambahAdmin from "./Page/Admin/UMN/TambahAdmin";
 import EditAdmin from "./Page/Admin/UMN/EditAdmin";
+import VerifikasiAnggota from "./Page/Admin/Ketua/VerifikasiAnggota";
 
 function App() {
   const setKelompokTani = useKelompokTaniList().setKelompokTani;
@@ -104,10 +105,10 @@ function App() {
             </Route>
             {/* admin ketua kelompok tani */}
             <Route element={<RoleBasedRoutes allowed={3}/>}>
-              {/* <Route
-                path="/admin/manajemen-anggota"
-                element={<ManajemenAnggota />}
-              /> */}
+              <Route
+                path="/admin/verifikasi-anggota"
+                element={<VerifikasiAnggota />}
+              />
             </Route>
             {/* admin dinas */}
             <Route element={<RoleBasedRoutes allowed={4}/>}>
