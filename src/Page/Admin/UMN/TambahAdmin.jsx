@@ -11,7 +11,7 @@ import {
   InputRightElement,
   Button,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { useForm } from "react-hook-form";
@@ -25,6 +25,8 @@ const TambahAdmin = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [role, setRole] = useState(0);
+  const [kelompok, setKelompok] = useState([]);
+  const [kel, setKel] = useState(0);
 
   const {
     register,
@@ -34,6 +36,19 @@ const TambahAdmin = () => {
     clearErrors,
   } = useForm();
 
+  const getKelompok = async () => {
+    try {
+      const response = await axios.get(`${env.API_URL}/kelompok-tani`);
+      setKelompok(response.data);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  useEffect(() => {
+    getKelompok();
+  }, []);
+
   const addAdmin = async (data) => {
     if (data.role_id === "0") {
       setError("role_id", {
@@ -42,6 +57,16 @@ const TambahAdmin = () => {
       });
       return;
     }
+
+    if (data.role_id === "0" && data.kelompok_tani === "0") {
+      setError("kelompok_tani", {
+        type: "manual",
+        message: "Mohon pilih kelompok tani",
+      });
+      return;
+    }
+
+    console.log(data);
 
     withReactContent(Swal)
       .fire({
@@ -69,6 +94,7 @@ const TambahAdmin = () => {
                 const payload = {
                   ...data,
                   role_id: role,
+                  kelompok_tani: kel,
                 };
 
                 const response = await axios.post(
@@ -78,7 +104,7 @@ const TambahAdmin = () => {
                     headers: {
                       Authorization: `Bearer ${localStorage
                         .getItem("JWT_Token")
-                        .replace(/"/g, "")}`,
+                        .slice(1, -1)}`,
                       role_id: localStorage.getItem("role_id"),
                     },
                   }
@@ -262,6 +288,43 @@ const TambahAdmin = () => {
               <FormErrorMessage>{errors.role_id.message}</FormErrorMessage>
             )}
           </FormControl>
+
+          {role === 3 && (
+            <FormControl
+              id="kelompok_tani"
+              isInvalid={errors.kelompok_tani}
+              mt={4}
+            >
+              <FormLabel fontSize="small" fontWeight="bold">
+                Kelompok Tani
+              </FormLabel>
+              <Select
+                {...register("kelompok_tani", {
+                  required: "Mohon pilih kelompok tani",
+                  validate: (value) =>
+                    (role === 3 && value !== "0") ||
+                    "Mohon pilih kelompok tani",
+                })}
+                placeholder="Pilih Kelompok Tani"
+                onChange={(e) => {
+                  clearErrors("kelompok_tani");
+                  setKel(Number(e.target.value));
+                }}
+                value={kel}
+              >
+                {kelompok.map((item) => (
+                  <option value={`${item.id}`} key={item.id}>
+                    {item.nama}
+                  </option>
+                ))}
+              </Select>
+              {errors.kelompok_tani && (
+                <FormErrorMessage>
+                  {errors.kelompok_tani.message}
+                </FormErrorMessage>
+              )}
+            </FormControl>
+          )}
 
           <Flex
             justifyContent={"center"}
