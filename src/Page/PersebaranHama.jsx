@@ -5,11 +5,12 @@ import {
   ListItem,
   Text,
   UnorderedList,
+  ButtonGroup
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import MapComponent from "../Components/Map";
 import { IoIosArrowBack, IoMdClose } from "react-icons/io";
-import { FaPlus } from "react-icons/fa6";
+import { FaPlus, FaMinus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import env from "react-dotenv";
@@ -40,7 +41,7 @@ const PersebaranHama = () => {
   }
 
   // function handleAddPerangkap() {
-  const handleAddPerangkap = () => {
+  const handleIncrementPerangkap = () => {
     setDetail((prevState) => ({
       ...prevState,
       KelompokTani: {
@@ -48,9 +49,19 @@ const PersebaranHama = () => {
         jumlah_perangkap: prevState.KelompokTani.jumlah_perangkap + 1
       }
     }));
-    console.log(detail)
     axios.put(`${env.API_URL}/tambah-perangkap`, detail);
   }
+
+  const handleDecrementPerangkap = () => {
+    setDetail((prevState) => ({
+      ...prevState,
+      KelompokTani: {
+        ...prevState.KelompokTani,
+        jumlah_perangkap: prevState.KelompokTani.jumlah_perangkap - 1
+      }
+    }));
+    axios.put(`${env.API_URL}/tambah-perangkap`, detail);
+  } 
 
   // useEffect(() => {
   //   if (detail.hama && detail.hama.length > 0) {
@@ -206,7 +217,7 @@ const PersebaranHama = () => {
               <Text fontSize={"1.5vh"}>{detail.jumlah}</Text>
             </Flex>
             {nama === detail.KelompokTani.ketua ?
-              <Flex gap={3}>
+              <Flex gap={2}>
                 <Flex
                   h={"fit-content"}
                   w={"100%"}
@@ -219,14 +230,30 @@ const PersebaranHama = () => {
                   <Text fontSize={"1.5vh"}>Jumlah Perangkap</Text>
                   <Text fontSize={"1.5vh"}>{detail.KelompokTani.jumlah_perangkap}</Text>
                 </Flex>
-                <Button
-                  h={"inherit"}
-                  borderRadius={"12px"}
-                  bg={"#F5F5F5"}
-                  onClick={() => handleAddPerangkap()}
+                <ButtonGroup
+                  isAttached
                 >
-                  <FaPlus />
-                </Button>
+                  <Button
+                    variant={"unstyled"}
+                    justifyItems={"center"}
+                    h={"inherit"}
+                    borderRadius={"12px"}
+                    bg={"#F5F5F5"}
+                    onClick={() => handleIncrementPerangkap()}
+                  >
+                    <FaPlus />
+                  </Button>
+                  <Button
+                    variant={"unstyled"}
+                    justifyItems={"center"}
+                    h={"inherit"}
+                    borderRadius={"12px"}
+                    bg={"#F5F5F5"}
+                    onClick={() => handleDecrementPerangkap()}
+                  >
+                    <FaMinus />
+                  </Button>
+                </ButtonGroup>
               </Flex>
               :
               <Flex
