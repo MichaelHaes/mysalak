@@ -105,7 +105,7 @@ const EditAdmin = () => {
       .then((result) => {
         if (result.isConfirmed) {
           withReactContent(Swal).fire({
-            title: "Registrasi berhasil!",
+            title: "Data berhasil diedit!",
             timer: 2000,
             timerProgressBar: true,
             icon: "success",
@@ -130,8 +130,6 @@ const EditAdmin = () => {
                     },
                   }
                 );
-
-                console.log(response);
               } catch (e) {
                 console.log(e);
               }
