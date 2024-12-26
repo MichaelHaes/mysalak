@@ -40,6 +40,7 @@ const Profil = () => {
     localStorage.removeItem("role_id");
     localStorage.removeItem("nama");
     localStorage.removeItem("user_id");
+    localStorage.removeItem("kelompok_tani");
     axios
       .post(`${env.API_URL}/mysalak/delete-token`, {
         device_id: localStorage.getItem("deviceUUID"),
