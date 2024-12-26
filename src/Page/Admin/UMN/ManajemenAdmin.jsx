@@ -135,7 +135,7 @@ const ManajemenAdmin = () => {
           {admin
             .filter((item) => (filter !== "" ? item.role_id === filter : true))
             .map((item) => (
-              <AdminCard admin={item} />
+              <AdminCard admin={item} getAdmin={getAdmin}/>
             ))}
         </Stack>
       </Flex>
