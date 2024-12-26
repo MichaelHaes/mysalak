@@ -7,18 +7,67 @@ import {
   MenuList,
   MenuItem,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { SlOptions } from "react-icons/sl";
 import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import env from "react-dotenv";
+import axios from "axios";
+import "../custom-swal.css";
 
-const AdminCard = ({ admin }) => {
+const AdminCard = ({ admin, getAdmin }) => {
   const navigate = useNavigate();
+  const [del, setDel] = useState("");
 
   const deleteAdmin = async () => {
-    console.log('deleted');
-  }
+    withReactContent(Swal)
+      .fire({
+        text: `Anda yakin ingin menghapus akun ${del}?`,
+        showCancelButton: true,
+        icon: "warning",
+        confirmButtonText: "Hapus",
+        cancelButtonText: "Batalkan",
+        reverseButtons: true,
+        customClass: {
+          confirmButton: "custom-confirm-button",
+          cancelButton: "custom-cancel-button",
+        },
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          withReactContent(Swal).fire({
+            title: "Akun berhasil dihapus!",
+            timer: 1000,
+            timerProgressBar: true,
+            icon: "success",
+            showConfirmButton: false,
+            didOpen: async () => {
+              try {
+                const response = await axios.delete(
+                  `${env.API_URL}/auth/admin/${admin.id}/delete`,
+                  {
+                    headers: {
+                      Authorization: `Bearer ${localStorage
+                        .getItem("JWT_Token")
+                        .slice(1, -1)}`,
+                      role_id: localStorage.getItem("role_id"),
+                    },
+                  }
+                );
+              } catch (e) {
+                console.log(e);
+              }
+            },
+            willClose: () => {
+              getAdmin();
+            },
+          });
+        }
+      });
+  };
 
   return (
     <Flex
@@ -49,7 +98,7 @@ const AdminCard = ({ admin }) => {
         }
         alt={`${admin.role_id}`}
       />
-      <Flex direction={"column"} gap={.5}>
+      <Flex direction={"column"} gap={0.5}>
         <Text className="admin-nama" fontSize={"1.5vh"} fontWeight={"bold"}>
           {admin.nama}
         </Text>
@@ -73,11 +122,41 @@ const AdminCard = ({ admin }) => {
         >
           <SlOptions size={"1.2vh"} />
         </MenuButton>
-        <MenuList bg={"#f2f2f2"} px={.5} py={.5} borderRadius={"md"} minW={'9vh'} fontSize={'1.1vh'}>
-          <MenuItem bg={"white"} mb={1} py={1} borderRadius={"3px"} px={2} gap={1} onClick={() => {navigate(`/admin/manajemen-admin/${admin.id}/edit`)}}>
+        <MenuList
+          bg={"#f2f2f2"}
+          px={0.5}
+          py={0.5}
+          borderRadius={"md"}
+          minW={"9vh"}
+          fontSize={"1.1vh"}
+        >
+          <MenuItem
+            bg={"white"}
+            mb={1}
+            py={1}
+            borderRadius={"3px"}
+            px={2}
+            gap={1}
+            onClick={() => {
+              navigate(`/admin/manajemen-admin/${admin.id}/edit`);
+            }}
+          >
             <FiEdit /> Edit
           </MenuItem>
-          <MenuItem bg={"white"} color={"#c14848"} py={1} borderRadius={"3px"} px={2} gap={1} onClick={() => {deleteAdmin()}}>
+          <MenuItem
+            bg={"white"}
+            color={"#c14848"}
+            py={1}
+            borderRadius={"3px"}
+            px={2}
+            gap={1}
+            onMouseEnter={() => {
+              setDel(admin.nama);
+            }}
+            onClick={() => {
+              deleteAdmin();
+            }}
+          >
             <MdDelete /> Delete
           </MenuItem>
         </MenuList>
