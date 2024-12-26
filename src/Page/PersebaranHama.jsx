@@ -40,28 +40,32 @@ const PersebaranHama = () => {
     });
   }
 
-  // function handleAddPerangkap() {
-  const handleIncrementPerangkap = () => {
-    setDetail((prevState) => ({
-      ...prevState,
-      KelompokTani: {
-        ...prevState.KelompokTani,
-        jumlah_perangkap: prevState.KelompokTani.jumlah_perangkap + 1
-      }
-    }));
-    axios.put(`${env.API_URL}/tambah-perangkap`, detail);
-  }
+  const updateJumlahPerangkap = (newJumlah) => {
+    setDetail((prevState) => {
+      const updatedState = {
+        ...prevState,
+        KelompokTani: {
+          ...prevState.KelompokTani,
+          jumlah_perangkap: newJumlah,
+        },
+      };
+      axios.put(`${env.API_URL}/update-perangkap`, updatedState);
+      getKelompokTani();
 
-  const handleDecrementPerangkap = () => {
-    setDetail((prevState) => ({
-      ...prevState,
-      KelompokTani: {
-        ...prevState.KelompokTani,
-        jumlah_perangkap: prevState.KelompokTani.jumlah_perangkap - 1
-      }
-    }));
-    axios.put(`${env.API_URL}/tambah-perangkap`, detail);
-  } 
+      return updatedState;
+    });
+  };
+
+  const incrementJumlahPerangkap = () => {
+    const newJumlah = detail.KelompokTani.jumlah_perangkap + 1;
+    updateJumlahPerangkap(newJumlah);
+  };
+
+  const decrementJumlahPerangkap = () => {
+    const newJumlah = detail.KelompokTani.jumlah_perangkap - 1;
+    updateJumlahPerangkap(newJumlah);
+  };
+
 
   // useEffect(() => {
   //   if (detail.hama && detail.hama.length > 0) {
@@ -239,7 +243,7 @@ const PersebaranHama = () => {
                     h={"inherit"}
                     borderRadius={"12px"}
                     bg={"#F5F5F5"}
-                    onClick={() => handleIncrementPerangkap()}
+                    onClick={() => incrementJumlahPerangkap()}
                   >
                     <FaPlus />
                   </Button>
@@ -249,7 +253,7 @@ const PersebaranHama = () => {
                     h={"inherit"}
                     borderRadius={"12px"}
                     bg={"#F5F5F5"}
-                    onClick={() => handleDecrementPerangkap()}
+                    onClick={() => decrementJumlahPerangkap()}
                   >
                     <FaMinus />
                   </Button>
