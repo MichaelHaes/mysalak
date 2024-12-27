@@ -124,15 +124,17 @@ const TambahAdmin = () => {
   };
 
   return (
-    <Flex direction={"column"} h={"100vh"}>
+    <Flex direction={"column"} h={"100vh"} pb={20} overflowY={"scroll"}>
       {/* Header */}
       <Flex
         pos={"absolute"}
         w={"100%"}
-        h={"17vh"}
+        h={"13vh"}
         align={"center"}
         justifyContent={"center"}
         textAlign={"center"}
+        bg={"#f5f5f5"}
+        zIndex={10}
       >
         <Flex
           justify={"center"}
@@ -328,11 +330,12 @@ const TambahAdmin = () => {
 
           <Flex
             justifyContent={"center"}
-            w={"85%"}
+            w={"100%"}
             gap={5}
             mx={"auto"}
-            bottom={"10%"}
-            pos={"absolute"}
+            my={5}
+            // bottom={"10%"}
+            // pos={"absolute"}
           >
             <Button
               bg={"transparent"}
