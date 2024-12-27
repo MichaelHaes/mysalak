@@ -47,9 +47,12 @@ const PersebaranHama = () => {
         KelompokTani: {
           ...prevState.KelompokTani,
           jumlah_perangkap: newJumlah,
+          ftd: parseFloat(detail.jumlah / (detail.KelompokTani.jumlah_perangkap * 1)).toFixed(2), 
+          // ftd disini buat sekarang masih naive implementation
         },
       };
       axios.put(`${env.API_URL}/update-perangkap`, updatedState);
+      axios.put(`${env.API_URL}/update-ftd`, updatedState);
       getKelompokTani();
 
       return updatedState;
@@ -217,8 +220,9 @@ const PersebaranHama = () => {
                   )}
                 </Flex>
               </Flex> */}
-              <Text fontSize={"1.5vh"}>Jumlah Lalat Buah</Text>
-              <Text fontSize={"1.5vh"}>{detail.jumlah}</Text>
+              <Text fontSize={"1.5vh"}>FTD</Text>
+              <Text fontSize={"1.5vh"}>{detail.KelompokTani.ftd}</Text>
+              {/* <Text fontSize={"1.5vh"}>{detail.jumlah}</Text> */}
             </Flex>
             {nama === detail.KelompokTani.ketua ?
               <Flex gap={2}>
