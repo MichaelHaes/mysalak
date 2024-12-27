@@ -294,6 +294,8 @@ const Artikel = () => {
                 "&::-webkit-scrollbar": {
                   display: "none",
                 },
+                "-ms-overflow-style": "none",
+                "scrollbar-width": "none",
               }}
             >
               {ArticleData.map((article, index) => (

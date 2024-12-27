@@ -44,13 +44,12 @@ const ManajemenAdmin = () => {
         mx={"auto"}
         pos={"relative"}
         minH={"100vh"}
-        pt={2}
       >
         <Button
           pos={"sticky"}
           top={"85vh"}
-          left={'90vw'}
-          w={'10%'}
+          left={"90vw"}
+          w={"10%"}
           variant={"unstyled"}
           background={"#2c3631"}
           borderRadius={"lg"}
@@ -68,6 +67,7 @@ const ManajemenAdmin = () => {
               w={"100%"}
               fontSize={"2.3vh"}
               color={"#2c3631"}
+              mt={5}
             >
               Manajemen Akun Admin
             </Text>
@@ -97,7 +97,14 @@ const ManajemenAdmin = () => {
               h={"2rem"}
               gap={2}
               p={0}
-              overflowX={"scroll"}
+              overflowX={"auto"}
+              css={{
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
+                "-ms-overflow-style": "none",
+                "scrollbar-width": "none",
+              }}
             >
               <Tab
                 borderRadius={"full"}
@@ -135,7 +142,7 @@ const ManajemenAdmin = () => {
           {admin
             .filter((item) => (filter !== "" ? item.role_id === filter : true))
             .map((item) => (
-              <AdminCard admin={item} getAdmin={getAdmin}/>
+              <AdminCard admin={item} />
             ))}
         </Stack>
       </Flex>
