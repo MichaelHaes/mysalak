@@ -47,7 +47,7 @@ const PersebaranHama = () => {
         KelompokTani: {
           ...prevState.KelompokTani,
           jumlah_perangkap: newJumlah,
-          ftd: parseFloat(detail.jumlah / (detail.KelompokTani.jumlah_perangkap * 1)).toFixed(2), 
+          ftd: parseFloat(detail.jumlah / (detail.KelompokTani.jumlah_perangkap * 1)).toFixed(2),
           // ftd disini buat sekarang masih naive implementation
         },
       };
@@ -144,8 +144,9 @@ const PersebaranHama = () => {
             borderRadius={"12px"}
             color={"#2C3631"}
             gap={3}
-            py={5}
-            px={5}
+            pb={4}
+            pt={2}
+            px={4}
           >
             {/* <Button
               position={"absolute"}
@@ -176,17 +177,66 @@ const PersebaranHama = () => {
               </Text> */}
               <Button
                 borderRadius={"full"}
-                bg={"#F5F5F5"}
+                // bg={"#F5F5F5"}
+                right={-2}
                 variant={"unstyled"}
                 onClick={() => resetDetail()}
                 fontSize={"2vh"}
                 display={"flex"}
                 justifyContent={"center"}
               >
-                <IoMdClose />
+                <IoMdClose
+                  size={20}
+                />
               </Button>
             </Flex>
 
+
+            <Flex
+              align={"center"}
+              justify={"space-between"}
+              border={"1.5px solid #F5F5F5"}
+              pl={2}
+              borderRadius={"12px"}
+              bg={
+                detail.KelompokTani.ftd > 1
+                  ? "#850707"
+                  : detail.KelompokTani.ftd > 0.5
+                    ? "#ACA714"
+                    : "#377B4E"
+              }
+            >
+              <Text
+                color={"white"}
+                fontSize={"1.75vh"}
+              >Status</Text>
+              <Box
+                bg={"white"}
+                maxW={"30%"}
+                w={"30%"}
+                py={1.5}
+                m={1}
+                textAlign={"center"}
+                borderRadius={"8px"}
+                fontSize={"1.75vh"}
+                fontWeight={"bold"}
+                color={
+                  detail.KelompokTani.ftd > 1
+                    ? "#850707"
+                    : detail.KelompokTani.ftd > 0.5
+                      ? "#ACA714"
+                      : "#377B4E"
+                }
+              >
+                {detail.KelompokTani.ftd > 1 ? (
+                  <Text>Bahaya</Text>
+                ) : detail.KelompokTani.ftd > 0.5 ? (
+                  <Text>Waspada</Text>
+                ) : (
+                  <Text>Aman</Text>
+                )}
+              </Box>
+            </Flex>
             <Flex
               h={"fit-content"}
               p={2}
@@ -221,32 +271,35 @@ const PersebaranHama = () => {
                 </Flex>
               </Flex> */}
               <Text fontSize={"1.5vh"}>FTD</Text>
-              <Text fontSize={"1.5vh"}>{detail.KelompokTani.ftd}</Text>
-              {/* <Text fontSize={"1.5vh"}>{detail.jumlah}</Text> */}
+              <Text fontSize={"1.5vh"} fontWeight={"bold"}>{detail.KelompokTani.ftd}</Text>
             </Flex>
-            {nama === detail.KelompokTani.ketua ?
-              <Flex gap={2}>
+            <Flex gap={2}>
+              <Flex
+                h={"fit-content"}
+                w={"100%"}
+                p={2}
+                borderRadius={"12px"}
+                align={"center"}
+                justify={"space-between"}
+                bg={"#F5F5F5"}
+              >
+                <Text fontSize={"1.5vh"}>Jumlah Perangkap</Text>
+                <Text fontSize={"1.5vh"} fontWeight={"bold"}>{detail.KelompokTani.jumlah_perangkap}</Text>
+              </Flex>
+              {nama === detail.KelompokTani.ketua ?
                 <Flex
-                  h={"fit-content"}
-                  w={"100%"}
-                  p={2}
-                  borderRadius={"12px"}
-                  align={"center"}
-                  justify={"space-between"}
                   bg={"#F5F5F5"}
-                >
-                  <Text fontSize={"1.5vh"}>Jumlah Perangkap</Text>
-                  <Text fontSize={"1.5vh"}>{detail.KelompokTani.jumlah_perangkap}</Text>
-                </Flex>
-                <ButtonGroup
-                  isAttached
+                  justify={"space-between"}
+                  p={1}
+                  borderRadius={"12px"}
                 >
                   <Button
                     variant={"unstyled"}
                     justifyItems={"center"}
+                    mr={1}
                     h={"inherit"}
-                    borderRadius={"12px"}
-                    bg={"#F5F5F5"}
+                    borderRadius={"8px"}
+                    bg={"white"}
                     onClick={() => incrementJumlahPerangkap()}
                   >
                     <FaPlus />
@@ -255,50 +308,15 @@ const PersebaranHama = () => {
                     variant={"unstyled"}
                     justifyItems={"center"}
                     h={"inherit"}
-                    borderRadius={"12px"}
-                    bg={"#F5F5F5"}
+                    borderRadius={"8px"}
+                    bg={"white"}
                     onClick={() => decrementJumlahPerangkap()}
                   >
                     <FaMinus />
                   </Button>
-                </ButtonGroup>
-              </Flex>
-              :
-              <Flex
-                h={"fit-content"}
-                p={2}
-                borderRadius={"12px"}
-                align={"center"}
-                justify={"space-between"}
-                bg={"#F5F5F5"}
-              >
-                <Text fontSize={"1.5vh"}>Jumlah Perangkap</Text>
-                <Text fontSize={"1.5vh"}>{detail.KelompokTani.jumlah_perangkap}</Text>
-              </Flex>
-            }
-            <Flex
-              align={"center"}
-              justify={"space-between"}
-              border={"1.5px solid #F5F5F5"}
-              p={2}
-              borderRadius={"12px"}
-              fontWeight={"bold"}
-              boxShadow={
-                detail.jumlah > 50
-                  ? "inset 0 0 5px .5px #A9D2B5"
-                  : detail.jumlah > 10
-                    ? "inset 0 0 5px .5px #F4F091"
-                    : "inset 0 0 5px .5px #EBB5B5"
-              }
-            >
-              <Text>Status</Text>
-              {detail.jumlah > 50 ? (
-                <Text>Bahaya</Text>
-              ) : detail.jumlah > 10 ? (
-                <Text>Waspada</Text>
-              ) : (
-                <Text>Aman</Text>
-              )}
+                </Flex>
+                :
+                <></>}
             </Flex>
           </Flex>
         </Box>
