@@ -9,13 +9,17 @@ import { useCoordinate } from "../state";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import "../custom-swal.css"
+import "../custom-swal.css";
 
-const CameraPrediction = ({ togglePredict, captured, changeCaptured }) => {
-  const [loading, setLoading] = useState(true);
+const CameraPrediction = ({
+  togglePredict,
+  changeCaptured,
+  prediction,
+  loading,
+  handleLoading,
+}) => {
   const { latitude, longitude } = useCoordinate();
   const navigate = useNavigate();
-  const [detected, setDetected] = useState({});
   const [able, setAble] = useState(true);
   const [kelompoks, setKelompoks] = useState([]);
   const [selected, setSelected] = useState({});
@@ -31,35 +35,7 @@ const CameraPrediction = ({ togglePredict, captured, changeCaptured }) => {
     setSelected({});
     setAble(false);
     setSaving(false);
-  };
-
-  const getPrediction = async () => {
-    // const byteString = atob(captured.split(",")[1]);
-    // const mimeString = captured.split(",")[0].split(":")[1].split(";")[0];
-    // const ab = new ArrayBuffer(byteString.length);
-    // const ia = new Uint8Array(ab);
-    // for (let i = 0; i < byteString.length; i++) {
-    //   ia[i] = byteString.charCodeAt(i);
-    // }
-    // const blob = new Blob([ab], { type: mimeString });
-
-    // const formData = new FormData();
-    // // formData.append("image", blob);
-    // formData.append("image", captured);
-    // console.log(formData)
-
-    // const response = await axios.post(`${env.MODEL_URL}/yolo`, formData, {
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    // });
-
-    const response = await axios.post(`${env.MODEL_URL}/yolo`, {
-      image: captured,
-    });
-
-    setDetected(response.data);
-    setLoading(false);
+    handleLoading(true);
   };
 
   const getKelompokTani = async () => {
@@ -97,9 +73,7 @@ const CameraPrediction = ({ togglePredict, captured, changeCaptured }) => {
   };
 
   useEffect(() => {
-    setLoading(true);
     resetState();
-    getPrediction();
     getKelompokTani();
   }, []);
 
@@ -112,7 +86,7 @@ const CameraPrediction = ({ togglePredict, captured, changeCaptured }) => {
 
     const payload = {
       id_kelompok_tani: selected.id,
-      jumlah: detected.total,
+      jumlah: prediction.total,
     };
     const response = await axios.post(`${env.API_URL}/tangkapan-hama`, payload);
     // console.log(response);
@@ -129,11 +103,11 @@ const CameraPrediction = ({ togglePredict, captured, changeCaptured }) => {
         cancelButtonText: "Tidak Benar",
         reverseButtons: true,
         customClass: {
-          confirmButton: 'custom-confirm-button',
-          cancelButton: 'custom-cancel-button',
-          imageUrl: "custom-image-swal"
+          confirmButton: "custom-confirm-button",
+          cancelButton: "custom-cancel-button",
+          imageUrl: "custom-image-swal",
         },
-        imageUrl: "/assets/lalat buah.png"
+        imageUrl: "/assets/lalat buah.png",
       })
       .then((result) => {
         if (result.isConfirmed) {
@@ -143,9 +117,9 @@ const CameraPrediction = ({ togglePredict, captured, changeCaptured }) => {
               text: "Jumlah lalat telah disimpan",
               confirmButtonText: "Ke Manajemen Hama",
               customClass: {
-                confirmButton: 'custom-confirm-button',
-                cancelButton: 'custom-cancel-button'
-              }
+                confirmButton: "custom-confirm-button",
+                cancelButton: "custom-cancel-button",
+              },
             })
             .then(() => {
               postCalculation();
@@ -160,14 +134,15 @@ const CameraPrediction = ({ togglePredict, captured, changeCaptured }) => {
               cancelButtonText: "Tidak",
               reverseButtons: true,
               customClass: {
-                confirmButton: 'custom-confirm-button',
-                cancelButton: 'custom-cancel-button'
-              }
+                confirmButton: "custom-confirm-button",
+                cancelButton: "custom-cancel-button",
+              },
             })
             .then((res) => {
               if (res.isConfirmed) {
                 togglePredict();
                 changeCaptured(null);
+                handleLoading(true);
               } else if (res.dismiss === Swal.DismissReason.cancel) {
                 navigate(-1);
               }
@@ -217,17 +192,17 @@ const CameraPrediction = ({ togglePredict, captured, changeCaptured }) => {
         </Text>
 
         {full && (
-        <Image
-          src={`data:image/jpeg;base64,${detected.image}`}
-          w={full ? "85vw" : 0}
-          h={full ? "85vh" : 0}
-          bg={"lightgrey"}
-          transition={".3s ease"}
-          onClick={() => setFull(false)}
-          mt={"14vh"}
-          objectFit={"contain"}
-        />
-      )}
+          <Image
+            src={`data:image/jpeg;base64,${prediction.image}`}
+            w={full ? "85vw" : 0}
+            h={full ? "85vh" : 0}
+            bg={"lightgrey"}
+            transition={".3s ease"}
+            onClick={() => setFull(false)}
+            mt={"14vh"}
+            objectFit={"contain"}
+          />
+        )}
 
         <Flex flexDir={"column"} px={5} pt={"14vh"}>
           <Flex justify={"space-between"} align={"center"}>
@@ -256,7 +231,7 @@ const CameraPrediction = ({ togglePredict, captured, changeCaptured }) => {
                 h={"inherit"}
                 w={"inherit"}
                 mx={"auto"}
-                src={`data:image/jpeg;base64,${detected.image}`}
+                src={`data:image/jpeg;base64,${prediction.image}`}
                 // src={captured}
                 borderRadius={"20px"}
                 alt="hama"
@@ -283,7 +258,7 @@ const CameraPrediction = ({ togglePredict, captured, changeCaptured }) => {
                 mt={1}
                 lineHeight={"normal"}
               >
-                {detected.total}
+                {prediction.total}
               </Text>
             ) : (
               <Spinner />
