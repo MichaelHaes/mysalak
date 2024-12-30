@@ -12,6 +12,7 @@ const ArtipsCard = ({
   date,
   isSaved,
   onBookmarkToggle,
+  basePath = '/artikel',
 }) => {
   const navigate = useNavigate();
 
@@ -24,7 +25,7 @@ const ArtipsCard = ({
   // }, [id]);
 
   const handleCardClick = () => {
-    navigate(`/artikel/${id}`);
+    navigate(`${basePath}/${id}`);
   };
 
   const handleBookmarkClick = (e) => {
