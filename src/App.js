@@ -26,6 +26,9 @@ import TambahAdmin from "./Page/Admin/UMN/TambahAdmin";
 import EditAdmin from "./Page/Admin/UMN/EditAdmin";
 import VerifikasiAnggota from "./Page/Admin/Ketua/VerifikasiAnggota";
 import RedirectPage from "./Page/RedirectPage";
+import ArticleAdd from "./Page/ArticleAdd";
+import ArticleList from "./Page/ArticleList";
+import ArticleEdit from "./Page/ArticleEdit";
 
 function App() {
   const setKelompokTani = useKelompokTaniList().setKelompokTani;
@@ -65,12 +68,12 @@ function App() {
           bg={"#f5f5f5"}
           pos={"relative"}
         >
-          <Routes>
+          <Routes>            
             <Route element={<UnauthorizedRoute />}>
               <Route path="/" element={<LoginPage />} />
               <Route path="/create-petani" element={<PetaniCreate />} />
               <Route path="/login-petani" element={<PetaniLogin />} />
-              <Route path="/login-admin" element={<AdminLogin />} />
+              <Route path="/login-admin" element={<AdminLogin />} />              
             </Route>
             <Route element={<ProtectedRoutes />}>
               <Route path="/dashboard" element={<Dashboard />} />
@@ -81,6 +84,9 @@ function App() {
               <Route path="/ramalan-cuaca" element={<RamalanCuaca />} />
               <Route path="/artikel" element={<Artikel />} />
               <Route path="/artikel/:id" element={<ArticleDetail />} />
+              <Route path="/cms/article/add" element={<ArticleAdd />} />
+              <Route path="/cms/article" element={<ArticleList />} />
+              <Route path="/cms/article/edit/:id" element={<ArticleEdit />} />
             </Route>
             {/* admin umn */}
             <Route element={<RoleBasedRoutes allowed={1}/>}>
