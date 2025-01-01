@@ -26,6 +26,7 @@ import TambahAdmin from "./Page/Admin/UMN/TambahAdmin";
 import EditAdmin from "./Page/Admin/UMN/EditAdmin";
 import VerifikasiAnggota from "./Page/Admin/Ketua/VerifikasiAnggota";
 import RedirectPage from "./Page/RedirectPage";
+import EditProfil from "./Page/EditProfil";
 
 function App() {
   const setKelompokTani = useKelompokTaniList().setKelompokTani;
@@ -78,6 +79,7 @@ function App() {
               <Route path="/kamera" element={<Camera />} />
               <Route path="/manajemen-hama" element={<ManajemenHamaPage />} />
               <Route path="/profil" element={<Profil />} />
+              <Route path="/edit-profil" element={<EditProfil />} />
               <Route path="/ramalan-cuaca" element={<RamalanCuaca />} />
               <Route path="/artikel" element={<Artikel />} />
               <Route path="/artikel/:id" element={<ArticleDetail />} />

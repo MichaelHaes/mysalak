@@ -1,21 +1,19 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text, Spinner } from "@chakra-ui/react";
 import React from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 import Moment from "react-moment";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-
-const DashboardHeader = () => {
-  const navigate = useNavigate();
-  const today = new Date(); 
+const DashboardHeader = ({ profilePic, isLoadingProfilePic }) => {
+  const today = new Date();
+  console.log('profilePic', profilePic)
 
   return (
     <Box>
       <Box pos={"relative"} height={"28vh"}>
         <Box pos={"relative"} h={"100%"} w={"100%"}>
           <Image
-            src="
-            /assets/pohon salak.png"
+            src="/assets/pohon salak.png"
             pos={"absolute"}
             top={0}
             left={0}
@@ -53,7 +51,6 @@ const DashboardHeader = () => {
             ps={5}
             w={"50%"}
           >
-            {/* <Text fontSize={"1.4vh"}>Selamat pagi, Bu Endang!</Text> */}
             <Text
               mt={{ base: 1, md: 2 }}
               mb={{ base: 2, md: 3 }}
@@ -77,20 +74,32 @@ const DashboardHeader = () => {
             alignItems={"end"}
             pe={10}
             w={"50%"}
-            // onClick={() => {
-            //   navigate("/profil")
-            // }}
           >
             <Link to={"/profil"}>
-              <Image
-                src="/assets/profil.png"
-                borderRadius={"50%"}
+              <Box
                 w={"85px"}
                 h={"85px"}
+                borderRadius={"50%"}
                 border={"2px solid #a6c4a6"}
-                objectFit={"cover"}
-                objectPosition={"63%"}
-              />
+                overflow={"hidden"}
+              >
+                {isLoadingProfilePic ? (
+                  <Spinner size="lg" color="green.500" />
+                ) : (
+                  <Image
+                    src={
+                      profilePic
+                        ? `data:image/png;base64,${profilePic}`
+                        : "/assets/defaultUser.jpg"
+                    }
+                    alt="Profile"
+                    w={"100%"}
+                    h={"100%"}
+                    objectFit={"cover"}
+                    borderRadius={"50%"}
+                  />
+                )}
+              </Box>
             </Link>
           </Flex>
         </Flex>
@@ -131,37 +140,17 @@ const DashboardHeader = () => {
                 "linear-gradient(to right, rgba(237, 237, 237, 0), rgba(237, 237, 237, 1))",
             }}
           />
-          {/* <Text
-            pos={"absolute"}
-            width={"15px"}
-            height={"15px"}
-            fontSize={"11px"}
-            textAlign={"center"}
-            right={"12px"}
-            bottom={1}
-            zIndex={4}
-            bg={"white"}
-            borderRadius={"50%"}
-          >
-            i
-          </Text> */}
         </Box>
-        <Box alignSelf={"center"} pos={"absolute"} zIndex={4} width={"90%"} py={"1.3vh"}>
-          <Text fontWeight={"bold"} fontSize={"2vh"}  mb={1} ps={5}>
+        <Box
+          alignSelf={"center"}
+          pos={"absolute"}
+          zIndex={4}
+          width={"90%"}
+          py={"1.3vh"}
+        >
+          <Text fontWeight={"bold"} fontSize={"2vh"} mb={1} ps={5}>
             Waspada Lalat Buah!
           </Text>
-          {/* <Text
-            fontSize={"1.15vh"}
-            lineHeight={1}
-            maxH={"3.3vh"}
-            overflowY={"auto"}
-            wordBreak={"break-word"}
-            style={{
-              scrollbarWidth: "none",
-            }}
-          >
-            Cuaca saat ini berpotensi meningkatkan jumlah lalat buah
-          </Text> */}
         </Box>
       </Flex>
     </Box>

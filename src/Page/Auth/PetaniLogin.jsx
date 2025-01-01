@@ -38,7 +38,9 @@ const PetaniLogin = () => {
       axios.post(`${env.API_URL}/auth/petani/login`, { ...data, kelompok_tani: selectedKelompok.id })
         .then((response) => {
           const kelompok_tani = selectedKelompok.id;
-          const user_id = `${kelompok_tani}-${watch("no_telp")}-${watch("nama")}`;
+          const noTelpLast3 = watch("no_telp")?.slice(-3) || "";
+          const namaFirst3 = watch("nama")?.substring(0, 3) || "";
+          const user_id = `${kelompok_tani}-${noTelpLast3}-${namaFirst3}`;
           showToast(response.data.message)
           localStorage.setItem("JWT_Token", JSON.stringify(response.data.token))
           localStorage.setItem("role_id", JSON.stringify(response.data.role_id))
