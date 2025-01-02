@@ -15,7 +15,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { useForm } from "react-hook-form";
-import env from "react-dotenv";
 import axios from "axios";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
@@ -38,7 +37,7 @@ const TambahAdmin = () => {
 
   const getKelompok = async () => {
     try {
-      const response = await axios.get(`${env.API_URL}/kelompok-tani`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/kelompok-tani`);
       setKelompok(response.data);
     } catch (e) {
       console.log(e.message);
@@ -98,7 +97,7 @@ const TambahAdmin = () => {
                 };
 
                 const response = await axios.post(
-                  `${env.API_URL}/auth/admin/register`,
+                  `${process.env.REACT_APP_API_URL}/auth/admin/register`,
                   payload,
                   {
                     headers: {

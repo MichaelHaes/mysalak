@@ -5,7 +5,6 @@ import IndikatorCard from "../Components/IndikatorCard";
 import RamalanMingguan from "../Components/RamalanMingguan";
 import RamalanMingguanFull from "../Components/RamalanMingguanFull";
 import { useWeather } from "../state";
-import env from "react-dotenv";
 import axios from "axios";
 
 const RamalanCuaca = () => {
@@ -13,12 +12,12 @@ const RamalanCuaca = () => {
   const [all, setAll] = useState(false);
 
   const getPred = async () => {
-    const response = await axios.get(`${env.API_URL}/ramalan`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/ramalan`);
     setPreds(response.data);
   }
 
   const getAvgPreds = async () => {
-    const response = await axios.get(`${env.API_URL}/ramalan-avg`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/ramalan-avg`);
     setAvgPreds(response.data);
   }
 
@@ -30,6 +29,7 @@ const RamalanCuaca = () => {
     setAll(false);
     getPred();
     getAvgPreds();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return !all ? (

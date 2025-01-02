@@ -8,7 +8,6 @@ import "../Components/Styles/Profil.css";
 import { LuHistory } from "react-icons/lu";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import env from "react-dotenv";
 import toast from "react-hot-toast";
 import { requestForToken } from "../firebaseNotification/firebase";
 import Swal from "sweetalert2";
@@ -50,7 +49,7 @@ const Profil = () => {
     localStorage.removeItem("no_telp");
     localStorage.removeItem("is_verified");
     axios
-      .post(`${env.API_URL}/mysalak/delete-token`, {
+      .post(`${process.env.REACT_APP_API_URL}/mysalak/delete-token`, {
         device_id: localStorage.getItem("deviceUUID"),
       })
       .then((response) => {

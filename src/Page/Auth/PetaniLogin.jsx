@@ -18,7 +18,6 @@ import { useKelompokTaniList } from "../../state";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import {useNavigate} from "react-router-dom";
-import env from "react-dotenv";
 
 const PetaniLogin = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -35,7 +34,7 @@ const PetaniLogin = () => {
 
   const onSubmit = (data) => {
     try{
-      axios.post(`${env.API_URL}/auth/petani/login`, { ...data, kelompok_tani: selectedKelompok.id })
+      axios.post(`${process.env.REACT_APP_API_URL}/auth/petani/login`, { ...data, kelompok_tani: selectedKelompok.id })
         .then((response) => {
           const kelompok_tani = selectedKelompok.id;
           const noTelpLast3 = watch("no_telp")?.slice(-3) || "";

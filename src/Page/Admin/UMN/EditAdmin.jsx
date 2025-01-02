@@ -8,14 +8,12 @@ import {
   FormErrorMessage,
   InputGroup,
   Select,
-  InputRightElement,
   Button,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { useForm } from "react-hook-form";
-import env from "react-dotenv";
 import axios from "axios";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
@@ -41,7 +39,9 @@ const EditAdmin = () => {
 
   const getKelompok = async () => {
     try {
-      const response = await axios.get(`${env.API_URL}/kelompok-tani`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/kelompok-tani`
+      );
       setKelompok(response.data);
     } catch (e) {
       console.log(e.message);
@@ -50,7 +50,9 @@ const EditAdmin = () => {
 
   const getAdmin = async () => {
     try {
-      const response = await axios.get(`${env.API_URL}/admin/${id}`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/admin/${id}`
+      );
 
       reset({
         nama: response.data.nama,
@@ -70,6 +72,7 @@ const EditAdmin = () => {
   useEffect(() => {
     getKelompok();
     getAdmin();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addAdmin = async (data) => {
@@ -118,8 +121,9 @@ const EditAdmin = () => {
                   kelompok_tani: kel,
                 };
 
+                // eslint-disable-next-line no-unused-vars
                 const response = await axios.patch(
-                  `${env.API_URL}/auth/admin/${admin.id}/edit`,
+                  `${process.env.REACT_APP_API_URL}/auth/admin/${admin.id}/edit`,
                   payload,
                   {
                     headers: {

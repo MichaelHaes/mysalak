@@ -3,7 +3,6 @@ import Weather from "../Components/Weather";
 import ManajemenHama from "../Components/ManajemenHama";
 import DashboardHeader from "../Components/DashboardHeader";
 import axios from "axios";
-import env from "react-dotenv";
 
 const Dashboard = () => {
   const [profilePic, setProfilePic] = useState(null);
@@ -12,7 +11,7 @@ const Dashboard = () => {
   const fetchPetaniProfile = async () => {
     try {
       const user_id = JSON.parse(localStorage.getItem("user_id"));
-      const requestUrl = `${env.API_URL}/get-petani/${user_id}`;
+      const requestUrl = `${process.env.REACT_APP_API_URL}/get-petani/${user_id}`;
 
       const response = await axios.get(requestUrl);
 
@@ -42,7 +41,7 @@ const Dashboard = () => {
   const fetchProfileAdmin = async () => {
     try {
       const email = JSON.parse(localStorage.getItem("user_id"));
-      const requestUrl = `${env.API_URL}/get-admin/${email}`;
+      const requestUrl = `${process.env.REACT_APP_API_URL}/get-admin/${email}`;
       const response = await axios.get(requestUrl);
 
       const {

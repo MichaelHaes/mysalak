@@ -19,7 +19,6 @@ import React from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import env from "react-dotenv";
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -35,7 +34,7 @@ const AdminLogin = () => {
   const onSubmit = (data) => {
     try {
       axios
-        .post(`${env.API_URL}/auth/admin/login`, data)
+        .post(`${process.env.REACT_APP_API_URL}/auth/admin/login`, data)
         .then((response) => {
           console.log(response);
           showToast(response.data.message);

@@ -15,7 +15,6 @@ import LoginPage from "./Page/Auth/LoginPage";
 import PetaniCreate from "./Page/Auth/PetaniCreate";
 import axios from "axios";
 import { useKelompokTaniList } from "./state";
-import env from "react-dotenv";
 import PetaniLogin from "./Page/Auth/PetaniLogin";
 import ProtectedRoutes from "./Hooks/useProtectedRoutes";
 import AdminLogin from "./Page/Auth/AdminLogin";
@@ -33,7 +32,7 @@ function App() {
 
   const getKelompokTaniList = () => {
     axios
-      .get(`${env.API_URL}/kelompok-tani`)
+      .get(`${process.env.REACT_APP_API_URL}/kelompok-tani`)
       .then((response) => {
         let kelompokTaniTemp = [];
         response.data.forEach((kelompok) => {
@@ -54,6 +53,7 @@ function App() {
 
   useEffect(() => {
     getKelompokTaniList();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

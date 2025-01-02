@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
-import ManajemenHamaCard from "../Components/ManajemenHamaCard";
+import React, { useEffect } from "react";
 import ManajemenHamaSquareCard from "../Components/ManajemenHamaSquareCard";
 import { Flex, Text } from "@chakra-ui/react";
 import InformasiHama from "../Components/InformasiHama";
 import { useHama } from "../state";
 import axios from "axios";
-import env from "react-dotenv";
-import Moment from "react-moment";
 
 const ManajemenHamaPage = () => {
   const { from, index, detail, resetDetail, hama, setHama } = useHama();
 
   const fetchHama = async () => {
     try {
-      const response = await axios.get(`${env.API_URL}/tangkapan-hama-latest`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/tangkapan-hama-latest`);
       setHama(response.data);
     } catch (e) {
       console.log(e.message);
@@ -23,6 +20,7 @@ const ManajemenHamaPage = () => {
   useEffect(() => {
     if (from !== "Home") resetDetail();
     fetchHama();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return !detail ? (

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import MainCamera from "../Components/MainCamera";
 import CameraPrediction from "../Components/CameraPrediction";
 import axios from "axios";
-import env from "react-dotenv";
 
 const Camera = () => {
   const [predict, setPredict] = useState(false);
@@ -20,7 +19,7 @@ const Camera = () => {
   }
 
   const getPrediction = async (img) => {
-    const response = await axios.post(`${env.MODEL_URL}/yolo`, {
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/yolo`, {
       image: img,
     });
 

@@ -13,7 +13,6 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useKelompokTaniList } from "../state";
-import env from "react-dotenv";
 
 const EditProfil = () => {
   const navigate = useNavigate();
@@ -138,8 +137,8 @@ const EditProfil = () => {
     const userId = JSON.parse(localStorage.getItem("user_id"));
     const apiEndpoint =
       roleId === 5
-        ? `${env.API_URL}/edit-petani/${userId}`
-        : `${env.API_URL}/edit-admin/${userId}`;
+        ? `${process.env.REACT_APP_API_URL}/edit-petani/${userId}`
+        : `${process.env.REACT_APP_API_URL}/edit-admin/${userId}`;
 
     console.log("apiEndpoint: ", apiEndpoint);
 

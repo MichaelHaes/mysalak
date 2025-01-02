@@ -10,7 +10,6 @@ import {
   Box,
 } from "@chakra-ui/react";
 import axios from "axios";
-import env from "react-dotenv";
 import AdminCard from "../../../Components/AdminCard";
 import { TiUserAdd } from "react-icons/ti";
 import { useNavigate } from "react-router-dom";
@@ -22,12 +21,12 @@ const ManajemenAdmin = () => {
   const navigate = useNavigate();
 
   const getRoles = async () => {
-    const response = await axios.get(`${env.API_URL}/roles`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/roles`);
     setRoles(response.data);
   };
 
   const getAdmin = async () => {
-    const response = await axios.get(`${env.API_URL}/admin`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/admin`);
     setAdmin(response.data);
   };
 

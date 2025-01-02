@@ -2,10 +2,7 @@ import {
   Box,
   Button,
   Flex,
-  ListItem,
   Text,
-  UnorderedList,
-  ButtonGroup
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import MapComponent from "../Components/Map";
@@ -13,7 +10,6 @@ import { IoIosArrowBack, IoMdClose } from "react-icons/io";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import env from "react-dotenv";
 
 const PersebaranHama = () => {
   const nama = JSON.parse(localStorage.getItem('nama'));
@@ -22,7 +18,7 @@ const PersebaranHama = () => {
   const [hama, setHama] = useState([]);
 
   const getKelompokTani = async () => {
-    const response = await axios.get(`${env.API_URL}/tangkapan-hama-latest`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/tangkapan-hama-latest`);
     setHama(response.data);
   };
 
@@ -51,8 +47,8 @@ const PersebaranHama = () => {
           // ftd disini buat sekarang masih naive implementation
         },
       };
-      axios.put(`${env.API_URL}/update-perangkap`, updatedState);
-      axios.put(`${env.API_URL}/update-ftd`, updatedState);
+      axios.put(`${process.env.REACT_APP_API_URL}/update-perangkap`, updatedState);
+      axios.put(`${process.env.REACT_APP_API_URL}/update-ftd`, updatedState);
       getKelompokTani();
 
       return updatedState;
