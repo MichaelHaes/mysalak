@@ -13,6 +13,7 @@ import axios from "axios";
 import AdminCard from "../../../Components/AdminCard";
 import { TiUserAdd } from "react-icons/ti";
 import { useNavigate } from "react-router-dom";
+import { MdOutlineChangeCircle } from "react-icons/md";
 
 const ManajemenAdmin = () => {
   const [filter, setFilter] = useState("");
@@ -52,11 +53,20 @@ const ManajemenAdmin = () => {
           variant={"unstyled"}
           background={"#2c3631"}
           borderRadius={"lg"}
-          onClick={() => navigate("/admin/manajemen-admin/tambah")}
+          onClick={() => 
+            {
+              if(filter === 3) navigate("/admin/manajemen-admin/daftar-ketua-tani")
+              else navigate("/admin/manajemen-admin/tambah")
+            }
+            }
           zIndex={11}
         >
           <Flex w={"100%"} h={"100%"} p={2} justify={"center"}>
-            <TiUserAdd color="#ffffff" size={"100%"} />
+            {filter === 3 ? (
+              <MdOutlineChangeCircle color="#ffffff" size={"100%"} />
+            ) : (
+              <TiUserAdd color="#ffffff" size={"100%"} />
+            )}
           </Flex>
         </Button>
         <Box pos={"sticky"} top={0} zIndex={10} bg={"#f5f5f5"}>
@@ -141,7 +151,7 @@ const ManajemenAdmin = () => {
           {admin
             .filter((item) => (filter !== "" ? item.role_id === filter : true))
             .map((item) => (
-              <AdminCard admin={item} />
+              <AdminCard admin={item} getAdmin={getAdmin}/>
             ))}
         </Stack>
       </Flex>

@@ -26,6 +26,7 @@ import EditAdmin from "./Page/Admin/UMN/EditAdmin";
 import VerifikasiAnggota from "./Page/Admin/Ketua/VerifikasiAnggota";
 import RedirectPage from "./Page/RedirectPage";
 import EditProfil from "./Page/EditProfil";
+import DaftarKetuaTani from "./Page/Admin/UMN/DaftarKetuaTani";
 
 function App() {
   const setKelompokTani = useKelompokTaniList().setKelompokTani;
@@ -97,6 +98,10 @@ function App() {
               <Route
                 path="/admin/manajemen-admin/:id/edit"
                 element={<EditAdmin />}
+              />
+              <Route
+                path="/admin/manajemen-admin/daftar-ketua-tani"
+                element={<DaftarKetuaTani/>}
               />
             </Route>
             {/* admin ugm */}
