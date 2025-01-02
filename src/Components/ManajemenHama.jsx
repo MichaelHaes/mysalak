@@ -1,11 +1,10 @@
 import { Box, Button, Flex, Text, Image } from "@chakra-ui/react";
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useHama } from "../state";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import env from "react-dotenv";
 import Moment from "react-moment";
 
 const ManajemenHama = () => {
@@ -14,7 +13,7 @@ const ManajemenHama = () => {
 
   const fetchHama = async () => {
     try {
-      const response = await axios.get(`${env.API_URL}/tangkapan-hama-latest`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/tangkapan-hama-latest`);
       setHama(response.data);
     } catch (e) {
       console.log(e.message);
@@ -23,6 +22,7 @@ const ManajemenHama = () => {
 
   useEffect(() => {
     fetchHama();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

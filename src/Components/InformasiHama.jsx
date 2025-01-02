@@ -18,7 +18,6 @@ import { useHama } from "../state";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import axios from "axios";
-import env from "react-dotenv";
 
 const InformasiHama = (props) => {
   const { from, setFrom, resetDetail, hama, index } = useHama();
@@ -31,7 +30,7 @@ const InformasiHama = (props) => {
 
   const getHistory = async () => {
     const response = await axios.get(
-      `${env.API_URL}/tangkapan-hama/${data.id_kelompok_tani}/${month}/${thisYear}`
+      `${process.env.REACT_APP_API_URL}/tangkapan-hama/${data.id_kelompok_tani}/${month}/${thisYear}`
     );
 
     const sortedData = response.data.sort(
@@ -64,6 +63,7 @@ const InformasiHama = (props) => {
   useEffect(() => {
     getHistory();
     console.log(month);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [month]);
 
   const chartOptions = {

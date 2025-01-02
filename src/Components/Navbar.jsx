@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Tabs, TabList, Tab, Box, Flex } from "@chakra-ui/react";
 import { GoHomeFill } from "react-icons/go";
 import { useHama } from "../state";

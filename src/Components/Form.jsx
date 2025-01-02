@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 import { useWeatherPred } from "../state";
-import { Input, Button, Box, Heading, Text, Grid } from "@chakra-ui/react";
+import { Input, Button, Box, Grid } from "@chakra-ui/react";
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
-  FormHelperText,
 } from "@chakra-ui/react";
 import { Flex, Spacer } from "@chakra-ui/react";
 

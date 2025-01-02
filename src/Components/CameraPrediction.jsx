@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { Flex, Button, Text, Image, Spinner, Box } from "@chakra-ui/react";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import env from "react-dotenv";
 import { getPreciseDistance } from "geolib";
 import { useCoordinate } from "../state";
 import { RxEnterFullScreen, RxExitFullScreen } from "react-icons/rx";
@@ -39,7 +39,7 @@ const CameraPrediction = ({
   };
 
   const getKelompokTani = async () => {
-    const response = await axios.get(`${env.API_URL}/kelompok-tani`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/kelompok-tani`);
     setKelompoks(response.data);
   };
 
@@ -88,7 +88,8 @@ const CameraPrediction = ({
       id_kelompok_tani: selected.id,
       jumlah: prediction.total,
     };
-    const response = await axios.post(`${env.API_URL}/tangkapan-hama`, payload);
+    // eslint-disable-next-line no-unused-vars
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/tangkapan-hama`, payload);
     // console.log(response);
     navigate("/manajemen-hama");
   };

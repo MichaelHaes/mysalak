@@ -7,7 +7,6 @@ import { WiHumidity } from "react-icons/wi";
 import { useNavigate } from "react-router-dom";
 import { useWeather } from "../state";
 import axios from "axios";
-import env from "react-dotenv";
 
 const IndikatorHeader = () => {
   const navigate = useNavigate();
@@ -17,7 +16,7 @@ const IndikatorHeader = () => {
   const [humidity, setHumidity] = useState(0);
 
   const getWeather = async () => {
-    const response = await axios.get(`${env.API_URL}/raspi-latest`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/raspi-latest`);
     setLatest(response.data);
     setHumidity(response.data.humidity);
     setShow(true);
@@ -25,6 +24,7 @@ const IndikatorHeader = () => {
 
   useEffect(() => {
     getWeather();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

@@ -4,7 +4,6 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "./Styles/Map.css";
 import axios from "axios";
-import env from "react-dotenv";
 
 const MapComponent = (props) => {
   const mapRef = useRef(null);
@@ -14,7 +13,7 @@ const MapComponent = (props) => {
   const sebaran = props.sebaran;
 
   const getKelompokTani = async () => {
-    const response = await axios.get(`${env.API_URL}/kelompok-tani`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/kelompok-tani`);
     setPolygons(response.data);
   };
 

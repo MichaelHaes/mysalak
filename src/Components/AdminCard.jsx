@@ -14,7 +14,6 @@ import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import env from "react-dotenv";
 import axios from "axios";
 import "../custom-swal.css";
 
@@ -46,8 +45,9 @@ const AdminCard = ({ admin, getAdmin }) => {
             showConfirmButton: false,
             didOpen: async () => {
               try {
+                // eslint-disable-next-line no-unused-vars
                 const response = await axios.delete(
-                  `${env.API_URL}/auth/admin/${admin.id}/delete`,
+                  `${process.env.REACT_APP_API_URL}/auth/admin/${admin.id}/delete`,
                   {
                     headers: {
                       Authorization: `Bearer ${localStorage

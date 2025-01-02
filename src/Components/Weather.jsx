@@ -8,7 +8,6 @@ import "./Styles/Weather.css";
 import { Link } from "react-router-dom";
 import { useWeather } from "../state";
 import axios from "axios";
-import env from "react-dotenv";
 import moment from "moment";
 
 const Weather = () => {
@@ -17,20 +16,21 @@ const Weather = () => {
   const [humidity, setHumidity] = useState(0);
 
   const getWeather = async () => {
-    const response = await axios.get(`${env.API_URL}/raspi-latest`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/raspi-latest`);
     setLatest(response.data);
     setHumidity(response.data.humidity);
     setShow(true);
   };
 
   const getPred = async () => {
-    const response = await axios.get(`${env.API_URL}/ramalan`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/ramalan`);
     setPreds(response.data);
   };
 
   useEffect(() => {
     getWeather();
     getPred();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

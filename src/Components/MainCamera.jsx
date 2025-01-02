@@ -31,6 +31,7 @@ const MainCamera = ({ changeCaptured, togglePredict }) => {
 
   useEffect(() => {
     getUserLocation();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const videoConstraints = {
