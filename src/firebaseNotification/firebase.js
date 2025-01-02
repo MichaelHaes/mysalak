@@ -4,7 +4,6 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getMessaging, getToken, onMessage, isSupported } from 'firebase/messaging';
 import axios from "axios";
-import env from "react-dotenv";
 import getDeviceUUID from "../Hooks/useUUID";
 
 const firebaseConfig = {
@@ -45,7 +44,7 @@ export const requestForToken = async () => {
         const user_id = JSON.parse(localStorage.getItem('user_id'));
         const role_id = JSON.parse(localStorage.getItem('role_id'));
 
-        axios.post(`${env.API_URL}/mysalak/register-token`, { user_id:user_id, role_id:role_id, device_id:device_id, token:currentToken })
+        axios.post(`${process.env.REACT_APP_API_URL}/mysalak/register-token`, { user_id:user_id, role_id:role_id, device_id:device_id, token:currentToken })
           .then((response) => {
             console.log("response: ", response)
           })

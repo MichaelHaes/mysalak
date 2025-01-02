@@ -50,9 +50,9 @@
     "zustand": "^4.5.2"
   },
   "scripts": {
-    "start": "react-dotenv && react-scripts start --experimental-https",
-    "build": "react-dotenv && react-scripts build",
-    "test": "react-dotenv && react-scripts test",
+    "start": "react-scripts start --experimental-https",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -71,12 +71,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "react-dotenv": {
-    "whitelist": [
-      "API_URL",
-      "MODEL_URL"
     ]
   }
 }

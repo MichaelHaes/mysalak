@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import { RxCheck, RxCross2 } from "react-icons/rx";
 import axios from "axios";
-import env from "react-dotenv";
 import PetaniCard from "../../../Components/PetaniCard";
 
 const VerifikasiAnggota = () => {
@@ -16,12 +15,13 @@ const VerifikasiAnggota = () => {
   const [petani, setPetani] = useState([]);
 
   const getPetani = async () => {
-    const response = await axios.get(`${env.API_URL}/petani`);
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/petani`);
     setPetani(response.data);
   };
 
   const verify = async(id) => {
-    const response = axios.put(`${env.API_URL}/petani-verify`, {idPetani:id});
+    // eslint-disable-next-line no-unused-vars
+    const response = axios.put(`${process.env.REACT_APP_API_URL}/petani-verify`, {idPetani:id});
     getPetani()
   }
 
