@@ -46,8 +46,9 @@ const AdminCard = ({ admin, getAdmin }) => {
             didOpen: async () => {
               try {
                 // eslint-disable-next-line no-unused-vars
-                const response = await axios.delete(
+                const response = await axios.patch(
                   `${process.env.REACT_APP_API_URL}/auth/admin/${admin.id}/delete`,
+                  {},
                   {
                     headers: {
                       Authorization: `Bearer ${localStorage
